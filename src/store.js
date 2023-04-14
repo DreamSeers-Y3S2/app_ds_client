@@ -66,7 +66,7 @@ const customerInfoFromStorage = localStorage.getItem("customerInfo")
   ? JSON.parse(localStorage.getItem("customerInfo"))
   : null;
 
-  const vendorInfoFromStorage = localStorage.getItem("vendorInfo")
+const vendorInfoFromStorage = localStorage.getItem("vendorInfo")
   ? JSON.parse(localStorage.getItem("vendorInfo"))
   : null;
 

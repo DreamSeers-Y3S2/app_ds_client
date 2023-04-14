@@ -3,50 +3,50 @@ import "./footer.css";
 import logo1 from "./logo1.png";
 import { Row } from "react-bootstrap";
 
-function Footer() {
+const Footer = () => {
   return (
     <div className="main-footer">
-      <div className="container" style={{ marginLeft: "1%" }}>
+      <div className="container">
         <div className="row">
           {/* Column1 */}
           <div className="col">
-            <img src={logo1} alt="" style={{ width: "75%", height: "100%" }} />
+            <img src={logo1} alt="" style={{ width: "60%", height: "90%" }} />
           </div>
           <div>
             <Row>
               {/* Column2 */}
-              <div className="col" style={{ marginTop: "10%" }}>
+              <div className="col" style={{ marginTop: "5%" }}>
                 <h4>QUICK LINKS</h4>
                 <li className="list-unstyled">
-                  <a href="/">HOME</a>
+                  <a href="/">Home</a>
                   <br></br>
-                  <a href="/aboutus">ABOUT US</a>
+                  <a href="/aboutus">About Us</a>
                   <br></br>
-                  <a href="/">FITNESS BLOG</a>
+                  <a href="/">Products</a>
                   <br></br>
-                  <a href="/bmi-calculator">BMI CALCULATOR</a>
                 </li>
               </div>
               {/* Column3 */}
-              <div className="col" style={{ marginTop: "10%" }}>
+              <div className="col" style={{ marginTop: "5%" }}>
                 <h4>POPULAR LINKS</h4>
                 <li className="list-unstyled">
-                  <a href="/contactus">CONTACT US</a>
+                  <a href="/contactus">Contact Us</a>
                   <br></br>
-                  <a href="/login-select">JOIN US</a>
+                  <a href="/login-select">Sign Up</a>
                   <br></br>
-                  <a href="/terms-and-conditions">TERMS & CONDITIONS</a>
+                  <a href="/terms-and-conditions">Sign In</a>
                   <br></br>
-                  <a href="/">SERVICES</a>
+                  <a href="/">Terms And Conditions</a>
                 </li>
               </div>
               {/* Column4 */}
-              <div className="col" style={{ marginTop: "10%" }}>
+              <div className="col" style={{ marginTop: "5%" }}>
                 <h4>CONTACT</h4>
                 <ul className="list-unstyled">
-                  <li>ADDRESS : Fitness Factory, Galle Road, Colombo</li>
+                  <li>ADDRESS : Hela Ayu Corporation, Galle Road, Colombo</li>
+                  <br></br>
                   <li>PHONE : 077 7785441</li>
-                  <li>EMAIL : fitnessfactory@gmail.com</li>
+                  <li>EMAIL : hela-ayu@gmail.com</li>
                 </ul>
               </div>
             </Row>
@@ -55,13 +55,13 @@ function Footer() {
         <hr />
         <div className="row">
           <p className="col-sm">
-            &copy;{new Date().getFullYear()} site by ByteSquad | FITNESS FACTORY
-            | All rights reserved |
+            &copy;{new Date().getFullYear()} site by DreamSeers | Hela Ayu | All
+            rights reserved |
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Footer;
