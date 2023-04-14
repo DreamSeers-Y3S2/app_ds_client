@@ -45,6 +45,8 @@ const CustomerRegisterScreen = () => {
     setTelephone("07778569896");
     setAddress("Colombo");
     setEmail("pamelabeesly@gmail.com");
+    setPassword("test");
+    setConfirmPassword("test");
   };
 
   const resetHandler = async (e) => {

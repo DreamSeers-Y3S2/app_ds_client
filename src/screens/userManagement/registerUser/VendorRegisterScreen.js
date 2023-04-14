@@ -60,6 +60,8 @@ const VendorRegisterScreen = () => {
     setTelephone("0778456212");
     setHomeAddress("Colombo");
     setEmail("jimhalpert@gmail.com");
+    setPassword("test");
+    setConfirmPassword("test");
     setBusinessName("Halpert Cosmetics");
     setBusinessAddress("One Galle Face Mall");
     setWebsite("www.halpertcosmetics.com");
@@ -226,7 +228,7 @@ const VendorRegisterScreen = () => {
                     />
                   </Form.Group>
                   <br></br>
-                  <Form.Group controlId="vendorFormBasicAddress">
+                  <Form.Group controlId="vendorFormBasicBusinessName">
                     <Form.Label>Business Name</Form.Label>
                     <Form.Control
                       type="text"
@@ -237,7 +239,7 @@ const VendorRegisterScreen = () => {
                     />
                   </Form.Group>
                   <br></br>
-                  <Form.Group controlId="vendorFormBasicAddress">
+                  <Form.Group controlId="vendorFormBasicBusinessAddress">
                     <Form.Label>Business Address</Form.Label>
                     <Form.Control
                       type="textArea"
@@ -248,7 +250,7 @@ const VendorRegisterScreen = () => {
                     />
                   </Form.Group>
                   <br></br>
-                  <Form.Group controlId="vendorFormBasicAddress">
+                  <Form.Group controlId="vendorFormBasicWebsite">
                     <Form.Label>Website</Form.Label>
                     <Form.Control
                       type="text"
@@ -259,7 +261,7 @@ const VendorRegisterScreen = () => {
                     />
                   </Form.Group>
                   <br></br>
-                  <Form.Group controlId="vendorFormBasicAddress">
+                  <Form.Group controlId="vendorFormBasicBusinessRegNo">
                     <Form.Label>Business Registration Number</Form.Label>
                     <Form.Control
                       type="text"
@@ -270,14 +272,18 @@ const VendorRegisterScreen = () => {
                     />
                   </Form.Group>
                   <br></br>
-                  <Form.Group controlId="vendorFormBasicAddress">
+                  <Form.Group controlId="vendorFormBasicDescription">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control
-                      type="textArea"
+                    <textarea
+                      style={{
+                        width: "100%",
+                        fontSize: "16px",
+                        borderRadius: "5px",
+                      }}
                       value={description}
-                      placeholder="Enter Description"
                       onChange={(e) => setDescription(e.target.value)}
                       required
+                      rows={7}
                     />
                   </Form.Group>
                   <br></br>

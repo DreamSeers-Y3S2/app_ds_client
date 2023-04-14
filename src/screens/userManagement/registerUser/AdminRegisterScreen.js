@@ -41,6 +41,8 @@ const AdminRegisterScreen = () => {
     setTelephone("0715689562");
     setAddress("Colombo");
     setEmail("michaelscott@gmail.com");
+    setPassword("test");
+    setConfirmPassword("test");
   };
 
   const resetHandler = async (e) => {

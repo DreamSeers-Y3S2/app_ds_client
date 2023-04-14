@@ -10,6 +10,9 @@ import VendorLandingPage from "./screens/static/landingPages/VendorLandingPage";
 import AdminLandingPage from "./screens/static/landingPages/AdminLandingPage";
 import HomeScreen from "./screens/static/home/HomeScreen";
 import VendorRegisterScreen from "./screens/userManagement/registerUser/VendorRegisterScreen";
+import AdminViewScreen from "./screens/userManagement/viewUser/AdminViewScreen";
+import CustomerViewScreen from "./screens/userManagement/viewUser/CustomerViewScreen";
+import VendorViewScreen from "./screens/userManagement/viewUser/VendorViewScreen";
 
 const App = () => {
   return (
@@ -19,6 +22,9 @@ const App = () => {
         <Route path="/admin-register" element={<AdminRegisterScreen />} />
         <Route path="/customer-register" element={<CustomerRegisterScreen />} />
         <Route path="/vendor-register" element={<VendorRegisterScreen />} />
+        <Route path="/admin-view" element={<AdminViewScreen />} />
+        <Route path="/customer-view" element={<CustomerViewScreen />} />
+        <Route path="/vendor-view" element={<VendorViewScreen />} />
         <Route path="/admin" element={<AdminLandingPage />} />
         <Route path="/customer" element={<CustomerLandingPage />} />
         <Route path="/vendor" element={<VendorLandingPage />} />

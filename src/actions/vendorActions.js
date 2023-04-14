@@ -133,6 +133,7 @@ export const vendorRegister =
         timer: 2000,
         button: false,
       });
+
       setTimeout(function () {
         window.location.href = "/vendor";
       }, 2000);
