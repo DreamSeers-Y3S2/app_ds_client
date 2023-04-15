@@ -46,7 +46,7 @@ const reducer = combineReducers({
   customerDelete: customerDeleteReducer,
   customerViewById: customerViewByIdReducer,
   customerUpdateById: customerUpdateByIdReducer,
-  customerDeleteByIdReducer: customerDeleteByIdReducer,
+  customerDeleteById: customerDeleteByIdReducer,
   vendor_Login: vendorLoginReducer,
   vendorRegistration: vendorRegisterReducer,
   vendorView: vendorViewReducer,
@@ -55,7 +55,7 @@ const reducer = combineReducers({
   vendorDelete: vendorDeleteReducer,
   vendorViewById: vendorViewByIdReducer,
   vendorUpdateById: vendorUpdateByIdReducer,
-  vendorDeleteByIdReducer: vendorDeleteByIdReducer,
+  vendorDeleteById: vendorDeleteByIdReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo")

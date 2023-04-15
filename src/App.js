@@ -16,6 +16,7 @@ import VendorViewScreen from "./screens/userManagement/viewUser/VendorViewScreen
 import AdminEditScreen from "./screens/userManagement/editUser/AdminEditScreen";
 import CustomerEditScreen from "./screens/userManagement/editUser/CustomerEditScreen";
 import VendorEditScreen from "./screens/userManagement/editUser/VendorEditScreen";
+import CustomerList from "./screens/userManagement/adminUserManagement/adminLists/CustomerListScreen";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/admin-edit" element={<AdminEditScreen />} />
         <Route path="/customer-edit" element={<CustomerEditScreen />} />
         <Route path="/vendor-edit" element={<VendorEditScreen />} />
+        <Route path="/admin-customers" element={<CustomerList />} />
         <Route path="/admin" element={<AdminLandingPage />} />
         <Route path="/customer" element={<CustomerLandingPage />} />
         <Route path="/vendor" element={<VendorLandingPage />} />
