@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Row,
-  Col,
-  Form,
-} from "react-bootstrap";
+import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import MainScreen from "../../../../components/MainScreen";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   customerDeleteProfileById,
@@ -116,7 +110,7 @@ const CustomerListForAdminScreen = () => {
             </Col>
             <Col>
               <div className="search" style={{ marginTop: 5, marginLeft: 150 }}>
-                <Form inline>
+                <Form>
                   <input
                     type="text"
                     placeholder="Search..."

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Row,
-  Col,
-  Form,
-} from "react-bootstrap";
+import { Button, Card, Row, Col, Form } from "react-bootstrap";
 import MainScreen from "../../../../components/MainScreen";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,7 +110,7 @@ const VendorListForAdminScreen = () => {
             </Col>
             <Col>
               <div className="search" style={{ marginTop: 5, marginLeft: 150 }}>
-                <Form inline>
+                <Form>
                   <input
                     type="text"
                     placeholder="Search..."
@@ -233,9 +227,7 @@ const VendorListForAdminScreen = () => {
                                   style={{ marginTop: 20, fontSize: 15 }}
                                   variant="danger"
                                   className="mx-2"
-                                  onClick={() =>
-                                    deleteHandler(vendorList._id)
-                                  }
+                                  onClick={() => deleteHandler(vendorList._id)}
                                 >
                                   Delete
                                 </Button>
@@ -251,10 +243,21 @@ const VendorListForAdminScreen = () => {
                                 <h5>Telephone - {vendorList.telephone}</h5>
                                 <h5>Home Address - {vendorList.homeAddress}</h5>
                                 <h5>Email - {vendorList.email}</h5>
-                                <h5>Business Name - {vendorList.businessName}</h5>
-                                <h5>Business Address - {vendorList.businessAddress}</h5>
-                                <h5>Business Registration Number - {vendorList.businessRegNumber}</h5>
-                                <h5>Description - <br></br>{vendorList.description}</h5>
+                                <h5>
+                                  Business Name - {vendorList.businessName}
+                                </h5>
+                                <h5>
+                                  Business Address -{" "}
+                                  {vendorList.businessAddress}
+                                </h5>
+                                <h5>
+                                  Business Registration Number -{" "}
+                                  {vendorList.businessRegNumber}
+                                </h5>
+                                <h5>
+                                  Description - <br></br>
+                                  {vendorList.description}
+                                </h5>{" "}
                                 <br></br>
                               </Col>
                               <Col

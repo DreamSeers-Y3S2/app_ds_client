@@ -238,7 +238,7 @@ export const vendorUpdateProfile = (vendor) => async (dispatch, getState) => {
 
 export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
   try {
-    dispatch({ type: VENDOR_UPDATE_REQUEST });
+    dispatch({ type: VENDOR_DELETE_REQUEST });
 
     const {
       vendor_Login: { vendorInfo },
@@ -256,7 +256,7 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
       config
     );
 
-    dispatch({ type: VENDOR_UPDATE_SUCCESS, payload: data });
+    dispatch({ type: VENDOR_DELETE_SUCCESS, payload: data });
     swal({
       title: "Success !!!",
       text: "Vendor Account Delete Successful.",
@@ -270,7 +270,7 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
     localStorage.removeItem("vendorInfo");
   } catch (error) {
     dispatch({
-      type: VENDOR_UPDATE_FAIL,
+      type: VENDOR_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
