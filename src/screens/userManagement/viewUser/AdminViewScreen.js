@@ -7,7 +7,6 @@ import "./ViewScreen.css";
 
 const AdminViewScreen = () => {
   const [name, setName] = useState("");
-  const [dob, setDob] = useState("");
   const [telephone, setTelephone] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");

@@ -137,6 +137,8 @@ export const vendorRegister =
       setTimeout(function () {
         window.location.href = "/vendor";
       }, 2000);
+
+      localStorage.setItem("vendorInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: VENDOR_REGISTER_FAIL,
@@ -246,9 +248,8 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axios.delete(
       `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/delete`,
-      vendor,
       config
     );
 
@@ -260,12 +261,10 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
       timer: 2000,
       button: false,
     });
-    setTimeout(function () {
-      window.location.href = "/vendor-view";
-    }, 2000);
-    dispatch({ type: VENDOR_LOGIN_SUCCESS, payload: data });
+    window.location.href = "/";
 
-    localStorage.setItem("vendorInfo", JSON.stringify(data));
+    dispatch({ type: VENDOR_LOGOUT });
+    localStorage.removeItem("vendorInfo");
   } catch (error) {
     dispatch({
       type: VENDOR_UPDATE_FAIL,

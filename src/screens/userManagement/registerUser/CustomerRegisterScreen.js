@@ -42,7 +42,7 @@ const CustomerRegisterScreen = () => {
     e.preventDefault();
 
     setName("Pamela Beesly");
-    setTelephone("07778569896");
+    setTelephone("0778569896");
     setAddress("Colombo");
     setEmail("pamelabeesly@gmail.com");
     setPassword("test");
