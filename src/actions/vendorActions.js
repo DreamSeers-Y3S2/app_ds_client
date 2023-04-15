@@ -24,6 +24,9 @@ import {
   VENDOR_UPDATE_BY_ID_FAIL,
   VENDOR_UPDATE_BY_ID_REQUEST,
   VENDOR_UPDATE_BY_ID_SUCCESS,
+  VENDOR_DELETE_BY_ID_FAIL,
+  VENDOR_DELETE_BY_ID_REQUEST,
+  VENDOR_DELETE_BY_ID_SUCCESS,
 } from "../constants/vendorConstants";
 import axios from "axios";
 import swal from "sweetalert";
@@ -454,7 +457,7 @@ export const vendorUpdateProfileById =
 export const vendorDeleteProfileById = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: VENDOR_DELETE_REQUEST,
+      type: VENDOR_DELETE_BY_ID_REQUEST,
     });
 
     const {
@@ -473,13 +476,13 @@ export const vendorDeleteProfileById = (id) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: VENDOR_DELETE_SUCCESS,
+      type: VENDOR_DELETE_BY_ID_SUCCESS,
       payload: data,
     });
   } catch (error) {
     const message = "Vendor Delete Failed !!!";
     dispatch({
-      type: VENDOR_DELETE_FAIL,
+      type: VENDOR_DELETE_BY_ID_FAIL,
       payload: message,
     });
   }
