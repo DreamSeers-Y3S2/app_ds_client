@@ -4,9 +4,9 @@ import MainScreen from "../../../../components/MainScreen";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  customerDeleteProfileById,
-  customersList,
-} from "../../../../actions/customerActions";
+  vendorDeleteProfileById,
+  vendorsList,
+} from "../../../../actions/vendorActions";
 import Loading from "../../../../components/Loading";
 import {
   Accordion,
@@ -19,31 +19,31 @@ import ErrorMessage from "../../../../components/ErrorMessage";
 import swal from "sweetalert";
 import "./lists.css";
 
-const CustomerListForAdminScreen = () => {
+const VendorListForAdminScreen = () => {
   const dispatch = useDispatch();
 
-  const customerList = useSelector((state) => state.customerList);
-  const { loading, customers, error } = customerList;
+  const vendorList = useSelector((state) => state.vendorList);
+  const { loading, vendors, error } = vendorList;
 
   const admin_Login = useSelector((state) => state.admin_Login);
   const { adminInfo } = admin_Login;
 
-  const customerUpdate = useSelector((state) => state.customerUpdate);
-  const { success: successUpdate } = customerUpdate;
+  const vendorUpdate = useSelector((state) => state.vendorUpdate);
+  const { success: successUpdate } = vendorUpdate;
 
-  const customerDeleteById = useSelector((state) => state.customerDeleteById);
+  const vendorDeleteById = useSelector((state) => state.vendorDeleteById);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = customerDeleteById;
+  } = vendorDeleteById;
 
   const history = useHistory();
 
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    dispatch(customersList());
+    dispatch(vendorsList());
     if (!adminInfo) {
       history.push("/access-denied", { replace: true });
     }
@@ -51,7 +51,7 @@ const CustomerListForAdminScreen = () => {
     dispatch,
     history,
     adminInfo,
-    customerDeleteById,
+    vendorDeleteById,
     successDelete,
     successUpdate,
   ]);
@@ -66,7 +66,7 @@ const CustomerListForAdminScreen = () => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(customerDeleteProfileById(id));
+          dispatch(vendorDeleteProfileById(id));
           swal({
             title: "Success!",
             text: "Deleted Account Successfully",
@@ -91,7 +91,7 @@ const CustomerListForAdminScreen = () => {
 
   if (adminInfo) {
     return (
-      <div className="customerList">
+      <div className="vendorList">
         <br></br>
         <MainScreen title={`Welcome Back ${adminInfo && adminInfo.name}..`}>
           <Row>
@@ -105,7 +105,7 @@ const CustomerListForAdminScreen = () => {
                   fontStyle: "italic",
                 }}
               >
-                Customers List
+                Vendors List
               </h1>
             </Col>
             <Col>
@@ -144,19 +144,19 @@ const CustomerListForAdminScreen = () => {
           <br></br>
           <div className="listContainer">
             <Accordion allowZeroExpanded>
-              {customers &&
-                customers
+              {vendors &&
+                vendors
                   .filter(
-                    (filteredCustomers) =>
-                      filteredCustomers.name
+                    (filteredVendors) =>
+                      filteredVendors.name
                         .toLowerCase()
                         .includes(search.toLowerCase()) ||
-                      filteredCustomers.email.includes(search)
+                      filteredVendors.email.includes(search)
                   )
                   .reverse()
-                  .map((customerList) => (
+                  .map((vendorList) => (
                     <AccordionItem
-                      key={customerList._id}
+                      key={vendorList._id}
                       className="listContainer"
                     >
                       <Card
@@ -201,22 +201,22 @@ const CustomerListForAdminScreen = () => {
                                     fontSize: 18,
                                   }}
                                 >
-                                  Customer Email : &emsp;
-                                  {customerList.email}{" "}
+                                  Vendor Email : &emsp;
+                                  {vendorList.email}{" "}
                                 </label>{" "}
                                 <br></br>
                                 <label
                                   className="name"
                                   style={{ paddingInline: 20, fontSize: 18 }}
                                 >
-                                  Customer Name : &emsp;
-                                  {customerList.name}
+                                  Vendor Name : &emsp;
+                                  {vendorList.name}
                                 </label>{" "}
                               </span>
                               <div>
                                 <Button
                                   style={{ marginTop: 20, fontSize: 15 }}
-                                  href={`/admin-customer-edit/${customerList._id}`}
+                                  href={`/admin-vendor-edit/${vendorList._id}`}
                                 >
                                   Edit
                                 </Button>
@@ -227,9 +227,7 @@ const CustomerListForAdminScreen = () => {
                                   style={{ marginTop: 20, fontSize: 15 }}
                                   variant="danger"
                                   className="mx-2"
-                                  onClick={() =>
-                                    deleteHandler(customerList._id)
-                                  }
+                                  onClick={() => deleteHandler(vendorList._id)}
                                 >
                                   Delete
                                 </Button>
@@ -241,10 +239,25 @@ const CustomerListForAdminScreen = () => {
                           <Card.Body>
                             <Row>
                               <Col md={6}>
-                                <h5>Name - {customerList.name}</h5>
-                                <h5>Telephone - {customerList.telephone}</h5>
-                                <h5>Address - {customerList.address}</h5>
-                                <h5>Email - {customerList.email}</h5>
+                                <h5>Name - {vendorList.name}</h5>
+                                <h5>Telephone - {vendorList.telephone}</h5>
+                                <h5>Home Address - {vendorList.homeAddress}</h5>
+                                <h5>Email - {vendorList.email}</h5>
+                                <h5>
+                                  Business Name - {vendorList.businessName}
+                                </h5>
+                                <h5>
+                                  Business Address -{" "}
+                                  {vendorList.businessAddress}
+                                </h5>
+                                <h5>
+                                  Business Registration Number -{" "}
+                                  {vendorList.businessRegNumber}
+                                </h5>
+                                <h5>
+                                  Description - <br></br>
+                                  {vendorList.description}
+                                </h5>{" "}
                                 <br></br>
                               </Col>
                               <Col
@@ -260,8 +273,8 @@ const CustomerListForAdminScreen = () => {
                                     width: "50%",
                                     height: "100%",
                                   }}
-                                  src={customerList.pic}
-                                  alt={customerList.name}
+                                  src={vendorList.pic}
+                                  alt={vendorList.name}
                                   className="profilePic"
                                 />
                               </Col>
@@ -278,7 +291,7 @@ const CustomerListForAdminScreen = () => {
                                 Registered Date -{" "}
                                 <cite title="Source Title">
                                   {" "}
-                                  {customerList.regDate}
+                                  {vendorList.regDate}
                                 </cite>
                               </Card.Footer>
                             </blockquote>
@@ -304,4 +317,4 @@ const CustomerListForAdminScreen = () => {
   }
 };
 
-export default CustomerListForAdminScreen;
+export default VendorListForAdminScreen;
