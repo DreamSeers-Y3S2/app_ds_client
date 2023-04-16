@@ -270,7 +270,7 @@ const VendorListForAdminScreen = () => {
                               >
                                 <img
                                   style={{
-                                    width: "50%",
+                                    width: "75%",
                                     height: "100%",
                                   }}
                                   src={vendorList.pic}
