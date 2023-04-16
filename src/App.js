@@ -17,36 +17,51 @@ import AdminEditScreen from "./screens/userManagement/editUser/AdminEditScreen";
 import CustomerEditScreen from "./screens/userManagement/editUser/CustomerEditScreen";
 import VendorEditScreen from "./screens/userManagement/editUser/VendorEditScreen";
 import CustomerListForAdminScreen from "./screens/userManagement/adminUserManagement/adminLists/CustomerListForAdminScreen";
-import VendorListForAdminScreen from "./screens/userManagement/adminUserManagement/adminLists/VendorListScreen";
+import VendorListForAdminScreen from "./screens/userManagement/adminUserManagement/adminLists/VendorListForAdminScreen";
 import CustomerEditByAdminScreen from "./screens/userManagement/adminUserManagement/adminUserEditScreens/CustomerEditByAdminScreen";
+import VendorEditByAdminScreen from "./screens/userManagement/adminUserManagement/adminUserEditScreens/VendorEditByAdminScreen";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/admin-register" element={<AdminRegisterScreen />} />
-        <Route path="/customer-register" element={<CustomerRegisterScreen />} />
-        <Route path="/vendor-register" element={<VendorRegisterScreen />} />
-        <Route path="/admin-view" element={<AdminViewScreen />} />
-        <Route path="/customer-view" element={<CustomerViewScreen />} />
-        <Route path="/vendor-view" element={<VendorViewScreen />} />
-        <Route path="/admin-edit" element={<AdminEditScreen />} />
-        <Route path="/customer-edit" element={<CustomerEditScreen />} />
-        <Route path="/vendor-edit" element={<VendorEditScreen />} />
+      <main>
+        <Route path="/admin-register" component={AdminRegisterScreen} exact />
+        <Route
+          path="/customer-register"
+          component={CustomerRegisterScreen}
+          exact
+        />
+        <Route path="/vendor-register" component={VendorRegisterScreen} exact />
+        <Route path="/admin-view" component={AdminViewScreen} exact />
+        <Route path="/customer-view" component={CustomerViewScreen} exact />
+        <Route path="/vendor-view" component={VendorViewScreen} exact />
+        <Route path="/admin-edit" component={AdminEditScreen} exact />
+        <Route path="/customer-edit" component={CustomerEditScreen} exact />
+        <Route path="/vendor-edit" component={VendorEditScreen} exact />
         <Route
           path="/admin-customers"
-          element={<CustomerListForAdminScreen />}
+          component={CustomerListForAdminScreen}
+          exact
         />
-        <Route path="/admin-vendors" element={<VendorListForAdminScreen />} />
         <Route
-          path="//admin-customer-edit/:id"
-          element={<CustomerEditByAdminScreen />}
+          path="/admin-vendors"
+          component={VendorListForAdminScreen}
+          exact
         />
-        <Route path="/admin" element={<AdminLandingPage />} />
-        <Route path="/customer" element={<CustomerLandingPage />} />
-        <Route path="/vendor" element={<VendorLandingPage />} />
-      </Routes>
+        <Route
+          path="/admin-customer-edit/:id"
+          component={CustomerEditByAdminScreen}
+          exact
+        />
+        <Route
+          path="/admin-vendor-edit/:id"
+          component={VendorEditByAdminScreen}
+          exact
+        />
+        <Route path="/admin" component={AdminLandingPage} exact />
+        <Route path="/customer" component={CustomerLandingPage} exact />
+        <Route path="/vendor" component={VendorLandingPage} exact />
+      </main>
       <Footer />
     </BrowserRouter>
   );
