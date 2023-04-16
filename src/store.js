@@ -7,7 +7,7 @@ import {
   adminRegisterReducer,
   adminViewReducer,
   adminUpdateReducer,
-} from "./reducers/adminReducers";
+} from "./reducers/userManagementReducers/adminReducers";
 
 import {
   customerLoginReducer,
@@ -19,7 +19,7 @@ import {
   customerViewByIdReducer,
   customerUpdateByIdReducer,
   customerDeleteByIdReducer,
-} from "./reducers/customerReducers";
+} from "./reducers/userManagementReducers/customerReducers";
 
 import {
   vendorLoginReducer,
@@ -31,7 +31,7 @@ import {
   vendorViewByIdReducer,
   vendorUpdateByIdReducer,
   vendorDeleteByIdReducer,
-} from "./reducers/vendorReducers";
+} from "./reducers/userManagementReducers/vendorReducers";
 
 const reducer = combineReducers({
   admin_Login: adminLoginReducer,
