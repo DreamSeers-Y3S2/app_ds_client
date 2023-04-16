@@ -22,7 +22,7 @@ import {
   PRODUCTS_DELETE_BY_ADMIN_FAIL,
 } from "../../constants/productManagementConstants/productConstants";
 
-export const productsListForVendorReducer = (
+export const vendorProductListReducer = (
   state = { products: [] },
   action
 ) => {
@@ -39,7 +39,7 @@ export const productsListForVendorReducer = (
   }
 };
 
-export const productsListForAdminReducer = (
+export const adminProductListReducer = (
   state = { products: [] },
   action
 ) => {

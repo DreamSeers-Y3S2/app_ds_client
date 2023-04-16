@@ -34,8 +34,8 @@ import {
 } from "./reducers/userManagementReducers/vendorReducers";
 
 import {
-  productsListForVendorReducer,
-  productsListForAdminReducer,
+  vendorProductListReducer,
+  adminProductListReducer,
   productCreateReducer,
   productUpdateByVendorReducer,
   productUpdateByAdminReducer,
@@ -66,8 +66,9 @@ const reducer = combineReducers({
   vendorViewById: vendorViewByIdReducer,
   vendorUpdateById: vendorUpdateByIdReducer,
   vendorDeleteById: vendorDeleteByIdReducer,
-  productsListForVendor: productsListForVendorReducer,
-  productsListForAdmin: productsListForAdminReducer,
+
+  adminProductList: adminProductListReducer,
+  vendorProductList: vendorProductListReducer,
   productCreate: productCreateReducer,
   productUpdateByVendor: productUpdateByVendorReducer,
   productUpdateByAdmin: productUpdateByAdminReducer,
