@@ -99,8 +99,13 @@ const VendorEditScreen = () => {
         telephone,
         homeAddress,
         email,
-        pic,
         password,
+        businessName,
+        businessAddress,
+        website,
+        businessRegNumber,
+        description,
+        pic,
       };
       dispatch(vendorUpdateProfile(vendorUpdatedInfo));
     }

@@ -3,23 +3,29 @@ import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { customerUpdateProfileById } from "../../../../actions/customerActions";
+import { vendorUpdateProfileById } from "../../../../actions/vendorActions";
 import axios from "axios";
 import MainScreen from "../../../../components/MainScreen";
 import { authHeader } from "../../../../actions/adminActions";
 import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../../../config";
 import "./adminUserEdit.css";
 
-const CustomerEditByAdminScreen = ({ match }) => {
+const VendorEditByAdminScreen = ({ match }) => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
-  const [address, setAddress] = useState("");
+  const [homeAddress, setHomeAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [pic, setPic] = useState();
+  const [pic, setPic] = useState("");
   const [password, setPassword] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessAddress, setBusinessAddress] = useState("");
+  const [website, setWebsite] = useState("");
+  const [businessRegNumber, setBusinessRegNumber] = useState("");
+  const [description, setDescription] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
+
   const [regDate, setRegDate] = useState("");
 
   const dispatch = useDispatch();
@@ -27,8 +33,8 @@ const CustomerEditByAdminScreen = ({ match }) => {
   const admin_Login = useSelector((state) => state.admin_Login);
   const { adminInfo } = admin_Login;
 
-  const customerUpdateById = useSelector((state) => state.customerUpdateById);
-  const { loading, error } = customerUpdateById;
+  const vendorUpdateById = useSelector((state) => state.vendorUpdateById);
+  const { loading, error } = vendorUpdateById;
 
   const postDetails = (pics) => {
     if (
@@ -45,7 +51,7 @@ const CustomerEditByAdminScreen = ({ match }) => {
     ) {
       const data = new FormData();
       data.append("file", pics);
-      data.append("upload_preset", "customerProfile");
+      data.append("upload_preset", "vendorProfile");
       data.append("cloud_name", "dfmnpw0yp");
       fetch("https://api.cloudinary.com/v1_1/dfmnpw0yp/image/upload", {
         method: "post",
@@ -70,13 +76,18 @@ const CustomerEditByAdminScreen = ({ match }) => {
       setMessage("Passwords do not match");
     } else {
       dispatch(
-        customerUpdateProfileById(
+        vendorUpdateProfileById(
           match.params.id,
           name,
           telephone,
-          address,
+          homeAddress,
           email,
           password,
+          businessName,
+          businessAddress,
+          website,
+          businessRegNumber,
+          description,
           pic,
           regDate
         )
@@ -88,15 +99,20 @@ const CustomerEditByAdminScreen = ({ match }) => {
     if (adminInfo != null) {
       const fetching = async () => {
         const { data } = await axios.get(
-          `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customer/profile/view/${match.params.id}`,
+          `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendor/profile/view/${match.params.id}`,
           {
             headers: authHeader(),
           }
         );
         setName(data.name);
         setTelephone(data.telephone);
-        setAddress(data.address);
+        setHomeAddress(data.homeAddress);
         setEmail(data.email);
+        setBusinessName(data.businessName);
+        setBusinessAddress(data.businessAddress);
+        setWebsite(data.website);
+        setBusinessRegNumber(data.businessRegNumber);
+        setDescription(data.description);
         setPic(data.pic);
         setRegDate(data.regDate);
       };
@@ -107,7 +123,7 @@ const CustomerEditByAdminScreen = ({ match }) => {
 
   if (adminInfo) {
     return (
-      <div className="adminCustomerEditBg">
+      <div className="adminVendorEditBg">
         <br></br>
         <MainScreen title="EDIT - CUSTOMER">
           <Button
@@ -117,10 +133,10 @@ const CustomerEditByAdminScreen = ({ match }) => {
               marginTop: 5,
               fontSize: 15,
             }}
-            href="/admin-customers"
+            href="/admin-vendors"
           >
             {" "}
-            Back to customers List
+            Back to vendors List
           </Button>
           <br></br>
 
@@ -147,49 +163,44 @@ const CustomerEditByAdminScreen = ({ match }) => {
                 {loading && <Loading />}
               </div>
               <br></br>
-              <Row className="customerProfileContainer">
+              <Row className="vendorProfileContainer">
                 <Col md={6}>
                   <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="customerName">
+                    <Form.Group controlId="vendorViewName">
                       <Form.Label>Name</Form.Label>
                       <Form.Control
-                        type="name"
+                        type="text"
                         value={name}
-                        placeholder="Enter name"
                         onChange={(e) => setName(e.target.value)}
                         required
-                      />
+                      ></Form.Control>
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="customerFormBasicTelephone">
+                    <Form.Group controlId="vendorFormBasicTelephone">
                       <Form.Label>Telephone</Form.Label>
                       <Form.Control
                         type="text"
                         value={telephone}
-                        placeholder="Enter Telephone Number"
                         onChange={(e) => setTelephone(e.target.value)}
                         required
-                        maxLength={10}
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="customerFormBasicAddress">
-                      <Form.Label>Address</Form.Label>
+                    <Form.Group controlId="vendorFormBasicAddress">
+                      <Form.Label>Home Address</Form.Label>
                       <Form.Control
                         type="textArea"
-                        value={address}
-                        placeholder="Enter Address"
-                        onChange={(e) => setAddress(e.target.value)}
+                        value={homeAddress}
+                        onChange={(e) => setHomeAddress(e.target.value)}
                         required
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="doctorFormBasicEmail">
+                    <Form.Group controlId="vendorFormBasicEmail">
                       <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="email"
                         value={email}
-                        placeholder="Enter Email Address"
                         onChange={(e) => setEmail(e.target.value)}
                         required
                       />
@@ -215,6 +226,65 @@ const CustomerEditByAdminScreen = ({ match }) => {
                       />
                     </Form.Group>
                     <br></br>
+                    <Form.Group controlId="vendorFormBasicBusinessName">
+                      <Form.Label>Business Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={businessName}
+                        placeholder="Enter Business Name"
+                        onChange={(e) => setBusinessName(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <br></br>
+                    <Form.Group controlId="vendorFormBasicBusinessAddress">
+                      <Form.Label>Business Address</Form.Label>
+                      <Form.Control
+                        type="textArea"
+                        value={businessAddress}
+                        placeholder="Enter Business Address"
+                        onChange={(e) => setBusinessAddress(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <br></br>
+                    <Form.Group controlId="vendorFormBasicWebsite">
+                      <Form.Label>Website</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={website}
+                        placeholder="Enter Website"
+                        onChange={(e) => setWebsite(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <br></br>
+                    <Form.Group controlId="vendorFormBasicBusinessRegNo">
+                      <Form.Label>Business Registration Number</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={businessRegNumber}
+                        placeholder="Enter Business Registration Number"
+                        onChange={(e) => setBusinessRegNumber(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <br></br>
+                    <Form.Group controlId="vendorFormBasicDescription">
+                      <Form.Label>Description</Form.Label>
+                      <textarea
+                        style={{
+                          width: "100%",
+                          fontSize: "16px",
+                          borderRadius: "5px",
+                        }}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        rows={7}
+                      />
+                    </Form.Group>
+                    <br></br>
                     {picMessage && (
                       <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
                     )}
@@ -224,18 +294,8 @@ const CustomerEditByAdminScreen = ({ match }) => {
                       <input
                         type="file"
                         accept="image/*"
-                        id="customer-pic"
+                        id="vendor-pic"
                         onChange={(e) => postDetails(e.target.files[0])}
-                      />
-                    </Form.Group>
-                    <br></br>
-                    <Form.Group controlId="customerRegDate">
-                      <Form.Label>Registration Date</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={regDate}
-                        onChange={(e) => setRegDate(e.target.value)}
-                        readOnly
                       />
                     </Form.Group>
                     <br></br>
@@ -292,4 +352,4 @@ const CustomerEditByAdminScreen = ({ match }) => {
   }
 };
 
-export default CustomerEditByAdminScreen;
+export default VendorEditByAdminScreen;
