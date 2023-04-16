@@ -33,6 +33,16 @@ import {
   vendorDeleteByIdReducer,
 } from "./reducers/userManagementReducers/vendorReducers";
 
+import {
+  productsListForVendorReducer,
+  productsListForAdminReducer,
+  productCreateReducer,
+  productUpdateByVendorReducer,
+  productUpdateByAdminReducer,
+  productDeleteByVendorReducer,
+  productDeleteByAdminReducer,
+} from "./reducers/productManagementReducers/productReducers";
+
 const reducer = combineReducers({
   admin_Login: adminLoginReducer,
   adminRegistration: adminRegisterReducer,
@@ -56,6 +66,13 @@ const reducer = combineReducers({
   vendorViewById: vendorViewByIdReducer,
   vendorUpdateById: vendorUpdateByIdReducer,
   vendorDeleteById: vendorDeleteByIdReducer,
+  productsListForVendor: productsListForVendorReducer,
+  productsListForAdmin: productsListForAdminReducer,
+  productCreate: productCreateReducer,
+  productUpdateByVendor: productUpdateByVendorReducer,
+  productUpdateByAdmin: productUpdateByAdminReducer,
+  productDeleteByVendor: productDeleteByVendorReducer,
+  productDeleteByAdmin: productDeleteByAdminReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo")
