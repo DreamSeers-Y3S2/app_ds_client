@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import MainScreen from "../../../components/MainScreen";
-import { customerLogout } from "../../../actions/customerActions";
+import { customerLogout } from "../../../actions/userManagementActions/customerActions";
 import "./ViewScreen.css";
 
 const CustomerViewScreen = () => {

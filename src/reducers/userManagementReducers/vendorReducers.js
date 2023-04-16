@@ -27,7 +27,7 @@ import {
   VENDOR_DELETE_BY_ID_FAIL,
   VENDOR_DELETE_BY_ID_REQUEST,
   VENDOR_DELETE_BY_ID_SUCCESS,
-} from "../constants/vendorConstants";
+} from "../../constants/userManagementConstants/vendorConstants";
 
 export const vendorLoginReducer = (state = {}, action) => {
   switch (action.type) {

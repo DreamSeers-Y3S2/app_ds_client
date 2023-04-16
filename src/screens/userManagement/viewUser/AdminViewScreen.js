@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import MainScreen from "../../../components/MainScreen";
-import { adminLogout } from "../../../actions/adminActions";
+import { adminLogout } from "../../../actions/userManagementActions/adminActions";
 import "./ViewScreen.css";
 
 const AdminViewScreen = () => {

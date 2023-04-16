@@ -7,7 +7,7 @@ import MainScreen from "../../../components/MainScreen";
 import {
   vendorUpdateProfile,
   vendorDeleteProfile,
-} from "../../../actions/vendorActions";
+} from "../../../actions/userManagementActions/vendorActions";
 import swal from "sweetalert";
 import "./EditScreen.css";
 

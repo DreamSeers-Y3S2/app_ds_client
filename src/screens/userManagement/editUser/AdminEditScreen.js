@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import ErrorMessage from "../../../components/ErrorMessage";
 import MainScreen from "../../../components/MainScreen";
-import { adminUpdateProfile } from "../../../actions/adminActions";
+import { adminUpdateProfile } from "../../../actions/userManagementActions/adminActions";
 import "./EditScreen.css";
 
 const AdminEditScreen = () => {

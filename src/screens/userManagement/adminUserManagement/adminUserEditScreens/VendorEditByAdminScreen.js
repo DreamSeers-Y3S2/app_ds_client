@@ -3,10 +3,10 @@ import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { vendorUpdateProfileById } from "../../../../actions/vendorActions";
+import { vendorUpdateProfileById } from "../../../../actions/userManagementActions/vendorActions";
 import axios from "axios";
 import MainScreen from "../../../../components/MainScreen";
-import { authHeader } from "../../../../actions/adminActions";
+import { authHeader } from "../../../../actions/userManagementActions/adminActions";
 import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../../../config";
 import "./adminUserEdit.css";
 

@@ -7,7 +7,7 @@ import MainScreen from "../../../components/MainScreen";
 import {
   customerUpdateProfile,
   customerDeleteProfile,
-} from "../../../actions/customerActions";
+} from "../../../actions/userManagementActions/customerActions";
 import swal from "sweetalert";
 import "./EditScreen.css";
 

@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import ErrorMessage from "../../../components/ErrorMessage";
-import { customerRegister } from "../../../actions/customerActions";
+import { customerRegister } from "../../../actions/userManagementActions/customerActions";
 import MainScreen from "../../../components/MainScreen";
 import "./RegisterScreen.css";
 

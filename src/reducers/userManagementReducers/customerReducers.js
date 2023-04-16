@@ -27,7 +27,7 @@ import {
   CUSTOMER_DELETE_BY_ID_FAIL,
   CUSTOMER_DELETE_BY_ID_REQUEST,
   CUSTOMER_DELETE_BY_ID_SUCCESS,
-} from "../constants/customerConstants";
+} from "../../constants/userManagementConstants/customerConstants";
 
 export const customerLoginReducer = (state = {}, action) => {
   switch (action.type) {

@@ -27,10 +27,10 @@ import {
   CUSTOMER_DELETE_BY_ID_FAIL,
   CUSTOMER_DELETE_BY_ID_REQUEST,
   CUSTOMER_DELETE_BY_ID_SUCCESS,
-} from "../constants/customerConstants";
+} from "../../constants/userManagementConstants/customerConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../config";
+import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
 
 export const customerLogin = (email, password) => async (dispatch) => {
   try {

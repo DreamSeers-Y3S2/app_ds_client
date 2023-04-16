@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   vendorDeleteProfileById,
   vendorsList,
-} from "../../../../actions/vendorActions";
+} from "../../../../actions/userManagementActions/vendorActions";
 import Loading from "../../../../components/Loading";
 import {
   Accordion,

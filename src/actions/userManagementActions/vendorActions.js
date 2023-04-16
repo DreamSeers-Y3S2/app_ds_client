@@ -27,10 +27,10 @@ import {
   VENDOR_DELETE_BY_ID_FAIL,
   VENDOR_DELETE_BY_ID_REQUEST,
   VENDOR_DELETE_BY_ID_SUCCESS,
-} from "../constants/vendorConstants";
+} from "../../constants/userManagementConstants/vendorConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../config";
+import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
 
 export const vendorLogin = (email, password) => async (dispatch) => {
   try {
