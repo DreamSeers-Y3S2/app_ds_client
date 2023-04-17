@@ -25,8 +25,6 @@ const CustomerListForAdminScreen = () => {
   const customerList = useSelector((state) => state.customerList);
   const { loading, customers, error } = customerList;
 
-  console.log(customerList);
-
   const admin_Login = useSelector((state) => state.admin_Login);
   const { adminInfo } = admin_Login;
 

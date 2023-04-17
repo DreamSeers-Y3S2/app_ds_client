@@ -36,6 +36,8 @@ const ProductsListForVendorScreen = () => {
   );
   const { success: successUpdate } = productUpdateByVendor; //taking out products update state from redux
 
+  console.log(vendorProductList);
+
   const [search, setSearch] = useState("");
 
   const productDeleteByVendor = useSelector(
@@ -145,7 +147,7 @@ const ProductsListForVendorScreen = () => {
 
           <Button
             variant="success"
-            href="/admin"
+            href="/vendor-product-add"
             style={{ float: "right", fontSize: "15px" }}
           >
             + Add New Product
@@ -303,11 +305,11 @@ const ProductsListForVendorScreen = () => {
                               >
                                 <img
                                   style={{
-                                    width: "75%",
-                                    height: "75%",
+                                    width: "50%",
+                                    height: "70%",
                                   }}
-                                  src={vendorProductList.picUrl}
-                                  alt={vendorProductList.name}
+                                  src={vendorProductList.picURL}
+                                  alt={vendorProductList.title}
                                   className="profilePic"
                                 />
                               </Col>
@@ -320,13 +322,7 @@ const ProductsListForVendorScreen = () => {
                                   borderRadius: 20,
                                   background: "white",
                                 }}
-                              >
-                                Registered Date -{" "}
-                                <cite title="Source Title">
-                                  {" "}
-                                  {vendorProductList.regDate}
-                                </cite>
-                              </Card.Footer>
+                              />
                             </blockquote>
                           </Card.Body>
                         </AccordionItemPanel>

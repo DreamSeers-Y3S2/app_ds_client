@@ -282,6 +282,7 @@ const VendorRegisterScreen = () => {
                       }}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Enter Description"
                       required
                       rows={7}
                     />

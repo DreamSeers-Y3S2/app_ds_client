@@ -295,10 +295,10 @@ const ProductsListForAdminScreen = () => {
                               >
                                 <img
                                   style={{
-                                    width: "75%",
-                                    height: "75%",
+                                    width: "50%",
+                                    height: "70%",
                                   }}
-                                  src={adminProductList.picUrl}
+                                  src={adminProductList.picURL}
                                   alt={adminProductList.name}
                                   className="profilePic"
                                 />
@@ -312,13 +312,7 @@ const ProductsListForAdminScreen = () => {
                                   borderRadius: 20,
                                   background: "white",
                                 }}
-                              >
-                                Registered Date -{" "}
-                                <cite title="Source Title">
-                                  {" "}
-                                  {adminProductList.regDate}
-                                </cite>
-                              </Card.Footer>
+                              />
                             </blockquote>
                           </Card.Body>
                         </AccordionItemPanel>

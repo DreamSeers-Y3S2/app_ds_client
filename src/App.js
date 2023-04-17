@@ -22,6 +22,7 @@ import CustomerEditByAdminScreen from "./screens/userManagement/adminUserManagem
 import VendorEditByAdminScreen from "./screens/userManagement/adminUserManagement/adminUserEditScreens/VendorEditByAdminScreen";
 import ProductsListForVendorScreen from "./screens/productManagement/vendorProductManagement/productsListForVendor/ProductsListForVendorScreen";
 import ProductsListForAdminScreen from "./screens/productManagement/adminProductManagement/productsListForAdmin/ProductsListForAdminScreen";
+import AddProductByVendorScreen from "./screens/productManagement/vendorProductManagement/addProduct/AddProductByVendorScreen";
 
 const App = () => {
   return (
@@ -71,6 +72,11 @@ const App = () => {
         <Route
           path="/admin-products"
           component={ProductsListForAdminScreen}
+          exact
+        />
+        <Route
+          path="/vendor-product-add"
+          component={AddProductByVendorScreen}
           exact
         />
       </main>
