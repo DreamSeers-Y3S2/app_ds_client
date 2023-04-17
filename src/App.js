@@ -9,6 +9,9 @@ import CustomerLandingPage from "./screens/static/landingPages/CustomerLandingPa
 import VendorLandingPage from "./screens/static/landingPages/VendorLandingPage";
 import AdminLandingPage from "./screens/static/landingPages/AdminLandingPage";
 import HomeScreen from "./screens/static/home/HomeScreen";
+import AdminLogin from "./screens/userManagement/login/AdminLogin";
+import CustomerLogin from "./screens/userManagement/login/CustomerLogin";
+import VendorLogin from "./screens/userManagement/login/VendorLogin";
 import VendorRegisterScreen from "./screens/userManagement/registerUser/VendorRegisterScreen";
 import AdminViewScreen from "./screens/userManagement/viewUser/AdminViewScreen";
 import CustomerViewScreen from "./screens/userManagement/viewUser/CustomerViewScreen";
@@ -30,6 +33,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <main>
+        <Route path="/admin-login" component={AdminLogin} />
+        <Route path="/customer-login" component={CustomerLogin} />
+        <Route path="/vendor-login" component={VendorLogin} />
         <Route path="/admin-register" component={AdminRegisterScreen} exact />
         <Route
           path="/customer-register"
