@@ -12,7 +12,7 @@ import {
   ADMIN_UPDATE_FAIL,
   ADMIN_UPDATE_REQUEST,
   ADMIN_UPDATE_SUCCESS,
-} from "../constants/adminConstants";
+} from "../../constants/userManagementConstants/adminConstants";
 
 export const adminLoginReducer = (state = {}, action) => {
   switch (action.type) {

@@ -7,7 +7,7 @@ import {
   adminRegisterReducer,
   adminViewReducer,
   adminUpdateReducer,
-} from "./reducers/adminReducers";
+} from "./reducers/userManagementReducers/adminReducers";
 
 import {
   customerLoginReducer,
@@ -19,7 +19,7 @@ import {
   customerViewByIdReducer,
   customerUpdateByIdReducer,
   customerDeleteByIdReducer,
-} from "./reducers/customerReducers";
+} from "./reducers/userManagementReducers/customerReducers";
 
 import {
   vendorLoginReducer,
@@ -31,7 +31,17 @@ import {
   vendorViewByIdReducer,
   vendorUpdateByIdReducer,
   vendorDeleteByIdReducer,
-} from "./reducers/vendorReducers";
+} from "./reducers/userManagementReducers/vendorReducers";
+
+import {
+  vendorProductListReducer,
+  adminProductListReducer,
+  productCreateReducer,
+  productUpdateByVendorReducer,
+  productUpdateByAdminReducer,
+  productDeleteByVendorReducer,
+  productDeleteByAdminReducer,
+} from "./reducers/productManagementReducers/productReducers";
 
 const reducer = combineReducers({
   admin_Login: adminLoginReducer,
@@ -46,7 +56,7 @@ const reducer = combineReducers({
   customerDelete: customerDeleteReducer,
   customerViewById: customerViewByIdReducer,
   customerUpdateById: customerUpdateByIdReducer,
-  customerDeleteByIdReducer: customerDeleteByIdReducer,
+  customerDeleteById: customerDeleteByIdReducer,
   vendor_Login: vendorLoginReducer,
   vendorRegistration: vendorRegisterReducer,
   vendorView: vendorViewReducer,
@@ -55,7 +65,15 @@ const reducer = combineReducers({
   vendorDelete: vendorDeleteReducer,
   vendorViewById: vendorViewByIdReducer,
   vendorUpdateById: vendorUpdateByIdReducer,
-  vendorDeleteByIdReducer: vendorDeleteByIdReducer,
+  vendorDeleteById: vendorDeleteByIdReducer,
+
+  adminProductList: adminProductListReducer,
+  vendorProductList: vendorProductListReducer,
+  productCreate: productCreateReducer,
+  productUpdateByVendor: productUpdateByVendorReducer,
+  productUpdateByAdmin: productUpdateByAdminReducer,
+  productDeleteByVendor: productDeleteByVendorReducer,
+  productDeleteByAdmin: productDeleteByAdminReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo")
@@ -66,7 +84,7 @@ const customerInfoFromStorage = localStorage.getItem("customerInfo")
   ? JSON.parse(localStorage.getItem("customerInfo"))
   : null;
 
-  const vendorInfoFromStorage = localStorage.getItem("vendorInfo")
+const vendorInfoFromStorage = localStorage.getItem("vendorInfo")
   ? JSON.parse(localStorage.getItem("vendorInfo"))
   : null;
 

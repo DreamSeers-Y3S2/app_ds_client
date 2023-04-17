@@ -24,10 +24,13 @@ import {
   CUSTOMER_UPDATE_BY_ID_FAIL,
   CUSTOMER_UPDATE_BY_ID_REQUEST,
   CUSTOMER_UPDATE_BY_ID_SUCCESS,
-} from "../constants/customerConstants";
+  CUSTOMER_DELETE_BY_ID_FAIL,
+  CUSTOMER_DELETE_BY_ID_REQUEST,
+  CUSTOMER_DELETE_BY_ID_SUCCESS,
+} from "../../constants/userManagementConstants/customerConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../config";
+import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
 
 export const customerLogin = (email, password) => async (dispatch) => {
   try {
@@ -213,52 +216,49 @@ export const customerUpdateProfile =
     }
   };
 
-export const customerDeleteProfile =
-  (customer) => async (dispatch, getState) => {
-    try {
-      dispatch({ type: CUSTOMER_UPDATE_REQUEST });
+export const customerDeleteProfile = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: CUSTOMER_DELETE_REQUEST });
 
-      const {
-        customer_Login: { customerInfo },
-      } = getState();
+    const {
+      customer_Login: { customerInfo },
+    } = getState();
+    console.log(customerInfo);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${customerInfo.token}`,
+      },
+    };
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${customerInfo.token}`,
-        },
-      };
+    const { data } = await axios.delete(
+      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/delete`,
+      config
+    );
 
-      const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/delete`,
-        customer,
-        config
-      );
+    dispatch({ type: CUSTOMER_DELETE_SUCCESS, payload: data });
+    swal({
+      title: "Success !!!",
+      text: "Customer Account Delete Successful.",
+      icon: "success",
+      timer: 2000,
+      button: false,
+    });
 
-      dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: data });
-      swal({
-        title: "Success !!!",
-        text: "Customer Account Delete Successful.",
-        icon: "success",
-        timer: 2000,
-        button: false,
-      });
-      setTimeout(function () {
-        window.location.href = "/customer-view";
-      }, 2000);
-      dispatch({ type: CUSTOMER_LOGIN_SUCCESS, payload: data });
+    window.location.href = "/";
 
-      localStorage.setItem("customerInfo", JSON.stringify(data));
-    } catch (error) {
-      dispatch({
-        type: CUSTOMER_UPDATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+    dispatch({ type: CUSTOMER_LOGOUT });
+    localStorage.removeItem("customerInfo");
+  } catch (error) {
+    dispatch({
+      type: CUSTOMER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const customersList = () => async (dispatch, getState) => {
   try {
@@ -403,7 +403,7 @@ export const customerUpdateProfileById =
 export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: CUSTOMER_DELETE_REQUEST,
+      type: CUSTOMER_DELETE_BY_ID_REQUEST,
     });
 
     const {
@@ -422,13 +422,13 @@ export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: CUSTOMER_DELETE_SUCCESS,
+      type: CUSTOMER_DELETE_BY_ID_SUCCESS,
       payload: data,
     });
   } catch (error) {
     const message = "Customer Delete Failed !!!";
     dispatch({
-      type: CUSTOMER_DELETE_FAIL,
+      type: CUSTOMER_DELETE_BY_ID_FAIL,
       payload: message,
     });
   }

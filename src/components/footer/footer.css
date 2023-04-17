@@ -1,10 +1,12 @@
 .main-footer {
-  color: #05ad6d;
-  background-color: #000000;
+  color: #00bb8c;
+  background-color: rgb(230, 230, 230);
   padding-top: 3em;
   position: relative;
   bottom: 0;
   width: 100%;
+  height: auto;
+  font-size: small;
 }
 
 .logo {
