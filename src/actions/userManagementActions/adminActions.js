@@ -12,10 +12,10 @@ import {
   ADMIN_UPDATE_FAIL,
   ADMIN_UPDATE_REQUEST,
   ADMIN_UPDATE_SUCCESS,
-} from "../constants/adminConstants";
+} from "../../constants/userManagementConstants/adminConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../config";
+import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
 
 export const adminLogin = (email, password) => async (dispatch) => {
   try {
