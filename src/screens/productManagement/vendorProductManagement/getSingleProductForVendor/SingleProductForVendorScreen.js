@@ -1,40 +1,50 @@
 import React, { useEffect, useState } from "react";
 import MainScreen from "../../../../components/MainScreen";
+import axios from "axios";
+import { Button, Card, Form, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
-import { createProduct } from "../../../../actions/productManagementActions/productActions";
-import Loading from "../../../../components/Loading";
+import {
+  authHeaderForVendor,
+  deleteProductByVendor,
+  updateProductByVendor,
+} from "../../../../actions/productManagementActions/productActions";
 import ErrorMessage from "../../../../components/ErrorMessage";
+import Loading from "../../../../components/Loading";
 import swal from "sweetalert";
-import "./addProduct.css";
+import "./singleProduct.css";
+import { API_ENDPOINT_FOR_PRODUCT_MANAGEMENT } from "../../../../config";
 
-function AddProductByVendorScreen({ history }) {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [productBrand, setProductBrand] = useState("");
-  const [productCode, setProductCode] = useState("");
-  const [description, setDescription] = useState("");
-  const [picURL, setPicUrl] = useState(
-    "https://res.cloudinary.com/dfmnpw0yp/image/upload/v1679235307/assets/tsuh9f6v1reihgqxwxrz.ico"
-  );
-  const [price, setPrice] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [usage, setUsage] = useState("");
-  const [warnings, setWarnings] = useState("");
-  const [discountNote, setDiscountNote] = useState("");
-  const [discountPrice, setDiscountPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
+function SingleProductForVendorScreen({ match, history }) {
+  const [vendorEmail, setVendorEmail] = useState();
+  const [title, setTitle] = useState();
+  const [category, setCategory] = useState();
+  const [productBrand, setProductBrand] = useState();
+  const [productCode, setProductCode] = useState();
+  const [description, setDescription] = useState();
+  const [picURL, setPicUrl] = useState();
+  const [price, setPrice] = useState();
+  const [ingredients, setIngredients] = useState();
+  const [usage, setUsage] = useState();
+  const [warnings, setWarnings] = useState();
+  const [discountNote, setDiscountNote] = useState();
+  const [discountPrice, setDiscountPrice] = useState();
+  const [quantity, setQuantity] = useState();
   const [picMessage, setPicMessage] = useState(null);
 
   const dispatch = useDispatch();
 
-  const productCreate = useSelector((state) => state.productCreate);
-  const { loading, error } = productCreate;
+  const productUpdateByVendor = useSelector(
+    (state) => state.productUpdateByVendor
+  );
+  const { loading, error } = productUpdateByVendor;
+
+  const productDeleteByVendor = useSelector(
+    (state) => state.productDeleteByVendor
+  );
+  const { loading: loadingDelete, error: errorDelete } = productDeleteByVendor;
 
   const vendor_Login = useSelector((state) => state.vendor_Login);
   const { vendorInfo } = vendor_Login;
-
-  const [vendorEmail, setVendorEmail] = useState(vendorInfo.email);
 
   const resetHandler = () => {
     setTitle("");
@@ -51,78 +61,35 @@ function AddProductByVendorScreen({ history }) {
     setQuantity();
   };
 
-  const demoHandler = () => {
-    setVendorEmail(vendorInfo.email);
-    setTitle("Link Natural Face Cream");
-    setCategory("Beauty and Personal Care");
-    setProductBrand("Link");
-    setProductCode("BC-01234");
-    setDescription(
-      "Link Natural Face Cream has a rich herbal and ayurvedic formulation that comforts and calms your skin while you sleep. Star ingredient Orange extraction moisturizes the skin and helps to restore skin's natural glow. Natural Honey induces a powerful cell activation mechanism offering health suppleness to the skin while enhancing the circulation for greater cell turnover, giving you a youthful, bright and glowing skin."
-    );
-    setPrice(1200);
-    setIngredients(
-      "Sandalwood, Pure Sandalwood Oil, Venivel (Yellow vine), Kokun Bark, Suwanda Kottan, Indian Turmeric, Velmadata."
-    );
-    setUsage("Apply on skin after a clean wash");
-    setWarnings(
-      "People who are with sesnsitive skin must have medical approval before use."
-    );
-    setDiscountNote("5% off");
-    setDiscountPrice(1140);
-    setQuantity(150);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    if (
-      !vendorEmail ||
-      !title ||
-      !category ||
-      !productBrand ||
-      !productCode ||
-      !description ||
-      !picURL ||
-      !price ||
-      !ingredients ||
-      !usage ||
-      !warnings ||
-      !discountNote ||
-      !discountPrice ||
-      !quantity
-    )
-      return;
-    dispatch(
-      createProduct(
-        vendorEmail,
-        title,
-        category,
-        productBrand,
-        productCode,
-        description,
-        picURL,
-        price,
-        ingredients,
-        usage,
-        warnings,
-        discountNote,
-        discountPrice,
-        quantity
-      )
-    );
-
-    resetHandler();
+  const deleteHandler = (id) => {
     swal({
-      title: "Success !!!",
-      text: "Product Creation Successful.",
-      icon: "success",
-      timer: 2000,
-      button: false,
-    });
-    setTimeout(function () {
-      window.location.href = "/vendor-products";
-    }, 2000);
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover these details!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteProductByVendor(id));
+          swal({
+            title: "Success!",
+            text: "Deleted Product Successfully",
+            icon: "success",
+            timer: 2000,
+            button: false,
+          });
+
+          history.push("/vendor-products");
+        }
+      })
+      .catch((err) => {
+        swal({
+          title: "Error!",
+          text: "Couldn't Delete Note",
+          type: "error",
+        });
+      });
   };
 
   const postDetails = (pics) => {
@@ -158,12 +125,92 @@ function AddProductByVendorScreen({ history }) {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (vendorInfo != null) {
+      const fetching = async () => {
+        const { data } = await axios.get(
+          `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get/${match.params.id}`,
+          {
+            headers: authHeaderForVendor(),
+          }
+        );
+        setVendorEmail(data.vendorEmail);
+        setTitle(data.title);
+        setCategory(data.category);
+        setProductBrand(data.productBrand);
+        setProductCode(data.productCode);
+        setDescription(data.description);
+        setPicUrl(data.picURL);
+        setPrice(data.price);
+        setIngredients(data.ingredients);
+        setUsage(data.usage);
+        setWarnings(data.warnings);
+        setDiscountNote(data.discountNote);
+        setDiscountPrice(data.discountPrice);
+        setQuantity(data.quantity);
+      };
+
+      fetching();
+    }
+  }, [match.params.id, vendorInfo]);
+
+  const updateHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateProductByVendor(
+        match.params.id,
+        vendorEmail,
+        title,
+        category,
+        productBrand,
+        productCode,
+        description,
+        picURL,
+        price,
+        ingredients,
+        usage,
+        warnings,
+        discountNote,
+        discountPrice,
+        quantity
+      )
+    );
+    if (
+      !vendorEmail ||
+      !title ||
+      !category ||
+      !productBrand ||
+      !productCode ||
+      !description ||
+      !picURL ||
+      !price ||
+      !ingredients ||
+      !usage ||
+      !warnings ||
+      !discountNote ||
+      !discountPrice ||
+      !quantity
+    )
+      return;
+
+    resetHandler();
+
+    swal({
+      title: "Success !!!",
+      text: "Product Update Successful.",
+      icon: "success",
+      timer: 2000,
+      button: false,
+    });
+    setTimeout(function () {
+      window.location.href = "/vendor-products";
+    }, 2000);
+  };
   if (vendorInfo) {
     return (
-      <div className="productBg">
+      <div className="productEditBg">
         <br></br>
-        <MainScreen title="Add a New Product">
+        <MainScreen title="Edit Your product">
           <Button
             variant="success"
             style={{
@@ -174,7 +221,7 @@ function AddProductByVendorScreen({ history }) {
             href="/vendor-products"
           >
             {" "}
-            Back to Products List
+            Back to product List
           </Button>
           <br></br>
           <br></br>
@@ -196,29 +243,36 @@ function AddProductByVendorScreen({ history }) {
                 {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
                 {loading && <Loading />}
               </div>
-              <br></br>
               <Row className="ProductContainer">
                 <Col md={6}>
-                  <Form onSubmit={submitHandler}>
+                  <Form onSubmit={updateHandler}>
+                    {loadingDelete && <Loading />}
+                    {error && (
+                      <ErrorMessage variant="danger">{error}</ErrorMessage>
+                    )}
+                    {errorDelete && (
+                      <ErrorMessage variant="danger">
+                        {errorDelete}
+                      </ErrorMessage>
+                    )}
                     <Form.Group controlId="productFormBasicVendorEmail">
                       <Form.Label>Vendor Email</Form.Label>
                       <Form.Control
                         type="email"
                         value={vendorEmail}
-                        onChange={(e) => setVendorEmail(vendorInfo.email)}
+                        onChange={(e) => setVendorEmail(e.target.value)}
                         readOnly
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="productFormBasicTitle">
+                    <Form.Group controlId="productFormBasicProductTitle">
                       <Form.Label>Product Name</Form.Label>
                       <Form.Control
                         type="text"
                         value={title}
-                        placeholder="Enter Product Name"
+                        placeholder="Enter Title"
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        maxLength={10}
                       />
                     </Form.Group>
                     <br></br>
@@ -244,7 +298,7 @@ function AddProductByVendorScreen({ history }) {
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="productFormBasicCode">
                       <Form.Label>Product Code</Form.Label>
                       <Form.Control
                         type="text"
@@ -271,7 +325,7 @@ function AddProductByVendorScreen({ history }) {
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="confirmPassword">
+                    <Form.Group controlId="productFormBasicPrice">
                       <Form.Label>Product Price</Form.Label>
                       <Form.Control
                         type="text"
@@ -390,30 +444,20 @@ function AddProductByVendorScreen({ history }) {
                         marginTop: 10,
                       }}
                     >
-                      Submit
+                      Update Product
                     </Button>
                     &emsp;
                     <Button
                       variant="danger"
-                      onClick={resetHandler}
+                      onClick={deleteHandler}
                       style={{
                         fontSize: 15,
                         marginTop: 10,
                       }}
                     >
-                      Reset
+                      Delete Product
                     </Button>
                     &emsp;
-                    <Button
-                      variant="info"
-                      onClick={demoHandler}
-                      style={{
-                        fontSize: 15,
-                        marginTop: 10,
-                      }}
-                    >
-                      Demo
-                    </Button>
                   </Form>
                 </Col>
                 <Col
@@ -438,8 +482,8 @@ function AddProductByVendorScreen({ history }) {
                   />
                 </Col>
               </Row>
+              <br></br>
             </div>
-            <br></br>
           </Card>
           <br></br>
         </MainScreen>
@@ -455,4 +499,4 @@ function AddProductByVendorScreen({ history }) {
   }
 }
 
-export default AddProductByVendorScreen;
+export default SingleProductForVendorScreen;

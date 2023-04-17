@@ -24,6 +24,26 @@ import {
 import axios from "axios";
 import { API_ENDPOINT_FOR_PRODUCT_MANAGEMENT } from "../../config";
 
+export function authHeaderForVendor() {
+  let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
+
+  if (vendor && vendor.token) {
+    return { Authorization: `Bearer ${vendor.token}` };
+  } else {
+    return {};
+  }
+}
+
+export function authHeaderForAdmin() {
+  let admin = JSON.parse(localStorage.getItem("adminInfo"));
+
+  if (admin && admin.token) {
+    return { Authorization: `Bearer ${admin.token}` };
+  } else {
+    return {};
+  }
+}
+
 export const productsListForVendor = () => async (dispatch, getState) => {
   try {
     dispatch({
