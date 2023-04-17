@@ -5,7 +5,7 @@ import MainScreen from "../../../components/MainScreen";
 import { customerLogout } from "../../../actions/userManagementActions/customerActions";
 import "./ViewScreen.css";
 
-const CustomerViewScreen = () => {
+const CustomerViewScreen = ({ history }) => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
   const [address, setAddress] = useState("");
@@ -29,7 +29,7 @@ const CustomerViewScreen = () => {
 
   const logoutHandler = () => {
     dispatch(customerLogout());
-    //history.push("/");
+    history.push("/");
   };
 
   if (customerInfo) {

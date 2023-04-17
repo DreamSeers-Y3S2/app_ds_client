@@ -5,7 +5,7 @@ import MainScreen from "../../../components/MainScreen";
 import { vendorLogout } from "../../../actions/userManagementActions/vendorActions";
 import "./ViewScreen.css";
 
-const VendorViewScreen = () => {
+const VendorViewScreen = ({ history }) => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
@@ -39,7 +39,7 @@ const VendorViewScreen = () => {
 
   const logoutHandler = () => {
     dispatch(vendorLogout());
-    //history.push("/");
+    history.push("/");
   };
 
   if (vendorInfo) {

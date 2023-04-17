@@ -24,6 +24,7 @@ import ProductsListForVendorScreen from "./screens/productManagement/vendorProdu
 import ProductsListForAdminScreen from "./screens/productManagement/adminProductManagement/productsListForAdmin/ProductsListForAdminScreen";
 import AddProductByVendorScreen from "./screens/productManagement/vendorProductManagement/addProduct/AddProductByVendorScreen";
 import SingleProductForVendorScreen from "./screens/productManagement/vendorProductManagement/getSingleProductForVendor/SingleProductForVendorScreen";
+import SingleProductForAdminScreen from "./screens/productManagement/adminProductManagement/getSingleProductForAdmin/SingleProductForAdminScreen";
 
 const App = () => {
   return (
@@ -83,6 +84,11 @@ const App = () => {
         <Route
           path="/vendor-product-edit/:id"
           component={SingleProductForVendorScreen}
+          exact
+        />
+        <Route
+          path="/admin-product-edit/:id"
+          component={SingleProductForAdminScreen}
           exact
         />
       </main>

@@ -5,7 +5,7 @@ import MainScreen from "../../../components/MainScreen";
 import { adminLogout } from "../../../actions/userManagementActions/adminActions";
 import "./ViewScreen.css";
 
-const AdminViewScreen = () => {
+const AdminViewScreen = ({ history }) => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
   const [address, setAddress] = useState("");
@@ -29,7 +29,7 @@ const AdminViewScreen = () => {
 
   const logoutHandler = () => {
     dispatch(adminLogout());
-    //history.push("/");
+    history.push("/");
   };
 
   if (adminInfo) {

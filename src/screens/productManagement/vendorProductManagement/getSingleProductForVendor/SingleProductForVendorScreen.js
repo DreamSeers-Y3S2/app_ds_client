@@ -210,7 +210,7 @@ function SingleProductForVendorScreen({ match, history }) {
     return (
       <div className="productEditBg">
         <br></br>
-        <MainScreen title="Edit Your product">
+        <MainScreen title="Edit Your Product">
           <Button
             variant="success"
             style={{

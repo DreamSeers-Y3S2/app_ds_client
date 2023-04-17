@@ -140,8 +140,6 @@ export const vendorRegister =
       setTimeout(function () {
         window.location.href = "/vendor";
       }, 2000);
-
-      localStorage.setItem("vendorInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: VENDOR_REGISTER_FAIL,
