@@ -1,23 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
-import { trainerLogout } from "../../../actions/trainerActions";
-import "./Dashboard.css";
+import { adminLogout } from "../../../actions/userManagementActions/adminActions";
+import "./landingScreen.css";
 import MainScreen from "../../../components/MainScreen";
 
-const TrainerDashboardPage = ({ history }) => {
-  const trainer_Login = useSelector((state) => state.trainer_Login);
-  const { trainerInfo } = trainer_Login;
+const AdminLandingScreen = ({ history }) => {
+  const admin_Login = useSelector((state) => state.admin_Login);
+  const { adminInfo } = admin_Login;
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    dispatch(trainerLogout());
+    dispatch(adminLogout());
     history.push("/");
   };
-  if (trainerInfo) {
+
+  if (adminInfo) {
     return (
-      <div className="trainerBackground">
-        <MainScreen
-          title={`Welcome Back ${trainerInfo && trainerInfo.name} ...`}
-        >
+      <div className="adminBackground">
+        <br></br>
+        <MainScreen title={`Welcome Back ${adminInfo && adminInfo.name}..`}>
           <Button
             variant="danger"
             onClick={logoutHandler}
@@ -29,7 +30,7 @@ const TrainerDashboardPage = ({ history }) => {
 
           <br></br>
           <br></br>
-          <br></br>
+
           <div className="loginContainer">
             <Card
               style={{
@@ -46,91 +47,79 @@ const TrainerDashboardPage = ({ history }) => {
                 <br></br>
                 <br></br>
                 <div>
-                  <a href="/trainer-view">
+                  <Link to="/admin-view">
                     <Button
+                      id="landingBtn"
                       variant="success"
                       size="lg"
+                      className="landingbutton"
                       style={{ width: 350, height: 75 }}
                     >
                       My Account
                     </Button>
-                  </a>
-                  &emsp;
-                  <a href="/trainer-customers">
+                  </Link>
+                  <Link to="/admin-register">
                     <Button
-                      variant="success"
-                      size="lg"
-                      style={{ width: 350, height: 75 }}
-                    >
-                      View Customers
-                    </Button>
-                  </a>
-                </div>
-                <br></br>
-                <div>
-                  <a href="/workout-handling-view">
-                    <Button
+                      id="landingBtn"
                       variant="success"
                       size="lg"
                       className="landingbutton"
                       style={{ width: 350, height: 75 }}
                     >
-                      Workout Management
+                      Create New Admin Account
                     </Button>
-                  </a>
-                  <a href="/workout-schedule-view">
+                  </Link>
+                </div>
+                <br></br>
+                <div>
+                  <Link to="/admin-customers">
                     <Button
+                      id="landingBtn"
                       variant="success"
                       size="lg"
                       className="landingbutton"
                       style={{ width: 350, height: 75 }}
                     >
-                      Customer Schedule Management
+                      Customer Account Management
                     </Button>
-                  </a>
-                </div>
-                <br></br>
-                <div>
-                  <a href="/faq-trainer-view">
+                  </Link>
+                  <Link to="/admin-vendors">
                     <Button
+                      id="landingBtn"
                       variant="success"
                       size="lg"
                       className="landingbutton"
                       style={{ width: 350, height: 75 }}
                     >
-                      Q & A Management
+                      Vendor Account Management
                     </Button>
-                  </a>
+                  </Link>
                 </div>
                 <br></br>
                 <div>
-                  <a href="/nutrition-plan-trainer-view">
+                  <Link to="/admin-products">
                     <Button
+                      id="landingBtn"
                       variant="success"
                       size="lg"
+                      className="landingbutton"
                       style={{ width: 350, height: 75 }}
                     >
-                      Customer Meal Plan Management
+                      Product Management
                     </Button>
-                  </a>
-                  &emsp;
-                  <a href="/trainer-leaves">
-                    <Button
-                      variant="success"
-                      size="lg"
-                      style={{ width: 350, height: 75 }}
-                    >
-                      Leave Management
-                    </Button>
-                  </a>
+                  </Link>
                 </div>
+
                 <br></br>
               </div>
               <br></br>
+
               <br></br>
             </Card>
           </div>
         </MainScreen>
+        <br></br>
+        <br></br>
       </div>
     );
   } else {
@@ -143,4 +132,4 @@ const TrainerDashboardPage = ({ history }) => {
   }
 };
 
-export default TrainerDashboardPage;
+export default AdminLandingScreen;

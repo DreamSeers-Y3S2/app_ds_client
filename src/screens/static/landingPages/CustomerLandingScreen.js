@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from "react-bootstrap";
-import { customerLogout } from "../../../actions/customerActions";
-import "./Dashboard.css";
+import { customerLogout } from "../../../actions/userManagementActions/customerActions";
+import "./landingScreen.css";
 import MainScreen from "../../../components/MainScreen";
 
-const CustomerDashboardPage = ({ history }) => {
+const CustomerLandingScreen = ({ history }) => {
   const customer_Login = useSelector((state) => state.customer_Login);
   const { customerInfo } = customer_Login;
   const dispatch = useDispatch();
@@ -48,55 +48,12 @@ const CustomerDashboardPage = ({ history }) => {
                 <br></br>
                 <a href="/customer-view">
                   <Button
+                    id="landingBtn"
                     variant="success"
                     size="lg"
                     style={{ width: 350, height: 75 }}
                   >
                     My Account
-                  </Button>
-                </a>
-                <br></br>
-                <br></br>
-                <a href="/nutrition-plan-customer-view">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    style={{ width: 350, height: 75 }}
-                  >
-                    View Meal Plan
-                  </Button>
-                </a>
-                <br></br>
-                <br></br>
-                <a href="/workout-schedule-customer">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    style={{ width: 350, height: 75 }}
-                  >
-                    View Workout Schedule
-                  </Button>
-                </a>
-                <br></br>
-                <br></br>
-                <a href="/workout-list-customer">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    style={{ width: 350, height: 75 }}
-                  >
-                    View Workout List
-                  </Button>
-                </a>
-                <br></br>
-                <br></br>
-                <a href="/faq-customer-view">
-                  <Button
-                    variant="success"
-                    size="lg"
-                    style={{ width: 350, height: 75 }}
-                  >
-                    Q&A Management
                   </Button>
                 </a>
                 <br></br>
@@ -118,4 +75,4 @@ const CustomerDashboardPage = ({ history }) => {
   }
 };
 
-export default CustomerDashboardPage;
+export default CustomerLandingScreen;

@@ -5,9 +5,6 @@ import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import AdminRegisterScreen from "./screens/userManagement/registerUser/AdminRegisterScreen";
 import CustomerRegisterScreen from "./screens/userManagement/registerUser/CustomerRegisterScreen";
-import CustomerLandingPage from "./screens/static/landingPages/CustomerLandingPage";
-import VendorLandingPage from "./screens/static/landingPages/VendorLandingPage";
-import AdminLandingPage from "./screens/static/landingPages/AdminLandingPage";
 import HomeScreen from "./screens/static/home/HomeScreen";
 import AdminLogin from "./screens/userManagement/login/AdminLoginScreen";
 import CustomerLogin from "./screens/userManagement/login/CustomerLoginScreen";
@@ -29,6 +26,9 @@ import AddProductByVendorScreen from "./screens/productManagement/vendorProductM
 import SingleProductForVendorScreen from "./screens/productManagement/vendorProductManagement/getSingleProductForVendor/SingleProductForVendorScreen";
 import SingleProductForAdminScreen from "./screens/productManagement/adminProductManagement/getSingleProductForAdmin/SingleProductForAdminScreen";
 import LoginSelectorScreen from "./screens/static/loginSelect/LoginSelectorScreen";
+import AdminLandingScreen from "./screens/static/landingPages/AdminLandingScreen";
+import CustomerLandingScreen from "./screens/static/landingPages/CustomerLandingScreen";
+import VendorLandingScreen from "./screens/static/landingPages/VendorLandingScreen";
 
 const App = () => {
   return (
@@ -70,9 +70,9 @@ const App = () => {
           component={VendorEditByAdminScreen}
           exact
         />
-        <Route path="/admin" component={AdminLandingPage} exact />
-        <Route path="/customer" component={CustomerLandingPage} exact />
-        <Route path="/vendor" component={VendorLandingPage} exact />
+        <Route path="/admin" component={AdminLandingScreen} exact />
+        <Route path="/customer" component={CustomerLandingScreen} exact />
+        <Route path="/vendor" component={VendorLandingScreen} exact />
         <Route
           path="/vendor-products"
           component={ProductsListForVendorScreen}
