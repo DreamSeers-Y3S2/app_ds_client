@@ -9,9 +9,9 @@ import CustomerLandingPage from "./screens/static/landingPages/CustomerLandingPa
 import VendorLandingPage from "./screens/static/landingPages/VendorLandingPage";
 import AdminLandingPage from "./screens/static/landingPages/AdminLandingPage";
 import HomeScreen from "./screens/static/home/HomeScreen";
-import AdminLogin from "./screens/userManagement/login/AdminLogin";
-import CustomerLogin from "./screens/userManagement/login/CustomerLogin";
-import VendorLogin from "./screens/userManagement/login/VendorLogin";
+import AdminLogin from "./screens/userManagement/login/AdminLoginScreen";
+import CustomerLogin from "./screens/userManagement/login/CustomerLoginScreen";
+import VendorLogin from "./screens/userManagement/login/VendorLoginScreen";
 import VendorRegisterScreen from "./screens/userManagement/registerUser/VendorRegisterScreen";
 import AdminViewScreen from "./screens/userManagement/viewUser/AdminViewScreen";
 import CustomerViewScreen from "./screens/userManagement/viewUser/CustomerViewScreen";
@@ -28,6 +28,7 @@ import ProductsListForAdminScreen from "./screens/productManagement/adminProduct
 import AddProductByVendorScreen from "./screens/productManagement/vendorProductManagement/addProduct/AddProductByVendorScreen";
 import SingleProductForVendorScreen from "./screens/productManagement/vendorProductManagement/getSingleProductForVendor/SingleProductForVendorScreen";
 import SingleProductForAdminScreen from "./screens/productManagement/adminProductManagement/getSingleProductForAdmin/SingleProductForAdminScreen";
+import LoginSelectorScreen from "./screens/static/loginSelect/LoginSelectorScreen";
 
 const App = () => {
   return (
@@ -97,6 +98,7 @@ const App = () => {
           component={SingleProductForAdminScreen}
           exact
         />
+        <Route path="/login-selector" component={LoginSelectorScreen} exact />
       </main>
       <Footer />
     </BrowserRouter>
