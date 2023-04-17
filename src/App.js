@@ -20,6 +20,8 @@ import CustomerListForAdminScreen from "./screens/userManagement/adminUserManage
 import VendorListForAdminScreen from "./screens/userManagement/adminUserManagement/adminLists/VendorListForAdminScreen";
 import CustomerEditByAdminScreen from "./screens/userManagement/adminUserManagement/adminUserEditScreens/CustomerEditByAdminScreen";
 import VendorEditByAdminScreen from "./screens/userManagement/adminUserManagement/adminUserEditScreens/VendorEditByAdminScreen";
+import ProductsListForVendorScreen from "./screens/productManagement/vendorProductManagement/productsListForVendor/ProductsListForVendorScreen";
+import ProductsListForAdminScreen from "./screens/productManagement/adminProductManagement/productsListForAdmin/ProductsListForAdminScreen";
 
 const App = () => {
   return (
@@ -61,6 +63,16 @@ const App = () => {
         <Route path="/admin" component={AdminLandingPage} exact />
         <Route path="/customer" component={CustomerLandingPage} exact />
         <Route path="/vendor" component={VendorLandingPage} exact />
+        <Route
+          path="/vendor-products"
+          component={ProductsListForVendorScreen}
+          exact
+        />
+        <Route
+          path="/admin-products"
+          component={ProductsListForAdminScreen}
+          exact
+        />
       </main>
       <Footer />
     </BrowserRouter>

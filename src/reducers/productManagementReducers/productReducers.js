@@ -22,10 +22,7 @@ import {
   PRODUCTS_DELETE_BY_ADMIN_FAIL,
 } from "../../constants/productManagementConstants/productConstants";
 
-export const vendorProductListReducer = (
-  state = { products: [] },
-  action
-) => {
+export const vendorProductListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_LIST_FOR_VENDOR_REQUEST:
       return { loading: true };
@@ -39,10 +36,7 @@ export const vendorProductListReducer = (
   }
 };
 
-export const adminProductListReducer = (
-  state = { products: [] },
-  action
-) => {
+export const adminProductListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_LIST_FOR_ADMIN_REQUEST:
       return { loading: true };

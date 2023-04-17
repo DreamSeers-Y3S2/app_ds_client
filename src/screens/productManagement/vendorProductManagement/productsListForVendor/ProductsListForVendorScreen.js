@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
-import MainScreen from "../../../../components/MainScreen";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  customerDeleteProfileById,
-  customersList,
-} from "../../../../actions/userManagementActions/customerActions";
-import Loading from "../../../../components/Loading";
 import {
   Accordion,
   AccordionItem,
@@ -15,48 +7,45 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
+import MainScreen from "../../../../components/MainScreen";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteProductByVendor,
+  productsListForVendor,
+} from "../../../../actions/productManagementActions/productActions";
+import Loading from "../../../../components/Loading";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import swal from "sweetalert";
-import "./userLists.css";
+import "./productLists.css";
 
-const CustomerListForAdminScreen = () => {
+const ProductsListForVendorScreen = () => {
   const dispatch = useDispatch();
 
-  const customerList = useSelector((state) => state.customerList);
-  const { loading, customers, error } = customerList;
+  const vendorProductList = useSelector((state) => state.vendorProductList);
+  const { loading, products, error } = vendorProductList;
 
-  console.log(customerList);
+  const vendor_Login = useSelector((state) => state.vendor_Login);
+  const { vendorInfo } = vendor_Login;
 
-  const admin_Login = useSelector((state) => state.admin_Login);
-  const { adminInfo } = admin_Login;
+  const productCreate = useSelector((state) => state.productCreate);
+  const { success: successCreate } = productCreate;
 
-  const customerUpdate = useSelector((state) => state.customerUpdate);
-  const { success: successUpdate } = customerUpdate;
+  const productUpdateByVendor = useSelector(
+    (state) => state.productUpdateByVendor
+  );
+  const { success: successUpdate } = productUpdateByVendor; //taking out products update state from redux
 
-  const customerDeleteById = useSelector((state) => state.customerDeleteById);
+  const [search, setSearch] = useState("");
+
+  const productDeleteByVendor = useSelector(
+    (state) => state.productDeleteByVendor
+  );
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = customerDeleteById;
-
-  const history = useHistory();
-
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    dispatch(customersList());
-    if (!adminInfo) {
-      history.push("/access-denied", { replace: true });
-    }
-  }, [
-    dispatch,
-    history,
-    adminInfo,
-    customerDeleteById,
-    successDelete,
-    successUpdate,
-  ]);
+  } = productDeleteByVendor;
 
   const deleteHandler = (id) => {
     swal({
@@ -68,10 +57,10 @@ const CustomerListForAdminScreen = () => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(customerDeleteProfileById(id));
+          dispatch(deleteProductByVendor(id));
           swal({
             title: "Success!",
-            text: "Deleted Account Successfully",
+            text: "Deleted Product Successfully",
             icon: "success",
             timer: 2000,
             button: false,
@@ -81,21 +70,35 @@ const CustomerListForAdminScreen = () => {
       .catch((err) => {
         swal({
           title: "Error!",
-          text: "Couldn't Delete Account",
+          text: "Couldn't Delete Product",
           type: "error",
         });
       });
   };
-
   const searchHandler = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
 
-  if (adminInfo) {
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(productsListForVendor());
+    if (!vendorInfo) {
+      history.push("/access-denied");
+    }
+  }, [
+    dispatch,
+    successCreate,
+    history,
+    vendorInfo,
+    successUpdate,
+    successDelete,
+  ]);
+  if (vendorInfo) {
     return (
-      <div className="customerList">
+      <div className="vendorProductList">
         <br></br>
-        <MainScreen title={`Welcome Back ${adminInfo && adminInfo.name}..`}>
+        <MainScreen title={`Welcome Back ${vendorInfo && vendorInfo.name}..`}>
           <Row>
             <Col>
               <h1
@@ -107,7 +110,7 @@ const CustomerListForAdminScreen = () => {
                   fontStyle: "italic",
                 }}
               >
-                Customers List
+                Products List
               </h1>
             </Col>
             <Col>
@@ -132,8 +135,20 @@ const CustomerListForAdminScreen = () => {
           </Row>
           <br></br>
 
-          <Button variant="success" href="/admin">
+          <Button
+            variant="success"
+            href="/admin"
+            style={{ float: "left", fontSize: "15px" }}
+          >
             Back to Dashboard
+          </Button>
+
+          <Button
+            variant="success"
+            href="/admin"
+            style={{ float: "right", fontSize: "15px" }}
+          >
+            + Add New Product
           </Button>
 
           <br></br>
@@ -146,19 +161,19 @@ const CustomerListForAdminScreen = () => {
           <br></br>
           <div className="listContainer">
             <Accordion allowZeroExpanded>
-              {customers &&
-                customers
+              {products &&
+                products
                   .filter(
-                    (filteredCustomers) =>
-                      filteredCustomers.name
+                    (filteredProducts) =>
+                      filteredProducts.title
                         .toLowerCase()
                         .includes(search.toLowerCase()) ||
-                      filteredCustomers.email.includes(search)
+                      filteredProducts.productBrand.includes(search.toLowerCase)
                   )
                   .reverse()
-                  .map((customerList) => (
+                  .map((vendorProductList) => (
                     <AccordionItem
-                      key={customerList._id}
+                      key={vendorProductList._id}
                       className="listContainer"
                     >
                       <Card
@@ -203,22 +218,22 @@ const CustomerListForAdminScreen = () => {
                                     fontSize: 18,
                                   }}
                                 >
-                                  Customer Email : &emsp;
-                                  {customerList.email}{" "}
+                                  Product Name : &emsp;
+                                  {vendorProductList.title}{" "}
                                 </label>{" "}
                                 <br></br>
                                 <label
                                   className="name"
                                   style={{ paddingInline: 20, fontSize: 18 }}
                                 >
-                                  Customer Name : &emsp;
-                                  {customerList.name}
+                                  Product Brand : &emsp;
+                                  {vendorProductList.productBrand}
                                 </label>{" "}
                               </span>
                               <div>
                                 <Button
                                   style={{ marginTop: 20, fontSize: 15 }}
-                                  href={`/admin-customer-edit/${customerList._id}`}
+                                  href={`/vendor-product-edit/${vendorProductList._id}`}
                                 >
                                   Edit
                                 </Button>
@@ -230,7 +245,7 @@ const CustomerListForAdminScreen = () => {
                                   variant="danger"
                                   className="mx-2"
                                   onClick={() =>
-                                    deleteHandler(customerList._id)
+                                    deleteHandler(vendorProductList._id)
                                   }
                                 >
                                   Delete
@@ -243,10 +258,39 @@ const CustomerListForAdminScreen = () => {
                           <Card.Body>
                             <Row>
                               <Col md={6}>
-                                <h5>Name - {customerList.name}</h5>
-                                <h5>Telephone - {customerList.telephone}</h5>
-                                <h5>Address - {customerList.address}</h5>
-                                <h5>Email - {customerList.email}</h5>
+                                <h5>
+                                  Product Name - {vendorProductList.title}
+                                </h5>
+                                <h5>
+                                  Product Category -{" "}
+                                  {vendorProductList.category}
+                                </h5>
+                                <h5>
+                                  Product Brand -{" "}
+                                  {vendorProductList.productBrand}
+                                </h5>
+                                <h5>
+                                  Product Code - {vendorProductList.productCode}
+                                </h5>
+                                <h5>
+                                  Description - {vendorProductList.description}
+                                </h5>
+                                <h5>Price - {vendorProductList.price}</h5>
+                                <h5>
+                                  Product Ingredients -{" "}
+                                  {vendorProductList.ingredients}
+                                </h5>
+                                <h5>Usage - {vendorProductList.usage}</h5>
+                                <h5>Warnings - {vendorProductList.warnings}</h5>
+                                <h5>
+                                  Discount Note -{" "}
+                                  {vendorProductList.discountNote}
+                                </h5>
+                                <h5>
+                                  Discount Price -{" "}
+                                  {vendorProductList.discountPrice}
+                                </h5>
+                                <h5>Quantity - {vendorProductList.quantity}</h5>
                                 <br></br>
                               </Col>
                               <Col
@@ -259,11 +303,11 @@ const CustomerListForAdminScreen = () => {
                               >
                                 <img
                                   style={{
-                                    width: "50%",
-                                    height: "100%",
+                                    width: "75%",
+                                    height: "75%",
                                   }}
-                                  src={customerList.pic}
-                                  alt={customerList.name}
+                                  src={vendorProductList.picUrl}
+                                  alt={vendorProductList.name}
                                   className="profilePic"
                                 />
                               </Col>
@@ -280,7 +324,7 @@ const CustomerListForAdminScreen = () => {
                                 Registered Date -{" "}
                                 <cite title="Source Title">
                                   {" "}
-                                  {customerList.regDate}
+                                  {vendorProductList.regDate}
                                 </cite>
                               </Card.Footer>
                             </blockquote>
@@ -306,4 +350,4 @@ const CustomerListForAdminScreen = () => {
   }
 };
 
-export default CustomerListForAdminScreen;
+export default ProductsListForVendorScreen;

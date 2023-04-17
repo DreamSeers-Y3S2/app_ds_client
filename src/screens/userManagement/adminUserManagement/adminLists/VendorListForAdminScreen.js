@@ -17,7 +17,7 @@ import {
 } from "react-accessible-accordion";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import swal from "sweetalert";
-import "./lists.css";
+import "./userLists.css";
 
 const VendorListForAdminScreen = () => {
   const dispatch = useDispatch();

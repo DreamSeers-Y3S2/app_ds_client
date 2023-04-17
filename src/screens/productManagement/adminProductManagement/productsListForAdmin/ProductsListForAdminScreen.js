@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
-import MainScreen from "../../../../components/MainScreen";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  customerDeleteProfileById,
-  customersList,
-} from "../../../../actions/userManagementActions/customerActions";
-import Loading from "../../../../components/Loading";
 import {
   Accordion,
   AccordionItem,
@@ -15,48 +7,45 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from "react-accessible-accordion";
+import MainScreen from "../../../../components/MainScreen";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteProductByAdmin,
+  productsListForAdmin,
+} from "../../../../actions/productManagementActions/productActions";
+import Loading from "../../../../components/Loading";
 import ErrorMessage from "../../../../components/ErrorMessage";
 import swal from "sweetalert";
-import "./userLists.css";
+import "./productLists.css";
 
-const CustomerListForAdminScreen = () => {
+const ProductsListForAdminScreen = () => {
   const dispatch = useDispatch();
 
-  const customerList = useSelector((state) => state.customerList);
-  const { loading, customers, error } = customerList;
-
-  console.log(customerList);
+  const adminProductList = useSelector((state) => state.adminProductList);
+  const { loading, products, error } = adminProductList;
 
   const admin_Login = useSelector((state) => state.admin_Login);
   const { adminInfo } = admin_Login;
 
-  const customerUpdate = useSelector((state) => state.customerUpdate);
-  const { success: successUpdate } = customerUpdate;
+  const productCreate = useSelector((state) => state.productCreate);
+  const { success: successCreate } = productCreate;
 
-  const customerDeleteById = useSelector((state) => state.customerDeleteById);
+  const productUpdateByAdmin = useSelector(
+    (state) => state.productUpdateByAdmin
+  );
+  const { success: successUpdate } = productUpdateByAdmin; //taking out products update state from redux
+
+  const [search, setSearch] = useState("");
+
+  const productDeleteByAdmin = useSelector(
+    (state) => state.productDeleteByAdmin
+  );
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = customerDeleteById;
-
-  const history = useHistory();
-
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    dispatch(customersList());
-    if (!adminInfo) {
-      history.push("/access-denied", { replace: true });
-    }
-  }, [
-    dispatch,
-    history,
-    adminInfo,
-    customerDeleteById,
-    successDelete,
-    successUpdate,
-  ]);
+  } = productDeleteByAdmin;
 
   const deleteHandler = (id) => {
     swal({
@@ -68,10 +57,10 @@ const CustomerListForAdminScreen = () => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(customerDeleteProfileById(id));
+          dispatch(deleteProductByAdmin(id));
           swal({
             title: "Success!",
-            text: "Deleted Account Successfully",
+            text: "Deleted Product Successfully",
             icon: "success",
             timer: 2000,
             button: false,
@@ -81,19 +70,33 @@ const CustomerListForAdminScreen = () => {
       .catch((err) => {
         swal({
           title: "Error!",
-          text: "Couldn't Delete Account",
+          text: "Couldn't Delete Product",
           type: "error",
         });
       });
   };
-
   const searchHandler = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
 
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(productsListForAdmin());
+    if (!adminInfo) {
+      history.push("/access-denied");
+    }
+  }, [
+    dispatch,
+    successCreate,
+    history,
+    adminInfo,
+    successUpdate,
+    successDelete,
+  ]);
   if (adminInfo) {
     return (
-      <div className="customerList">
+      <div className="adminProductList">
         <br></br>
         <MainScreen title={`Welcome Back ${adminInfo && adminInfo.name}..`}>
           <Row>
@@ -107,7 +110,7 @@ const CustomerListForAdminScreen = () => {
                   fontStyle: "italic",
                 }}
               >
-                Customers List
+                Products List
               </h1>
             </Col>
             <Col>
@@ -132,7 +135,11 @@ const CustomerListForAdminScreen = () => {
           </Row>
           <br></br>
 
-          <Button variant="success" href="/admin">
+          <Button
+            variant="success"
+            href="/admin"
+            style={{ float: "left", fontSize: "15px" }}
+          >
             Back to Dashboard
           </Button>
 
@@ -146,19 +153,19 @@ const CustomerListForAdminScreen = () => {
           <br></br>
           <div className="listContainer">
             <Accordion allowZeroExpanded>
-              {customers &&
-                customers
+              {products &&
+                products
                   .filter(
-                    (filteredCustomers) =>
-                      filteredCustomers.name
+                    (filteredProducts) =>
+                      filteredProducts.title
                         .toLowerCase()
                         .includes(search.toLowerCase()) ||
-                      filteredCustomers.email.includes(search)
+                      filteredProducts.productBrand.includes(search.toLowerCase)
                   )
                   .reverse()
-                  .map((customerList) => (
+                  .map((adminProductList) => (
                     <AccordionItem
-                      key={customerList._id}
+                      key={adminProductList._id}
                       className="listContainer"
                     >
                       <Card
@@ -203,22 +210,22 @@ const CustomerListForAdminScreen = () => {
                                     fontSize: 18,
                                   }}
                                 >
-                                  Customer Email : &emsp;
-                                  {customerList.email}{" "}
+                                  Product Name : &emsp;
+                                  {adminProductList.title}{" "}
                                 </label>{" "}
                                 <br></br>
                                 <label
                                   className="name"
                                   style={{ paddingInline: 20, fontSize: 18 }}
                                 >
-                                  Customer Name : &emsp;
-                                  {customerList.name}
+                                  Product Brand : &emsp;
+                                  {adminProductList.productBrand}
                                 </label>{" "}
                               </span>
                               <div>
                                 <Button
                                   style={{ marginTop: 20, fontSize: 15 }}
-                                  href={`/admin-customer-edit/${customerList._id}`}
+                                  href={`/admin-product-edit/${adminProductList._id}`}
                                 >
                                   Edit
                                 </Button>
@@ -230,7 +237,7 @@ const CustomerListForAdminScreen = () => {
                                   variant="danger"
                                   className="mx-2"
                                   onClick={() =>
-                                    deleteHandler(customerList._id)
+                                    deleteHandler(adminProductList._id)
                                   }
                                 >
                                   Delete
@@ -243,10 +250,39 @@ const CustomerListForAdminScreen = () => {
                           <Card.Body>
                             <Row>
                               <Col md={6}>
-                                <h5>Name - {customerList.name}</h5>
-                                <h5>Telephone - {customerList.telephone}</h5>
-                                <h5>Address - {customerList.address}</h5>
-                                <h5>Email - {customerList.email}</h5>
+                                <h5>
+                                  Vendor Email - {adminProductList.vendorEmail}
+                                </h5>
+                                <h5>Product Name - {adminProductList.title}</h5>
+                                <h5>
+                                  Product Category - {adminProductList.category}
+                                </h5>
+                                <h5>
+                                  Product Brand -{" "}
+                                  {adminProductList.productBrand}
+                                </h5>
+                                <h5>
+                                  Product Code - {adminProductList.productCode}
+                                </h5>
+                                <h5>
+                                  Description - {adminProductList.description}
+                                </h5>
+                                <h5>Price - {adminProductList.price}</h5>
+                                <h5>
+                                  Product Ingredients -{" "}
+                                  {adminProductList.ingredients}
+                                </h5>
+                                <h5>Usage - {adminProductList.usage}</h5>
+                                <h5>Warnings - {adminProductList.warnings}</h5>
+                                <h5>
+                                  Discount Note -{" "}
+                                  {adminProductList.discountNote}
+                                </h5>
+                                <h5>
+                                  Discount Price -{" "}
+                                  {adminProductList.discountPrice}
+                                </h5>
+                                <h5>Quantity - {adminProductList.quantity}</h5>
                                 <br></br>
                               </Col>
                               <Col
@@ -259,11 +295,11 @@ const CustomerListForAdminScreen = () => {
                               >
                                 <img
                                   style={{
-                                    width: "50%",
-                                    height: "100%",
+                                    width: "75%",
+                                    height: "75%",
                                   }}
-                                  src={customerList.pic}
-                                  alt={customerList.name}
+                                  src={adminProductList.picUrl}
+                                  alt={adminProductList.name}
                                   className="profilePic"
                                 />
                               </Col>
@@ -280,7 +316,7 @@ const CustomerListForAdminScreen = () => {
                                 Registered Date -{" "}
                                 <cite title="Source Title">
                                   {" "}
-                                  {customerList.regDate}
+                                  {adminProductList.regDate}
                                 </cite>
                               </Card.Footer>
                             </blockquote>
@@ -306,4 +342,4 @@ const CustomerListForAdminScreen = () => {
   }
 };
 
-export default CustomerListForAdminScreen;
+export default ProductsListForAdminScreen;
