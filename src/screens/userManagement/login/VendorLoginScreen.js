@@ -31,7 +31,7 @@ const VendorLogin = ({ history }) => {
     <div className="loginBg">
       <br></br>
       <br></br>
-      <MainScreen title="ADMIN LOGIN">
+      <MainScreen title="VENDOR LOGIN">
         <Card
           className="profileCont"
           style={{
