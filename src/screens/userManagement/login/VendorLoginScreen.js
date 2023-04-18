@@ -1,6 +1,6 @@
 import { Form, Button, Card } from "react-bootstrap";
 import MainScreen from "../../../components/MainScreen";
-import "./loginScreen.css";
+import "./LoginScreen.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
@@ -31,7 +31,7 @@ const VendorLogin = ({ history }) => {
     <div className="loginBg">
       <br></br>
       <br></br>
-      <MainScreen title="ADMIN LOGIN">
+      <MainScreen title="VENDOR LOGIN">
         <Card
           className="profileCont"
           style={{
