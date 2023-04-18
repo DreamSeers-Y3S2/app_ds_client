@@ -22,7 +22,7 @@ import {
   PRODUCTS_DELETE_BY_ADMIN_FAIL,
 } from "../../constants/productManagementConstants/productConstants";
 import axios from "axios";
-import { API_ENDPOINT_FOR_PRODUCT_MANAGEMENT } from "../../config";
+import { API_ENDPOINT } from "../../config";
 
 export function authHeaderForVendor() {
   let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
@@ -61,7 +61,7 @@ export const productsListForVendor = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get`,
+      `${API_ENDPOINT}/items/products/vendor/product/get`,
       config
     );
 
@@ -98,7 +98,7 @@ export const productsListForAdmin = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/admin/product/get`,
+      `${API_ENDPOINT}/items/products/admin/product/get`,
       config
     );
 
@@ -153,7 +153,7 @@ export const createProduct =
       };
 
       const { data } = await axios.post(
-        `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/add`,
+        `${API_ENDPOINT}/items/products/vendor/product/add`,
         {
           vendorEmail,
           title,
@@ -225,7 +225,7 @@ export const updateProductByVendor =
       };
 
       const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get/${id}`,
+        `${API_ENDPOINT}/items/products/vendor/product/get/${id}`,
         {
           vendorEmail,
           title,
@@ -297,7 +297,7 @@ export const updateProductByAdmin =
       };
 
       const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get/${id}`,
+        `${API_ENDPOINT}/items/products/vendor/product/get/${id}`,
         {
           vendorEmail,
           title,
@@ -350,7 +350,7 @@ export const deleteProductByVendor = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get/${id}`,
+      `${API_ENDPOINT}/items/products/vendor/product/get/${id}`,
       config
     );
 
@@ -387,7 +387,7 @@ export const deleteProductByAdmin = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/admin/product/get/${id}`,
+      `${API_ENDPOINT}/items/products/admin/product/get/${id}`,
       config
     );
 

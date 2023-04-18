@@ -12,7 +12,7 @@ import ErrorMessage from "../../../../components/ErrorMessage";
 import Loading from "../../../../components/Loading";
 import swal from "sweetalert";
 import "./singleProduct.css";
-import { API_ENDPOINT_FOR_PRODUCT_MANAGEMENT } from "../../../../config";
+import { API_ENDPOINT } from "../../../../config";
 
 function SingleProductForAdminScreen({ match, history }) {
   const [vendorEmail, setVendorEmail] = useState();
@@ -129,7 +129,7 @@ function SingleProductForAdminScreen({ match, history }) {
     if (adminInfo != null) {
       const fetching = async () => {
         const { data } = await axios.get(
-          `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/admin/product/get/${match.params.id}`,
+          `${API_ENDPOINT}/items/products/admin/product/get/${match.params.id}`,
           {
             headers: authHeaderForAdmin(),
           }

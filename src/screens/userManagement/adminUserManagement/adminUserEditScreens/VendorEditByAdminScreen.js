@@ -7,7 +7,7 @@ import { vendorUpdateProfileById } from "../../../../actions/userManagementActio
 import axios from "axios";
 import MainScreen from "../../../../components/MainScreen";
 import { authHeader } from "../../../../actions/userManagementActions/adminActions";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../../../config";
+import { API_ENDPOINT } from "../../../../config";
 import "./adminUserEdit.css";
 
 const VendorEditByAdminScreen = ({ match }) => {
@@ -99,7 +99,7 @@ const VendorEditByAdminScreen = ({ match }) => {
     if (adminInfo != null) {
       const fetching = async () => {
         const { data } = await axios.get(
-          `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendor/profile/view/${match.params.id}`,
+          `${API_ENDPOINT}/user/admin/vendor/profile/view/${match.params.id}`,
           {
             headers: authHeader(),
           }

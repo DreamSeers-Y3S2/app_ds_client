@@ -7,7 +7,7 @@ import { customerUpdateProfileById } from "../../../../actions/userManagementAct
 import axios from "axios";
 import MainScreen from "../../../../components/MainScreen";
 import { authHeader } from "../../../../actions/userManagementActions/adminActions";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../../../config";
+import { API_ENDPOINT } from "../../../../config";
 import "./adminUserEdit.css";
 
 const CustomerEditByAdminScreen = ({ match }) => {
@@ -88,7 +88,7 @@ const CustomerEditByAdminScreen = ({ match }) => {
     if (adminInfo != null) {
       const fetching = async () => {
         const { data } = await axios.get(
-          `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customer/profile/view/${match.params.id}`,
+          `${API_ENDPOINT}/user/admin/customer/profile/view/${match.params.id}`,
           {
             headers: authHeader(),
           }
