@@ -12,7 +12,7 @@ import ErrorMessage from "../../../../components/ErrorMessage";
 import Loading from "../../../../components/Loading";
 import swal from "sweetalert";
 import "./singleProduct.css";
-import { API_ENDPOINT_FOR_PRODUCT_MANAGEMENT } from "../../../../config";
+import { API_ENDPOINT } from "../../../../config";
 
 function SingleProductForVendorScreen({ match, history }) {
   const [vendorEmail, setVendorEmail] = useState();
@@ -129,7 +129,7 @@ function SingleProductForVendorScreen({ match, history }) {
     if (vendorInfo != null) {
       const fetching = async () => {
         const { data } = await axios.get(
-          `${API_ENDPOINT_FOR_PRODUCT_MANAGEMENT}/products/vendor/product/get/${match.params.id}`,
+          `${API_ENDPOINT}/items/products/vendor/product/get/${match.params.id}`,
           {
             headers: authHeaderForVendor(),
           }

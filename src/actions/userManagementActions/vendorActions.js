@@ -30,7 +30,7 @@ import {
 } from "../../constants/userManagementConstants/vendorConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
+import { API_ENDPOINT } from "../../config";
 
 export const vendorLogin = (email, password) => async (dispatch) => {
   try {
@@ -43,7 +43,7 @@ export const vendorLogin = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/login`,
+      `${API_ENDPOINT}/user/vendor/login`,
       { email, password, isAdmin: false },
       config
     );
@@ -111,7 +111,7 @@ export const vendorRegister =
       };
 
       const { data } = await axios.post(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/register`,
+        `${API_ENDPOINT}/user/vendor/register`,
         {
           name,
           telephone,
@@ -167,7 +167,7 @@ export const vendorViewProfile = (vendor) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/view`,
+      `${API_ENDPOINT}/user/vendor/view`,
       vendor,
       config
     );
@@ -204,7 +204,7 @@ export const vendorUpdateProfile = (vendor) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/edit`,
+      `${API_ENDPOINT}/user/vendor/edit`,
       vendor,
       config
     );
@@ -250,7 +250,7 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/vendor/delete`,
+      `${API_ENDPOINT}/user/vendor/delete`,
       config
     );
 
@@ -294,7 +294,7 @@ export const vendorsList = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendors`,
+      `${API_ENDPOINT}/user/admin/vendors`,
       config
     );
 
@@ -346,7 +346,7 @@ export const vendorViewProfileById =
       };
 
       const { data } = await axios.get(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendor/profile/view/${id}`,
+        `${API_ENDPOINT}/user/admin/vendor/profile/view/${id}`,
         {
           id,
           name,
@@ -412,7 +412,7 @@ export const vendorUpdateProfileById =
         },
       };
       const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendor/profile/edit/${id}`,
+        `${API_ENDPOINT}/user/admin/vendor/profile/edit/${id}`,
         {
           name,
           telephone,
@@ -469,7 +469,7 @@ export const vendorDeleteProfileById = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/vendor/profile/view/${id}`,
+      `${API_ENDPOINT}/user/admin/vendor/profile/view/${id}`,
       config
     );
 

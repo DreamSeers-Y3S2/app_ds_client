@@ -15,7 +15,7 @@ import {
 } from "../../constants/userManagementConstants/adminConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
+import { API_ENDPOINT } from "../../config";
 
 export const adminLogin = (email, password) => async (dispatch) => {
   try {
@@ -28,7 +28,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/login`,
+      `${API_ENDPOINT}/user/admin/login`,
       { email, password, isAdmin: true },
       config
     );
@@ -83,7 +83,7 @@ export const adminRegister =
       };
 
       const { data } = await axios.post(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/register`,
+        `${API_ENDPOINT}/user/admin/register`,
         {
           name,
           telephone,
@@ -134,7 +134,7 @@ export const adminViewProfile = (admin) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/view`,
+      `${API_ENDPOINT}/user/admin/view`,
       admin,
       config
     );
@@ -171,7 +171,7 @@ export const adminUpdateProfile = (admin) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/edit`,
+      `${API_ENDPOINT}/user/admin/edit`,
       admin,
       config
     );

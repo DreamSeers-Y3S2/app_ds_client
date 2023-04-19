@@ -30,7 +30,7 @@ import {
 } from "../../constants/userManagementConstants/customerConstants";
 import axios from "axios";
 import swal from "sweetalert";
-import { API_ENDPOINT_FOR_USER_MANAGEMENT } from "../../config";
+import { API_ENDPOINT } from "../../config";
 
 export const customerLogin = (email, password) => async (dispatch) => {
   try {
@@ -43,7 +43,7 @@ export const customerLogin = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/login`,
+      `${API_ENDPOINT}/user/customer/login`,
       { email, password, isAdmin: false },
       config
     );
@@ -98,7 +98,7 @@ export const customerRegister =
       };
 
       const { data } = await axios.post(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/register`,
+        `${API_ENDPOINT}/user/customer/register`,
         {
           name,
           telephone,
@@ -148,7 +148,7 @@ export const customerViewProfile = (customer) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/view`,
+      `${API_ENDPOINT}/user/customer/view`,
       customer,
       config
     );
@@ -186,7 +186,7 @@ export const customerUpdateProfile =
       };
 
       const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/edit`,
+        `${API_ENDPOINT}/user/customer/edit`,
         customer,
         config
       );
@@ -232,7 +232,7 @@ export const customerDeleteProfile = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/customer/delete`,
+      `${API_ENDPOINT}/user/customer/delete`,
       config
     );
 
@@ -277,7 +277,7 @@ export const customersList = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customers`,
+      `${API_ENDPOINT}/user/admin/customers`,
       config
     );
 
@@ -316,7 +316,7 @@ export const customerViewProfileById =
       };
 
       const { data } = await axios.get(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customer/profile/view/${id}`,
+        `${API_ENDPOINT}/user/admin/customer/profile/view/${id}`,
         {
           id,
           name,
@@ -364,7 +364,7 @@ export const customerUpdateProfileById =
         },
       };
       const { data } = await axios.put(
-        `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customer/profile/edit/${id}`,
+        `${API_ENDPOINT}/user/admin/customer/profile/edit/${id}`,
         {
           name,
           telephone,
@@ -417,7 +417,7 @@ export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `${API_ENDPOINT_FOR_USER_MANAGEMENT}/user/admin/customer/profile/view/${id}`,
+      `${API_ENDPOINT}/user/admin/customer/profile/view/${id}`,
       config
     );
 
