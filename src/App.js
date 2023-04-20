@@ -29,6 +29,9 @@ import LoginSelectorScreen from "./screens/static/loginSelect/LoginSelectorScree
 import AdminLandingScreen from "./screens/static/landingPages/AdminLandingScreen";
 import CustomerLandingScreen from "./screens/static/landingPages/CustomerLandingScreen";
 import VendorLandingScreen from "./screens/static/landingPages/VendorLandingScreen";
+import CustomerProductView from "./screens/cartManagement/CustomerProductView";
+import SingleProduct from "./screens/cartManagement/SingleProduct";
+import CartView from "./screens/cartManagement/CartView";
 
 const App = () => {
   return (
@@ -99,6 +102,17 @@ const App = () => {
           exact
         />
         <Route path="/login-selector" component={LoginSelectorScreen} exact />
+        <Route
+          path="/customer-product-view"
+          component={CustomerProductView}
+          exact
+        />
+        <Route
+          path="/single-product-view/:id"
+          component={SingleProduct}
+          exact
+        />
+        <Route path="/customer-cart" component={CartView} exact />
       </main>
       <Footer />
     </BrowserRouter>
