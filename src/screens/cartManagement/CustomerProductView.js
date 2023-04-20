@@ -1,6 +1,6 @@
 import MainScreen from "../../components/MainScreen";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,7 +20,6 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardImage,
-  MDBIcon,
   MDBBtn,
   MDBRipple,
 } from "mdb-react-ui-kit";

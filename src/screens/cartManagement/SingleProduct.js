@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Card, Form, ButtonGroup } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import MainScreen from "../../components/MainScreen";
 import "./product.css";
 import { API_ENDPOINT } from "../../config";
 import { createCartAction } from "../../actions/cartManagementActions/cartAction";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 
 export default function SingleProduct({ match, history }) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [productBrand, setProductBrand] = useState("");
   const [productCode, setProductCode] = useState("");
   const [description, setDescription] = useState("");
   const [picURL, setPicURL] = useState("");
@@ -35,7 +36,6 @@ export default function SingleProduct({ match, history }) {
       );
       setTitle(data.title);
       setCategory(data.category);
-      setProductBrand(data.productBrand);
       setProductCode(data.productCode);
       setDescription(data.description);
       setPicURL(data.picURL);
@@ -92,11 +92,12 @@ export default function SingleProduct({ match, history }) {
         >
           {title} ({productCode})
         </h1>
-
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {loading && <Loading />}
         <div className="product-card">
           <div className="details">
             <div className="big-img">
-              <img src={picURL}></img>
+              <img src={picURL} alt=""></img>
               <h2
                 style={{
                   fontSize: "30px",

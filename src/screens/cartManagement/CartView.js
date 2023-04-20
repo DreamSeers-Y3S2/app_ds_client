@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useState } from "react";
 import MainScreen from "../../components/MainScreen";
-import swal from "sweetalert";
 import { authHeader } from "../../actions/userManagementActions/customerActions";
 
 export default function CartView() {
@@ -27,11 +26,7 @@ export default function CartView() {
   const { loading, carts, error } = cartList;
 
   const cartDelete = useSelector((state) => state.cartDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = cartDelete;
+  const { loading: loadingDelete, error: errorDelete } = cartDelete;
 
   const history = useHistory();
   useEffect(() => {
@@ -64,7 +59,7 @@ export default function CartView() {
     };
 
     fetchingTotal();
-  }, []);
+  }, [customerInfo._id]);
 
   if (customerInfo) {
     return (
@@ -106,6 +101,7 @@ export default function CartView() {
                           borderWidth: "4px",
                         }}
                         src={cart.picURL}
+                        alt=""
                       ></img>
                     </td>
                     <td

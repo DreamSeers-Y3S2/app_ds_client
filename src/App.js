@@ -1,11 +1,10 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import React from "react";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import AdminRegisterScreen from "./screens/userManagement/registerUser/AdminRegisterScreen";
 import CustomerRegisterScreen from "./screens/userManagement/registerUser/CustomerRegisterScreen";
-import HomeScreen from "./screens/static/home/HomeScreen";
 import AdminLogin from "./screens/userManagement/login/AdminLoginScreen";
 import CustomerLogin from "./screens/userManagement/login/CustomerLoginScreen";
 import VendorLogin from "./screens/userManagement/login/VendorLoginScreen";
@@ -36,6 +35,7 @@ import CartView from "./screens/cartManagement/CartView";
 const App = () => {
   return (
     <BrowserRouter>
+      <Header />
       <main>
         <Route path="/admin-login" component={AdminLogin} />
         <Route path="/customer-login" component={CustomerLogin} />
@@ -102,11 +102,7 @@ const App = () => {
           exact
         />
         <Route path="/login-selector" component={LoginSelectorScreen} exact />
-        <Route
-          path="/customer-product-view"
-          component={CustomerProductView}
-          exact
-        />
+        <Route path="/" component={CustomerProductView} exact />
         <Route
           path="/single-product-view/:id"
           component={SingleProduct}
