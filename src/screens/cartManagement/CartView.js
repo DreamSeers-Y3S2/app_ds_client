@@ -7,7 +7,7 @@ import {
   listCart,
   updateCartAction,
   deleteCartAction,
-} from "../../actions/cartAction";
+} from "../../actions/cartManagementActions/cartAction";
 import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import Loading from "../../components/Loading";
@@ -15,7 +15,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import { useState } from "react";
 import MainScreen from "../../components/MainScreen";
 import swal from "sweetalert";
-import { authHeader } from "../../actions/customerActions";
+import { authHeader } from "../../actions/userManagementActions/customerActions";
 
 export default function CartView() {
   const [total, setTotal] = useState(0);

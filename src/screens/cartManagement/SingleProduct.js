@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainScreen from "../../components/MainScreen";
 import "./product.css";
 import { API_ENDPOINT } from "../../config";
-import { createCartAction } from "../../actions/cartAction";
+import { createCartAction } from "../../actions/cartManagementActions/cartAction";
 
 export default function SingleProduct({ match, history }) {
   const [title, setTitle] = useState("");

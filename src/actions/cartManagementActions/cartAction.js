@@ -18,7 +18,7 @@ import {
   ALL_CART_DELETE_REQUEST,
   ALL_CART_DELETE_SUCCESS,
 } from "../../constants/cartManagementConstants/cartConstants";
-import { API_ENDPOINT } from "../config";
+import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import swal from "sweetalert";
 

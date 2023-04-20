@@ -3,7 +3,10 @@ import { Link, useHistory } from "react-router-dom";
 import { Button, Card, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listCartProducts, createCartAction } from "../../actions/cartAction";
+import {
+  listCartProducts,
+  createCartAction,
+} from "../../actions/cartManagementActions/cartAction";
 import { Grid } from "@material-ui/core/";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
