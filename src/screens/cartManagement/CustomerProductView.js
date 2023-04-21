@@ -71,7 +71,7 @@ const CustomerProductView = () => {
   }
 
   return (
-    <div style={{ minHeight: 700, backgroundColor: "#f0f0f0" }}>
+    <div style={{ minHeight: 700 }}>
       <header className="masthead">
         <div className="container">
           <div className="masthead-subheading">Welcome To Hela Ayu!</div>
