@@ -23,6 +23,7 @@ import {
 } from "../../constants/productManagementConstants/productConstants";
 import axios from "axios";
 import { API_ENDPOINT } from "../../config";
+import swal from "sweetalert";
 
 export function authHeaderForVendor() {
   let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
@@ -177,6 +178,16 @@ export const createProduct =
         type: PRODUCTS_CREATE_SUCCESS,
         payload: data,
       });
+      swal({
+        title: "Success !!!",
+        text: "Product Creation Successful.",
+        icon: "success",
+        timer: 2000,
+        button: false,
+      });
+      setTimeout(function () {
+        window.location.href = "/vendor-products";
+      }, 2000);
     } catch (error) {
       const message =
         error.response && error.response.data.message
