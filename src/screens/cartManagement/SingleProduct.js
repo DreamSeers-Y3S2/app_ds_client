@@ -3,11 +3,11 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import MainScreen from "../../components/MainScreen";
-import "./product.css";
 import { API_ENDPOINT } from "../../config";
 import { createCartAction } from "../../actions/cartManagementActions/cartAction";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import "./product-view.css";
 
 export default function SingleProduct({ match, history }) {
   const [title, setTitle] = useState("");
@@ -22,6 +22,7 @@ export default function SingleProduct({ match, history }) {
   const [discountNote, setDiscountNote] = useState("");
   const [quantity, setQuantity] = useState("");
   const [discount, setDiscount] = useState("");
+
   const dispatch = useDispatch();
   const customer_Login = useSelector((state) => state.customer_Login);
   const { customerInfo } = customer_Login;
@@ -75,14 +76,10 @@ export default function SingleProduct({ match, history }) {
   }
 
   return (
-    <div className="nutritonPlanView">
+    <div className="singlePlanView">
+      <br></br>
       <br></br>
       <MainScreen title="">
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <h1
           style={{
             fontSize: "35px",
@@ -97,7 +94,15 @@ export default function SingleProduct({ match, history }) {
         <div className="product-card">
           <div className="details">
             <div className="big-img">
-              <img src={picURL} alt=""></img>
+              <img
+                src={picURL}
+                alt=""
+                style={{
+                  width: "500px",
+                  height: "750px",
+                  borderRadius: "15px",
+                }}
+              ></img>
               <h2
                 style={{
                   fontSize: "30px",
@@ -118,7 +123,7 @@ export default function SingleProduct({ match, history }) {
               <p>{usage}</p>
               <h2>Warnings</h2>
               <p>{warnings}</p>
-              <div className="row">
+              <div className="row" style={{ margin: "50px" }}>
                 <span>
                   <h2
                     style={{ textDecoration: "line-through", fontSize: "30px" }}
@@ -150,7 +155,6 @@ export default function SingleProduct({ match, history }) {
             </div>
           </div>
         </div>
-        <br></br>
         <br></br>
         <br></br>
       </MainScreen>

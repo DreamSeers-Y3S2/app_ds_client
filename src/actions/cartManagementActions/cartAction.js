@@ -140,7 +140,7 @@ export const createCartAction =
       });
 
       setTimeout(function () {
-        window.location.href = "/customer-product-view";
+        window.location.href = "/";
       }, 2000);
     } catch (error) {
       const message =

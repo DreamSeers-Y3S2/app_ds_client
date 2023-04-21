@@ -30,7 +30,7 @@ function Header({ setSearch }) {
             <Button
               variant=""
               style={{ color: "#29C379", fontSize: "20px", marginLeft: "35px" }}
-              href="/customer-product-view"
+              href="/"
             >
               HOME
             </Button>

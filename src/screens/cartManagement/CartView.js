@@ -1,7 +1,8 @@
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   listCart,
@@ -9,10 +10,8 @@ import {
   deleteCartAction,
 } from "../../actions/cartManagementActions/cartAction";
 import { API_ENDPOINT } from "../../config";
-import axios from "axios";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
-import { useState } from "react";
 import MainScreen from "../../components/MainScreen";
 import { authHeader } from "../../actions/userManagementActions/customerActions";
 
@@ -63,14 +62,9 @@ export default function CartView() {
 
   if (customerInfo) {
     return (
-      <div style={{ minHeight: 700, backgroundColor: "#dbd7d2" }}>
+      <div style={{ minHeight: 700, backgroundColor: "#E0E0E0" }}>
         <br></br>
-        <MainScreen
-          style={{ fontColor: "black" }}
-          title={`Total Price : Rs ${total}`}
-        >
-          <br></br>
-          <br></br>
+        <MainScreen title={`Total Price : Rs ${total}`}>
           <br></br>
           {errorDelete && (
             <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>

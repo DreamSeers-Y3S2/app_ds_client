@@ -11,8 +11,8 @@ import { Grid } from "@material-ui/core/";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import ReactStars from "react-rating-stars-component";
-import "./product.css";
-import "./bootstrap.css";
+import "./product-view.css";
+import "./product-home.css";
 import {
   MDBContainer,
   MDBRow,
@@ -78,7 +78,7 @@ const CustomerProductView = () => {
           <div className="masthead-heading text-uppercase">
             It's Nice To Meet You
           </div>
-          <Link to="/customer-product-view">
+          <Link to="/">
             <Button
               variant="success"
               size="lg"
@@ -106,13 +106,14 @@ const CustomerProductView = () => {
               style={{
                 width: 260,
                 height: 40,
-                borderRadius: 50,
+                borderRadius: "50px",
                 padding: "10px",
                 paddingLeft: "15px",
-                marginLeft: 820,
+                marginLeft: 860,
                 fontSize: 15,
                 backgroundColor: "#f0fff0",
                 color: "black",
+                borderWidth: "5px",
               }}
             />
           </Form>
@@ -136,7 +137,7 @@ const CustomerProductView = () => {
             >
               <MDBContainer fluid className="my-5">
                 <MDBRow className="justify-content-center">
-                  <MDBCol md="12" lg="6" xl="10">
+                  <MDBCol md="12" lg="6" xl="11">
                     <MDBCard
                       style={{
                         borderRadius: "0px",
@@ -144,6 +145,8 @@ const CustomerProductView = () => {
                         backgroundColor: "#f0fff0",
                         borderWidth: "5px",
                         borderColor: "#087830",
+                        height: "500px",
+                        width: "340px",
                       }}
                     >
                       <MDBRipple
@@ -156,20 +159,16 @@ const CustomerProductView = () => {
                           fluid
                           className="w-100"
                           style={{
-                            borderTopLeftRadius: "0px",
-                            borderTopRightRadius: "0px",
+                            borderRadius: "0px",
                             width: "100px",
                             height: "250px",
                           }}
                         />
-                        <a href="#!">
-                          <div className="mask"></div>
-                        </a>
                       </MDBRipple>
                       <MDBCardBody className="pb-0">
                         <div className="d-flex justify-content-between">
                           <div>
-                            <h2>{product.title}</h2>
+                            <h4>{product.title}</h4>
                           </div>
                           <div>
                             <div className="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
@@ -185,16 +184,16 @@ const CustomerProductView = () => {
                       <hr class="my-0" />
                       <MDBCardBody className="pb-0">
                         <div className="d-flex justify-content-between">
-                          <h2 style={{ textDecoration: "line-through" }}>
+                          <h4 style={{ textDecoration: "line-through" }}>
                             <a href="#!" className="text-dark">
                               Rs {product.price}
                             </a>
-                          </h2>
-                          <h2 className="text-dark">
+                          </h4>
+                          <h4 className="text-dark">
                             Availability : {product.quantity}
-                          </h2>
+                          </h4>
                         </div>
-                        <h3>{product.discountNote}</h3>
+                        <h4>{product.discountNote}</h4>
                       </MDBCardBody>
                       <hr class="my-0" />
                       <MDBCardBody className="pb-0">
@@ -254,7 +253,7 @@ const CustomerProductView = () => {
             </Grid>
           ))}
       </MainScreen>
-      <section className="page-section " id="workout">
+      <section className="page-section " id="product">
         <div className="container">
           <div className="text-center">
             <h2 className="section-heading text-uppercase">Our Products</h2>
@@ -264,46 +263,46 @@ const CustomerProductView = () => {
           </div>
           <div className="row">
             <div className="col-lg-4 col-sm-6 mb-4">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="https://i.pinimg.com/originals/d3/41/05/d34105976d81728a9b0d960971691fca.jpg"
                   alt="..."
                   style={{ height: "200px" }}
                 />
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Beauty and Care</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Beauty and Care</div>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-sm-6 mb-4">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="https://img.freepik.com/free-photo/homeopathy-herbal-extracts-small-bottles_73944-9299.jpg?size=626&ext=jpg"
                   alt="..."
                   style={{ height: "200px" }}
                 />
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Homeopathy</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Homeopathy</div>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-sm-6 mb-4">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="http://internationalworldofbusiness.com/wp-content/uploads/2019/07/2-696x381.jpg"
                   alt="..."
                   style={{ height: "200px" }}
                 />
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Sports</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Sports</div>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="https://bwellpharmacy.com/wp-content/uploads/Products-Baby.jpg"
@@ -311,35 +310,35 @@ const CustomerProductView = () => {
                   style={{ height: "200px" }}
                 />
 
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Baby & Kids</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Baby & Kids</div>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-4 col-sm-6">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="https://ww1.prweb.com/prfiles/2014/09/11/12163870/Pharma+Packaging+Solutions+Products.png"
                   alt="..."
                   style={{ height: "200px" }}
                 />
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Grocery</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Grocery</div>
                 </div>
               </div>
             </div>
             <div className="col-lg-4 col-sm-6">
-              <div className="workout-item">
+              <div className="product-item">
                 <img
                   className="img-fluid"
                   src="https://www.nolibsvet.com/wp-content/uploads/2014/02/pharmacy.jpg"
                   alt="..."
                   style={{ height: "200px" }}
                 />
-                <div className="workout-caption">
-                  <div className="workout-caption-heading">Pet</div>
+                <div className="product-caption">
+                  <div className="product-caption-heading">Pet</div>
                 </div>
               </div>
             </div>
