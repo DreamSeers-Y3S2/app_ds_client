@@ -271,7 +271,7 @@ const CustomerProductView = () => {
                   style={{ height: "200px" }}
                 />
                 <div className="product-caption">
-                  <div className="product-caption-heading">Beauty and Care</div>
+                  <div className="product-caption-heading">Beauty Care</div>
                 </div>
               </div>
             </div>
