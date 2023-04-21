@@ -24,6 +24,7 @@ function AddProductByVendorScreen({ history }) {
   const [discountNote, setDiscountNote] = useState("");
   const [discountPrice, setDiscountPrice] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [message] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
 
   const dispatch = useDispatch();
@@ -113,16 +114,6 @@ function AddProductByVendorScreen({ history }) {
     );
 
     resetHandler();
-    swal({
-      title: "Success !!!",
-      text: "Product Creation Successful.",
-      icon: "success",
-      timer: 2000,
-      button: false,
-    });
-    setTimeout(function () {
-      window.location.href = "/vendor-products";
-    }, 2000);
   };
 
   const postDetails = (pics) => {
@@ -194,6 +185,9 @@ function AddProductByVendorScreen({ history }) {
             <div className="productContainer">
               <div>
                 {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+                {message && (
+                  <ErrorMessage variant="danger">{message}</ErrorMessage>
+                )}
                 {loading && <Loading />}
               </div>
               <br></br>
@@ -205,20 +199,19 @@ function AddProductByVendorScreen({ history }) {
                       <Form.Control
                         type="email"
                         value={vendorEmail}
-                        onChange={(e) => setVendorEmail(vendorInfo.email)}
+                        onChange={(e) => setVendorEmail(e.target.value)}
                         readOnly
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="productFormBasicTitle">
+                    <Form.Group controlId="productFormBasicProductTitle">
                       <Form.Label>Product Name</Form.Label>
                       <Form.Control
                         type="text"
                         value={title}
-                        placeholder="Enter Product Name"
+                        placeholder="Enter Title"
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        maxLength={10}
                       />
                     </Form.Group>
                     <br></br>
@@ -244,7 +237,7 @@ function AddProductByVendorScreen({ history }) {
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="productFormBasicCode">
                       <Form.Label>Product Code</Form.Label>
                       <Form.Control
                         type="text"
@@ -271,7 +264,7 @@ function AddProductByVendorScreen({ history }) {
                       />
                     </Form.Group>
                     <br></br>
-                    <Form.Group controlId="confirmPassword">
+                    <Form.Group controlId="productFormBasicPrice">
                       <Form.Label>Product Price</Form.Label>
                       <Form.Control
                         type="text"
