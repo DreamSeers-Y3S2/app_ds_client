@@ -33,86 +33,42 @@ import SingleProduct from "./screens/cartManagement/SingleProduct";
 import CartView from "./screens/cartManagement/CartView";
 
 const App = () => {
-  return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Route path="/admin-login" component={AdminLogin} />
-        <Route path="/customer-login" component={CustomerLogin} />
-        <Route path="/vendor-login" component={VendorLogin} />
-        <Route path="/admin-register" component={AdminRegisterScreen} exact />
-        <Route
-          path="/customer-register"
-          component={CustomerRegisterScreen}
-          exact
-        />
-        <Route path="/vendor-register" component={VendorRegisterScreen} exact />
-        <Route path="/admin-view" component={AdminViewScreen} exact />
-        <Route path="/customer-view" component={CustomerViewScreen} exact />
-        <Route path="/vendor-view" component={VendorViewScreen} exact />
-        <Route path="/admin-edit" component={AdminEditScreen} exact />
-        <Route path="/customer-edit" component={CustomerEditScreen} exact />
-        <Route path="/vendor-edit" component={VendorEditScreen} exact />
-        <Route
-          path="/admin-customers"
-          component={CustomerListForAdminScreen}
-          exact
-        />
-        <Route
-          path="/admin-vendors"
-          component={VendorListForAdminScreen}
-          exact
-        />
-        <Route
-          path="/admin-customer-edit/:id"
-          component={CustomerEditByAdminScreen}
-          exact
-        />
-        <Route
-          path="/admin-vendor-edit/:id"
-          component={VendorEditByAdminScreen}
-          exact
-        />
-        <Route path="/admin" component={AdminLandingScreen} exact />
-        <Route path="/customer" component={CustomerLandingScreen} exact />
-        <Route path="/vendor" component={VendorLandingScreen} exact />
-        <Route
-          path="/vendor-products"
-          component={ProductsListForVendorScreen}
-          exact
-        />
-        <Route
-          path="/admin-products"
-          component={ProductsListForAdminScreen}
-          exact
-        />
-        <Route
-          path="/vendor-product-add"
-          component={AddProductByVendorScreen}
-          exact
-        />
-        <Route
-          path="/vendor-product-edit/:id"
-          component={SingleProductForVendorScreen}
-          exact
-        />
-        <Route
-          path="/admin-product-edit/:id"
-          component={SingleProductForAdminScreen}
-          exact
-        />
-        <Route path="/login-selector" component={LoginSelectorScreen} exact />
-        <Route path="/" component={CustomerProductView} exact />
-        <Route
-          path="/single-product-view/:id"
-          component={SingleProduct}
-          exact
-        />
-        <Route path="/customer-cart" component={CartView} exact />
-      </main>
-      <Footer />
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Header />
+			<main>
+				<Route path="/admin-login" component={AdminLogin} />
+				<Route path="/customer-login" component={CustomerLogin} />
+				<Route path="/vendor-login" component={VendorLogin} />
+				<Route path="/admin-register" component={AdminRegisterScreen} exact />
+				<Route path="/customer-register" component={CustomerRegisterScreen} exact />
+				<Route path="/vendor-register" component={VendorRegisterScreen} exact />
+				<Route path="/admin-view" component={AdminViewScreen} exact />
+				<Route path="/customer-view" component={CustomerViewScreen} exact />
+				<Route path="/vendor-view" component={VendorViewScreen} exact />
+				<Route path="/admin-edit" component={AdminEditScreen} exact />
+				<Route path="/customer-edit" component={CustomerEditScreen} exact />
+				<Route path="/vendor-edit" component={VendorEditScreen} exact />
+				<Route path="/admin-customers" component={CustomerListForAdminScreen} exact />
+				<Route path="/admin-vendors" component={VendorListForAdminScreen} exact />
+				<Route path="/admin-customer-edit/:id" component={CustomerEditByAdminScreen} exact />
+				<Route path="/admin-vendor-edit/:id" component={VendorEditByAdminScreen} exact />
+				<Route path="/admin" component={AdminLandingScreen} exact />
+				<Route path="/customer" component={CustomerLandingScreen} exact />
+				<Route path="/vendor" component={VendorLandingScreen} exact />
+				<Route path="/vendor-products" component={ProductsListForVendorScreen} exact />
+				<Route path="/admin-products" component={ProductsListForAdminScreen} exact />
+				<Route path="/vendor-product-add" component={AddProductByVendorScreen} exact />
+				<Route path="/vendor-product-edit/:id" component={SingleProductForVendorScreen} exact />
+				<Route path="/admin-product-edit/:id" component={SingleProductForAdminScreen} exact />
+				<Route path="/login-selector" component={LoginSelectorScreen} exact />
+				<Route path="/" component={CustomerProductView} exact />
+				<Route path="/single-product-view/:id" component={SingleProduct} exact />
+				<Route path="/customer-cart" component={CartView} exact />
+			</main>
+			<Footer />
+		</BrowserRouter>
+	);
 };
 
 export default App;
