@@ -31,6 +31,7 @@ import VendorLandingScreen from "./screens/static/landingPages/VendorLandingScre
 import CustomerProductView from "./screens/cartManagement/CustomerProductView";
 import SingleProduct from "./screens/cartManagement/SingleProduct";
 import CartView from "./screens/cartManagement/CartView";
+import StripeContainer from "./screens/CardPayment/StripeContainer";
 
 const App = () => {
   return (
@@ -109,6 +110,8 @@ const App = () => {
           exact
         />
         <Route path="/customer-cart" component={CartView} exact />
+
+        <Route path="/payment" component={StripeContainer} exact />
       </main>
       <Footer />
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
@@ -58,7 +58,8 @@ export default function CartView() {
     };
 
     fetchingTotal();
-  }, [customerInfo._id]);
+    localStorage.setItem("total", total);
+  }, [customerInfo._id, total]);
 
   if (customerInfo) {
     return (
@@ -173,21 +174,23 @@ export default function CartView() {
               </tbody>
             </>
           </Table>
-          <Button
-            style={{
-              paddingRight: "5px",
-              paddingLeft: "5px",
-              width: "130px",
-              backgroundColor: "black",
-              border: "3px solid white",
-              fontSize: "18px",
-              height: "50px",
-              borderRadius: "0px",
-              borderWidth: "5px white",
-            }}
-          >
-            Checkout
-          </Button>
+          <Link to="/payment">
+            <Button
+              style={{
+                paddingRight: "5px",
+                paddingLeft: "5px",
+                width: "130px",
+                backgroundColor: "black",
+                border: "3px solid white",
+                fontSize: "18px",
+                height: "50px",
+                borderRadius: "0px",
+                borderWidth: "5px white",
+              }}
+            >
+              Checkout
+            </Button>
+          </Link>
           <br></br>
         </MainScreen>
       </div>
