@@ -5,10 +5,9 @@ import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { createProduct } from "../../../../actions/productManagementActions/productActions";
 import Loading from "../../../../components/Loading";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import swal from "sweetalert";
 import "./addProduct.css";
 
-function AddProductByVendorScreen({ history }) {
+function AddProductByVendorScreen() {
 	const [title, setTitle] = useState("");
 	const [category, setCategory] = useState("");
 	const [productBrand, setProductBrand] = useState("");
