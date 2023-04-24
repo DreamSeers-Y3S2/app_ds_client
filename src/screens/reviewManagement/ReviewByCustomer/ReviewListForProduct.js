@@ -13,6 +13,9 @@ const ReviewList = ({ match }) => {
 	const Review_Cus_List = useSelector((state) => state.Review_Cus_List);
 	const { loading, UIReview, error } = Review_Cus_List;
 
+	const customer_Login = useSelector((state) => state.customer_Login);
+	const { customerInfo } = customer_Login;
+
 	const [search, setSearch] = useState("");
 
 	useEffect(() => {
@@ -69,9 +72,13 @@ const ReviewList = ({ match }) => {
 						Back to Products
 					</Button>
 
-					<Button variant="success" href={`/customer-review-create/${match.params.id}`}>
-						+ Review Create
-					</Button>
+					{customerInfo ? (
+						<Button variant="success" href={`/customer-review-create/${match.params.id}`}>
+							+ Create Review
+						</Button>
+					) : (
+						<></>
+					)}
 				</ButtonGroup>
 				{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
 				{loading && <Loading />}
@@ -82,30 +89,30 @@ const ReviewList = ({ match }) => {
 						<Accordion>
 							<Card
 								style={{
-									margin: 10,
+									margin: 20,
 									borderRadius: 25,
 									borderWidth: 1.0,
 									borderColor: "rgb(0,0,0,0.5)",
-									marginTop: 20,
 									paddingInline: 10,
 									background: "rgb(235, 235, 235)",
 								}}
 							>
 								<Card.Header
 									style={{
-										display: "flex",
-										paddingInline: 10,
 										borderRadius: 25,
 										marginTop: 10,
-										marginBottom: 10,
 										borderColor: "black",
-										background: "#76BA99",
+										background: "#4E6E81",
+										color: "white",
 									}}
 								>
-									&emsp;&emsp;&emsp;
-									<h5>{reviewCustomer.reviewTittle}</h5>
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									<h5> Rating - {reviewCustomer.rating}</h5>
+									<center>
+										<h5 style={{ fontFamily: "cursive", marginTop: "10px", fontSize: "25px", fontWeight: "bolder" }}>
+											{reviewCustomer.reviewTittle}
+										</h5>
+
+										<h5 style={{ marginTop: "10px", fontSize: "25px" }}> Rating - {reviewCustomer.rating}</h5>
+									</center>
 									<span
 										style={{
 											color: "black",
@@ -124,13 +131,7 @@ const ReviewList = ({ match }) => {
 											<h5> Name - {reviewCustomer.reviewName}</h5>
 											<h5>Tittle - {reviewCustomer.reviewTittle}</h5>
 											<h5>Description- {reviewCustomer.reviewDescription}</h5>
-											<h5>
-												rating - {reviewCustomer.rating}
-												{/* // 	<h3>⭐</h3>
-													// }
-                                                    // else {
-													// <h3>⭐⭐⭐⭐⭐</h3> */}
-											</h5>
+											<h5>rating - {reviewCustomer.rating}</h5>
 
 											<br></br>
 										</Col>
