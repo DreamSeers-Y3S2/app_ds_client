@@ -144,7 +144,7 @@ export const updateOrderStatusAction = (id, status) => async (dispatch, getState
 				Authorization: `Bearer ${adminInfo.token}`,
 			},
 		};
-		const { data } = await axios.put(`${API_ENDPOINT}/orders/order/order-admin${id}`, { status }, config);
+		const { data } = await axios.put(`${API_ENDPOINT}/orders/order/order-admin/${id}`, { status }, config);
 
 		dispatch({
 			type: UPDATE_ORDER_SUCCESS,

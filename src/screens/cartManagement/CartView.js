@@ -1,10 +1,11 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { listCart, updateCartAction, deleteCartAction } from "../../actions/cartManagementActions/cartAction";
+import { createOrderAction } from "../../actions/orderManagementActions/orderAction";
 import { API_ENDPOINT } from "../../config";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -24,9 +25,6 @@ export default function CartView() {
 	const { loading: loadingDelete, error: errorDelete } = cartDelete;
 
 	const history = useHistory();
-	useEffect(() => {
-		dispatch(listCart());
-	}, [dispatch, history, customerInfo]);
 
 	function decreaseQuanity(id, quantity) {
 		if (quantity > 1) dispatch(updateCartAction(id, quantity - 1));
@@ -38,6 +36,10 @@ export default function CartView() {
 
 	const deleteHandler = (id) => {
 		dispatch(deleteCartAction(id));
+	};
+
+	const checkout = () => {
+		dispatch(createOrderAction(customerInfo._id, total));
 	};
 
 	useEffect(() => {
@@ -52,7 +54,8 @@ export default function CartView() {
 
 		fetchingTotal();
 		localStorage.setItem("total", total);
-	}, [customerInfo._id, total]);
+		dispatch(listCart());
+	}, [dispatch, history, customerInfo._id, total]);
 
 	if (customerInfo) {
 		return (
@@ -174,23 +177,24 @@ export default function CartView() {
 						</tbody>
 					</>
 				</Table>
-				<Link to="/payment">
-					<Button
-						style={{
-							paddingRight: "5px",
-							paddingLeft: "5px",
-							width: "130px",
-							backgroundColor: "black",
-							border: "3px solid white",
-							fontSize: "18px",
-							height: "50px",
-							borderRadius: "0px",
-							borderWidth: "5px white",
-						}}
-					>
-						Checkout
-					</Button>
-				</Link>
+
+				<Button
+					style={{
+						paddingRight: "5px",
+						paddingLeft: "5px",
+						width: "130px",
+						backgroundColor: "black",
+						border: "3px solid white",
+						fontSize: "18px",
+						height: "50px",
+						borderRadius: "0px",
+						borderWidth: "5px white",
+					}}
+					onClick={() => checkout()}
+				>
+					Checkout
+				</Button>
+
 				<br></br>
 			</div>
 		);
