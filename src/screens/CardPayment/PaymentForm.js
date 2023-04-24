@@ -1,34 +1,37 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
+import React, {useRef, useState} from "react";
 import Alert from "react-bootstrap/Alert";
 import Swal from "sweetalert2";
+import emailjs from '@emailjs/browser';
 
 import "./CardPayment.css";
 import PayServices from "./paymentService";
 
 const CARD_OPTIONS = {
-  iconStyle: "solid",
   style: {
     base: {
-      iconColor: "#c4f0ff",
-      color: "#fff",
-      fontWeight: 500,
-      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-      fontSize: "16px",
+      color: "#32325d",
+      fontFamily: 'Arial, sans-serif',
       fontSmoothing: "antialiased",
-      ":-webkit-autofill": { color: "#fce883" },
-      "::placeholder": { color: "#87bbfd" },
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#32325d"
+      }
     },
     invalid: {
-      iconColor: "#ffc7ee",
-      color: "#ffc7ee",
-    },
-  },
+      fontFamily: 'Arial, sans-serif',
+      color: "#fa755a",
+      iconColor: "#fa755a"
+    }
+  }
 };
 
 export default function PaymentForm() {
+
+  const formPay = useRef();
   const stripe = useStripe();
   const elements = useElements();
+  const [isSend, setisSend] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +44,7 @@ export default function PaymentForm() {
       try {
         const { id } = paymentMethod;
         const data = {
-          amount: Number(localStorage.getItem("total")) * 100,
+          amount: Number(localStorage.getItem("total")) + 100 + 300,
           id,
         };
         const response = await PayServices.pay(data);
@@ -50,7 +53,7 @@ export default function PaymentForm() {
           Swal.fire({
             icon: "success",
             title: "Payment Successful",
-            text: "Your order is placed now. Wait for 2 to 4 business days to approve the order!!",
+            text: "Your order is placed now. Payment confirmation email has been sent to the email",
             footer: '<a href="/buyerProfile">View Your Orders</a>',
           }).then((result) => {
             if (result.isConfirmed) {
@@ -69,24 +72,45 @@ export default function PaymentForm() {
     } else {
       console.log(error.message);
     }
+
+    emailjs.sendForm('service_a0dl37h', 'template_cbmdmwl', formPay.current, '-l-yfdg2kBiYgzEht')
+    .then((result)=> {
+      console.log(result.text);
+      setisSend(true);
+      setTimeout(()=> {
+        setisSend(false)
+      }, 2500);
+    })
+    .catch((error)=>{
+      console.log(error.text);
+    })
   };
 
   return (
     <>
       <div className="payContainer">
-        <Alert key="success" variant="success">
-          Hela Ayu Payment Gateway
-        </Alert>
-        <Alert key="dark" variant="dark">
-          Pay - Rs. {localStorage.getItem("total")}
-        </Alert>
-        <form onSubmit={handleSubmit}>
-          <fieldset className="FormGroupPay">
+        <h3>
+          Hela Ayu Payment Process
+        </h3><hr/>
+        <label>Delivery Cost - Rs.300 </label> <br/>
+        <label>Commission - Rs.100 </label> <hr/>
+        <label>Total Amount - Rs. {localStorage.getItem("total")+100+300} </label> <hr/>
+        <form onSubmit={handleSubmit} ref={formPay}>
+          <div >
+            <label>Email to send the payment confirmation: </label> <br/>
+            <input class="form-control form-control-sm" type='email' name="useremail"  style={{width:'300px', borderRadius:'3px'}}></input>
+          </div><br/>
+          <div>
+            <label>Mobile number to contact about the delivery: </label> <br/>
+            <input class="form-control form-control-sm" type='tel' name="user.phone"  style={{width:'300px', borderRadius:'3px'}}></input>
+          </div> <hr/>
+          <label>Enter your card details: </label>
+          <fieldset className="FormGroupPay" style={{width:'500px', alignContent:'left'}}>
             <div className="FormRowPay">
               <CardElement options={CARD_OPTIONS} />
             </div>
           </fieldset>
-          <button className="pay">Pay</button>
+          <button className="pay" style={{width:'200px'}}>Pay</button> <br/>
         </form>
       </div>
     </>
