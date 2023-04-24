@@ -7,6 +7,7 @@ import { adminCustomerOrders } from "../../actions/orderManagementActions/orderA
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import MainScreen from "../../components/MainScreen";
+import "./orderLists.css";
 
 export default function AdminOrderList() {
 	const dispatch = useDispatch();
@@ -23,78 +24,80 @@ export default function AdminOrderList() {
 
 	if (adminInfo) {
 		return (
-			<div
-				style={{
-					minHeight: 700,
-					marginLeft: "20%",
-					marginRight: "20%",
-					marginBottom: "100px",
-				}}
-			>
+			<div className="orderAdminList">
 				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-				{loading && <Loading />}
-				<Table style={{ background: "white" }}>
-					<>
-						<tbody>
-							{orders?.reverse().map((order) => (
-								<tr
-									key={order._id}
-									style={{
-										boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-									}}
-								>
-									<td
-										style={{
-											fontSize: 20,
-										}}
-									>
-										{order.orderID}
-									</td>
-									<td
-										style={{
-											fontSize: 20,
-										}}
-									>
-										{order.products}
-									</td>
-									<td
-										style={{
-											fontSize: 20,
-										}}
-									>
-										{order.total}
-									</td>
-									<td
-										style={{
-											fontSize: 20,
-										}}
-									>
-										{order.status}
-									</td>
-									<td>
-										<Button
+				<MainScreen title={`Order List..`}>
+					<div
+						style={{
+							minHeight: 700,
+							marginLeft: "20%",
+							marginRight: "20%",
+							marginBottom: "100px",
+						}}
+					>
+						{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+						{loading && <Loading />}
+						<Table style={{ background: "white", marginTop: 50, borderRadius: 10 }}>
+							<>
+								<tbody>
+									{orders?.reverse().map((order) => (
+										<tr
+											key={order._id}
 											style={{
-												fontSize: 15,
-												backgroundColor: "red",
-												borderRadius: 0,
-												border: "3px solid white",
+												boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+												borderRadius: 10,
 											}}
-											href={`/update-order/${order._id}`}
 										>
-											Edit
-										</Button>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</>
-				</Table>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{order.orderID}
+											</td>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{order.products}
+											</td>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{order.total}
+											</td>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{order.status}
+											</td>
+											<td>
+												<Button
+													style={{
+														fontSize: 15,
+														backgroundColor: "red",
+														borderRadius: 0,
+														border: "3px solid white",
+													}}
+													href={`/update-order/${order._id}`}
+												>
+													Edit
+												</Button>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</>
+						</Table>
 
-				<br></br>
+						<br></br>
+					</div>
+				</MainScreen>
 			</div>
 		);
 	} else {

@@ -51,6 +51,13 @@ const CustomerLandingScreen = ({ history }) => {
 								</a>
 								<br></br>
 								<br></br>
+								<a href="/customer-orders">
+									<Button id="landingBtn" variant="success" size="lg" style={{ width: 350, height: 75 }}>
+										Orders
+									</Button>
+								</a>
+								<br></br>
+								<br></br>
 								<br></br>
 							</div>
 						</Card>

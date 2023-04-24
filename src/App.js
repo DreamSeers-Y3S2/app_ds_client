@@ -42,6 +42,7 @@ const App = () => {
 		<BrowserRouter>
 			<Header />
 			<main>
+				<Route path="/login-select" component={LoginSelectorScreen} exact />
 				<Route path="/admin-login" component={AdminLogin} />
 				<Route path="/customer-login" component={CustomerLogin} />
 				<Route path="/vendor-login" component={VendorLogin} />
