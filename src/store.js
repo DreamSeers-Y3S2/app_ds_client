@@ -52,6 +52,13 @@ import {
 	allCartDeleteReducer,
 } from "./reducers/cartManagementReducers/cartReducer";
 
+import {
+	orderCreateReducer,
+	customerOrderListReducer,
+	adminOrderListReducer,
+	orderUpdateStatusReducer,
+} from "./reducers/orderManagementReducers/orderReducer";
+
 const reducer = combineReducers({
 	admin_Login: adminLoginReducer,
 	adminRegistration: adminRegisterReducer,
@@ -90,6 +97,11 @@ const reducer = combineReducers({
 	cartUpdate: cartUpdateReducer,
 	cartDelete: cartDeleteReducer,
 	cartDeleteAll: allCartDeleteReducer,
+
+	orderCreate: orderCreateReducer,
+	customerOrderList: customerOrderListReducer,
+	adminOrderList: adminOrderListReducer,
+	orderUpdateStatus: orderUpdateStatusReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo") ? JSON.parse(localStorage.getItem("adminInfo")) : null;
