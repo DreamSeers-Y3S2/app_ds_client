@@ -31,6 +31,8 @@ import VendorLandingScreen from "./screens/static/landingPages/VendorLandingScre
 import CustomerProductView from "./screens/cartManagement/CustomerProductView";
 import SingleProduct from "./screens/cartManagement/SingleProduct";
 import CartView from "./screens/cartManagement/CartView";
+import ReviewCustomerCreate from "./screens/reviewManagement/ReviewByCustomer/ReviewCustomerCreate";
+import ReviewList from "./screens/reviewManagement/ReviewByCustomer/ReviewListForProduct";
 
 const App = () => {
 	return (
@@ -65,6 +67,8 @@ const App = () => {
 				<Route path="/" component={CustomerProductView} exact />
 				<Route path="/single-product-view/:id" component={SingleProduct} exact />
 				<Route path="/customer-cart" component={CartView} exact />
+				<Route path="/customer-review-create/:id" component={ReviewCustomerCreate} exact />
+				<Route path="/product-review-list/:id" component={ReviewList} exact />
 			</main>
 			<Footer />
 		</BrowserRouter>
