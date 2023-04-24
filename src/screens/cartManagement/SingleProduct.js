@@ -118,6 +118,14 @@ export default function SingleProduct({ match, history }) {
 							>
 								Add To Cart
 							</Button>
+							&emsp;
+							<Button
+								href={`/product-review-list/${match.params.id}`}
+								style={{ marginLeft: "100px", background: "red" }}
+								className="cart"
+							>
+								Reviews
+							</Button>
 						</div>
 					</div>
 				</div>

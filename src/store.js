@@ -21,6 +21,8 @@ import {
 	customerDeleteByIdReducer,
 } from "./reducers/userManagementReducers/customerReducers";
 
+import { CustomerCreateReducer, CustomerReviewListReducer } from "./reducers/reviewManagementReducers/reviewReducers";
+
 import {
 	vendorLoginReducer,
 	vendorRegisterReducer,
@@ -90,6 +92,9 @@ const reducer = combineReducers({
 	cartUpdate: cartUpdateReducer,
 	cartDelete: cartDeleteReducer,
 	cartDeleteAll: allCartDeleteReducer,
+
+	Review_Customer_Create: CustomerCreateReducer,
+	Review_Cus_List: CustomerReviewListReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo") ? JSON.parse(localStorage.getItem("adminInfo")) : null;
