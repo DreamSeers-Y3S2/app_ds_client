@@ -108,6 +108,17 @@ const AdminLandingScreen = ({ history }) => {
 											Product Management
 										</Button>
 									</Link>
+									<Link to="/admin-orders">
+										<Button
+											id="landingBtn"
+											variant="success"
+											size="lg"
+											className="landingbutton"
+											style={{ width: 350, height: 75 }}
+										>
+											Order Management
+										</Button>
+									</Link>
 								</div>
 
 								<br></br>
