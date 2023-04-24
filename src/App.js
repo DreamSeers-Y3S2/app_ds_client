@@ -29,6 +29,7 @@ import LoginSelectorScreen from "./screens/static/loginSelect/LoginSelectorScree
 import AdminLandingScreen from "./screens/static/landingPages/AdminLandingScreen";
 import CustomerLandingScreen from "./screens/static/landingPages/CustomerLandingScreen";
 import VendorLandingScreen from "./screens/static/landingPages/VendorLandingScreen";
+import OrderListForAdmin from './screens/orderManagement/OrderDetails';
 
 const App = () => {
   return (
@@ -99,6 +100,7 @@ const App = () => {
           exact
         />
         <Route path="/login-selector" component={LoginSelectorScreen} exact />
+        <Route path="/admin-orders" component={OrderListForAdmin} exact />
       </main>
       <Footer />
     </BrowserRouter>
