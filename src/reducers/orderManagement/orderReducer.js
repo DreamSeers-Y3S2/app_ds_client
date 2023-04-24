@@ -33,7 +33,6 @@ export const allOrdersReducer = (state = { orders: [] }, action) => {
 export const orderReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_ORDER_REQUEST:
-        case DELETE_ORDER_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -46,30 +45,11 @@ export const orderReducer = (state = {}, action) => {
                 isUpdated: action.payload,
             };
 
-        case DELETE_ORDER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isDeleted: action.payload,
-            };
-
         case UPDATE_ORDER_FAIL:
-        case DELETE_ORDER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
-            };
-        case UPDATE_ORDER_RESET:
-            return {
-                ...state,
-                isUpdated: false,
-            };
-
-        case DELETE_ORDER_RESET:
-            return {
-                ...state,
-                isDeleted: false,
             };
 
         default:
