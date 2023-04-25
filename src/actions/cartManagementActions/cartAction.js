@@ -238,17 +238,6 @@ export const deleteAllCartAction = (id) => async (dispatch, getState) => {
 			type: ALL_CART_DELETE_SUCCESS,
 			payload: data,
 		});
-		swal({
-			title: "Success !!!",
-			text: "You have already checkout",
-			icon: "success",
-			timer: 2000,
-			button: false,
-		});
-
-		setTimeout(function () {
-			window.location.href = "/customer-product-view";
-		}, 2000);
 	} catch (error) {
 		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 		dispatch({
