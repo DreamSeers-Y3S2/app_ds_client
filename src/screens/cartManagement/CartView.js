@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
@@ -42,6 +42,7 @@ export default function CartView() {
 		dispatch(createOrderAction(customerInfo._id, total));
 	};
 
+<<<<<<< HEAD
 	useEffect(() => {
 		const fetchingTotal = async () => {
 			const { data } = await axios.get(`${API_ENDPOINT}/cart-items/cart/total/${customerInfo._id}`, {
@@ -51,12 +52,18 @@ export default function CartView() {
 			});
 			setTotal(data.totalPrice);
 		};
+=======
+    fetchingTotal();
+    localStorage.setItem("total", total);
+  }, [customerInfo._id, total]);
+>>>>>>> a671e6842024809653e8d10f674a76a0dd7321c1
 
 		fetchingTotal();
 		localStorage.setItem("total", total);
 		dispatch(listCart());
 	}, [dispatch, history, customerInfo._id, total]);
 
+<<<<<<< HEAD
 	if (customerInfo) {
 		return (
 			<div
@@ -206,4 +213,88 @@ export default function CartView() {
 			</div>
 		);
 	}
+=======
+                    <td
+                      style={{
+                        fontSize: 20,
+                      }}
+                    >
+                      <Button
+                        style={{
+                          fontSize: 15,
+                          backgroundColor: "black",
+                          borderRadius: 0,
+                          border: "3px solid white",
+                        }}
+                        onClick={() => decreaseQuanity(cart._id, cart.quantity)}
+                      >
+                        <i class="fa-solid fa-circle-minus"></i>
+                      </Button>
+                      &emsp;
+                      {cart.quantity}
+                      &emsp;
+                      <Button
+                        style={{
+                          fontSize: 15,
+                          backgroundColor: "black",
+                          borderRadius: 0,
+                          border: "3px solid white",
+                        }}
+                        onClick={() => increaseQuanity(cart._id, cart.quantity)}
+                      >
+                        <i class="fa-solid fa-circle-plus"></i>
+                      </Button>
+                    </td>
+                    <td>
+                      <Button
+                        style={{
+                          fontSize: 15,
+                          backgroundColor: "red",
+                          borderRadius: 0,
+                          border: "3px solid white",
+                        }}
+                        onClick={() => deleteHandler(cart._id)}
+                      >
+                        <i
+                          class="fa-solid fa-trash"
+                          onClick={() => deleteHandler(cart._id)}
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          </Table>
+          <Link to="/payment">
+            <Button
+              style={{
+                paddingRight: "5px",
+                paddingLeft: "5px",
+                width: "130px",
+                backgroundColor: "black",
+                border: "3px solid white",
+                fontSize: "18px",
+                height: "50px",
+                borderRadius: "0px",
+                borderWidth: "5px white",
+              }}
+            >
+              Checkout
+            </Button>
+          </Link>
+          <br></br>
+        </MainScreen>
+      </div>
+    );
+  } else {
+    return (
+      <div className="denied">
+        <MainScreen />
+        <br></br>
+      </div>
+    );
+  }
+>>>>>>> a671e6842024809653e8d10f674a76a0dd7321c1
 }
