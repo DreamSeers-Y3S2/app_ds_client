@@ -111,7 +111,7 @@ export default function ReviewCustomerCreate({ match, history }) {
 
 								<Form.Group controlId="reviewName">
 									<Form.Label>Name</Form.Label>
-									<Form.Control value={customerInfo.name} placeholder="Enter The Reviewer Name" readOnly />
+									<Form.Control value={customerInfo.name} placeholder="Enter Your Name" readOnly />
 								</Form.Group>
 
 								<Form.Group controlId="reviewTittle">
@@ -119,7 +119,7 @@ export default function ReviewCustomerCreate({ match, history }) {
 									<Form.Control
 										type="reviewTittle"
 										value={reviewTittle}
-										placeholder="Enter The Review'sTittle "
+										placeholder="Enter Your Review's Tittle "
 										onChange={(e) => setReviewTittle(e.target.value)}
 										required
 									/>
