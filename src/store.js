@@ -61,6 +61,13 @@ import {
 	orderUpdateStatusReducer,
 } from "./reducers/orderManagementReducers/orderReducer";
 
+import {
+	DeliveryCreateReducer,
+	DeliveryUpdateReducer,
+	DeliveryForEachReducer,
+	DeliveryGetByIDReducer,
+} from "./reducers/deliveryManagementReducers/deliveriesReducer";
+
 const reducer = combineReducers({
 	admin_Login: adminLoginReducer,
 	adminRegistration: adminRegisterReducer,
@@ -107,6 +114,8 @@ const reducer = combineReducers({
 	customerOrderList: customerOrderListReducer,
 	adminOrderList: adminOrderListReducer,
 	orderUpdateStatus: orderUpdateStatusReducer,
+
+	Delivery_Create:DeliveryCreateReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo") ? JSON.parse(localStorage.getItem("adminInfo")) : null;

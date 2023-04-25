@@ -36,6 +36,7 @@ import ReviewList from "./screens/reviewManagement/ReviewByCustomer/ReviewListFo
 import CustomerOrderList from "./screens/orderManagement/CustomerOrderList";
 import AdminOrderList from "./screens/orderManagement/AdminOrderList";
 import AdminUpdateOrder from "./screens/orderManagement/AdminUpdateOrder";
+import DeliveriesCreate from "./screens/deliveryManagement/DeliveriesCreate";
 
 const App = () => {
 	return (
@@ -76,6 +77,7 @@ const App = () => {
 				<Route path="/customer-orders" component={CustomerOrderList} exact />
 				<Route path="/admin-orders" component={AdminOrderList} exact />
 				<Route path="/update-order/:id" component={AdminUpdateOrder} exact />
+				<Route path="/delivery-create" component={DeliveriesCreate} exact />
 			</main>
 			<Footer />
 		</BrowserRouter>
