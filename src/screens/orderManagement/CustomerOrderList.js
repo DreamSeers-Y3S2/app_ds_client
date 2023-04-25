@@ -70,7 +70,7 @@ export default function CustomerOrderList() {
 												{order.total}
 											</td>
 											<td>
-												<Link to="/delivery">
+												<Link to="/payment">
 													<Button
 														style={{
 															fontSize: 15,

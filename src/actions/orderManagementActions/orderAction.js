@@ -12,6 +12,7 @@ import {
 	ORDER_DETAILS_SUCCESS,
 	ORDER_DETAILS_FAIL,
 } from "../../constants/orderManagementConstants/orderConstant";
+import { deleteAllCartAction } from "../cartManagementActions/cartAction";
 import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import swal from "sweetalert";
@@ -55,6 +56,7 @@ export const createOrderAction = (customer, total) => async (dispatch, getState)
 
 		setTimeout(function () {
 			window.location.href = "/customer-orders";
+			dispatch(deleteAllCartAction(customerInfo._id));
 		}, 2000);
 	} catch (error) {
 		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
