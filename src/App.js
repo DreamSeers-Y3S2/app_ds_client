@@ -33,12 +33,16 @@ import SingleProduct from "./screens/cartManagement/SingleProduct";
 import CartView from "./screens/cartManagement/CartView";
 import ReviewCustomerCreate from "./screens/reviewManagement/ReviewByCustomer/ReviewCustomerCreate";
 import ReviewList from "./screens/reviewManagement/ReviewByCustomer/ReviewListForProduct";
+import CustomerOrderList from "./screens/orderManagement/CustomerOrderList";
+import AdminOrderList from "./screens/orderManagement/AdminOrderList";
+import AdminUpdateOrder from "./screens/orderManagement/AdminUpdateOrder";
 
 const App = () => {
 	return (
 		<BrowserRouter>
 			<Header />
 			<main>
+				<Route path="/login-select" component={LoginSelectorScreen} exact />
 				<Route path="/admin-login" component={AdminLogin} />
 				<Route path="/customer-login" component={CustomerLogin} />
 				<Route path="/vendor-login" component={VendorLogin} />
@@ -69,6 +73,9 @@ const App = () => {
 				<Route path="/customer-cart" component={CartView} exact />
 				<Route path="/customer-review-create/:id" component={ReviewCustomerCreate} exact />
 				<Route path="/product-review-list/:id" component={ReviewList} exact />
+				<Route path="/customer-orders" component={CustomerOrderList} exact />
+				<Route path="/admin-orders" component={AdminOrderList} exact />
+				<Route path="/update-order/:id" component={AdminUpdateOrder} exact />
 			</main>
 			<Footer />
 		</BrowserRouter>

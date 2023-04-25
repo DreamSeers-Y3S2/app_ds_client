@@ -113,7 +113,7 @@ const CustomerProductView = () => {
 												backgroundColor: "#f0fff0",
 												borderWidth: "5px",
 												borderColor: "#087830",
-												height: "500px",
+												height: "550px",
 												width: "340px",
 											}}
 										>
@@ -125,7 +125,7 @@ const CustomerProductView = () => {
 													style={{
 														borderRadius: "0px",
 														width: "100px",
-														height: "250px",
+														height: "300px",
 													}}
 												/>
 											</MDBRipple>
