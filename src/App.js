@@ -37,6 +37,7 @@ import CustomerOrderList from "./screens/orderManagement/CustomerOrderList";
 import AdminOrderList from "./screens/orderManagement/AdminOrderList";
 import AdminUpdateOrder from "./screens/orderManagement/AdminUpdateOrder";
 import StripeContainer from "./screens/CardPayment/StripeContainer";
+import DeliveriesCreate from "./screens/deliveryManagement/DeliveriesCreate";
 
 const App = () => {
 	return (
@@ -78,6 +79,7 @@ const App = () => {
 				<Route path="/admin-orders" component={AdminOrderList} exact />
 				<Route path="/update-order/:id" component={AdminUpdateOrder} exact />
 				<Route path="/payment" component={StripeContainer} exact />
+				<Route path="/delivery-create" component={DeliveriesCreate} exact />
 			</main>
 			<Footer />
 		</BrowserRouter>
