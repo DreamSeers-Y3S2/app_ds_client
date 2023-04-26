@@ -33,6 +33,9 @@ export default function AdminUpdateOrder({ match, history }) {
 				<MainScreen title="">
 					<br></br>
 					<br></br>
+					<br></br>
+					<h1 style={{ fontWeight: "400", fontSize: "50px" }}>UPDATE ORDER STATUS</h1>
+					<br></br>
 
 					<Button
 						variant="success"
@@ -50,15 +53,15 @@ export default function AdminUpdateOrder({ match, history }) {
 					<br></br>
 					<br></br>
 					<br></br>
+
 					<Card
 						style={{
 							width: "60%",
 							borderWidth: 0,
-							padding: 15,
 							outline: "none",
-							marginLeft: 300,
-							background: "rgba(231, 238, 238, 0.8)",
-							borderRadius: 45,
+							marginLeft: 150,
+							background: "black",
+							borderRadius: 0,
 						}}
 					>
 						<Card.Body>
@@ -68,7 +71,8 @@ export default function AdminUpdateOrder({ match, history }) {
 								<Form.Group controlId="reply">
 									<Form.Label
 										style={{
-											fontSize: 25,
+											fontSize: 20,
+											color: "white",
 										}}
 									>
 										Status
@@ -86,7 +90,7 @@ export default function AdminUpdateOrder({ match, history }) {
 								</Form.Group>
 
 								{loading && <Loading size={50} />}
-								<Button style={{ fontSize: 15, marginTop: 10 }} type="submit" variant="primary">
+								<Button style={{ fontSize: 15, marginTop: 10, borderRadius: "0px" }} type="submit" variant="primary">
 									Submit
 								</Button>
 							</Form>

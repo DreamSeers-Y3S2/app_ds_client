@@ -26,18 +26,19 @@ export default function AdminOrderList() {
 		return (
 			<div className="orderAdminList">
 				<br></br>
-				<MainScreen title={`Order List..`}>
+				<MainScreen title="">
 					<div
 						style={{
 							minHeight: 700,
-							marginLeft: "20%",
-							marginRight: "20%",
 							marginBottom: "100px",
 						}}
 					>
+						<br></br>
+						<h1 style={{ fontWeight: "400", fontSize: "50px" }}>ORDER LIST</h1>
+						<br></br>
 						{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
 						{loading && <Loading />}
-						<Table style={{ background: "white", marginTop: 50, borderRadius: 10 }}>
+						<Table style={{ background: "white", borderRadius: 10, width: "1000px" }}>
 							<>
 								<tbody>
 									{orders?.reverse().map((order) => (
