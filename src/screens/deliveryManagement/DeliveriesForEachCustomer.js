@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";

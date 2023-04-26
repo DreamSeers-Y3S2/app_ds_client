@@ -59,6 +59,7 @@ import {
 	customerOrderListReducer,
 	adminOrderListReducer,
 	orderUpdateStatusReducer,
+	customerOrderUpdateStatusReducer,
 } from "./reducers/orderManagementReducers/orderReducer";
 
 import {
@@ -116,6 +117,7 @@ const reducer = combineReducers({
 	customerOrderList: customerOrderListReducer,
 	adminOrderList: adminOrderListReducer,
 	orderUpdateStatus: orderUpdateStatusReducer,
+	customerOrderStatus: customerOrderUpdateStatusReducer,
 
 	customerDeliveryList: deliveryListForCustomerReducer,
 	adminDeliveryList: deliveryListForAdminReducer,

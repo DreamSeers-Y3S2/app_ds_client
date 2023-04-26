@@ -1,4 +1,4 @@
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
@@ -78,7 +78,7 @@ export default function CustomerOrderList() {
 														borderRadius: 0,
 														border: "3px solid white",
 													}}
-													disabled={order.status === "pending"}
+													disabled={order.status === "pending" || order.status === "paid"}
 												>
 													{order.status}
 												</Button>
