@@ -78,8 +78,8 @@ const App = () => {
 				<Route path="/customer-orders" component={CustomerOrderList} exact />
 				<Route path="/admin-orders" component={AdminOrderList} exact />
 				<Route path="/update-order/:id" component={AdminUpdateOrder} exact />
-				<Route path="/payment" component={StripeContainer} exact />
-				<Route path="/delivery-create" component={DeliveriesCreate} exact />
+				<Route path="/payment/:id" component={StripeContainer} exact />
+				<Route path="/delivery-create/:id" component={DeliveriesCreate} exact />
 			</main>
 			<Footer />
 		</BrowserRouter>

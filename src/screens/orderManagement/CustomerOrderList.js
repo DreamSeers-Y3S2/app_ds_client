@@ -70,8 +70,9 @@ export default function CustomerOrderList() {
 												{order.total}
 											</td>
 											<td>
-												<Link to="/payment">
+												
 													<Button
+													href={`/payment/${order._id}`}
 														style={{
 															fontSize: 15,
 															backgroundColor: "red",
@@ -82,7 +83,7 @@ export default function CustomerOrderList() {
 													>
 														{order.status}
 													</Button>
-												</Link>
+												
 											</td>
 										</tr>
 									))}

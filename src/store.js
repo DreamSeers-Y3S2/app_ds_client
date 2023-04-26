@@ -62,10 +62,12 @@ import {
 } from "./reducers/orderManagementReducers/orderReducer";
 
 import {
-	DeliveryCreateReducer,
-	DeliveryUpdateReducer,
-	DeliveryForEachReducer,
-	DeliveryGetByIDReducer,
+	deliveryListForCustomerReducer,
+	deliveryListForAdminReducer,
+	deliveryCreateReducer,
+	deliveryUpdateReducer,
+	deliveryGetByIdReducer,
+	deliveryUpdateByIdReducer,
 } from "./reducers/deliveryManagementReducers/deliveriesReducer";
 
 const reducer = combineReducers({
@@ -115,7 +117,12 @@ const reducer = combineReducers({
 	adminOrderList: adminOrderListReducer,
 	orderUpdateStatus: orderUpdateStatusReducer,
 
-	Delivery_Create:DeliveryCreateReducer,
+	customerDeliveryList:deliveryListForCustomerReducer,
+	adminDeliveryList:deliveryListForAdminReducer,
+	deliveryCreate:deliveryCreateReducer,
+	deliveryUpdate:deliveryUpdateReducer,
+	deliveryViewById:deliveryGetByIdReducer,
+	deliveryUpdateById:deliveryUpdateByIdReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo") ? JSON.parse(localStorage.getItem("adminInfo")) : null;

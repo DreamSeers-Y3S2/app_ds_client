@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading";
-import { DeliveryCreateAction } from "../../actions/deliveryManagementActions/deliveriesAction";
+import { createDeliveryAction } from "../../actions/deliveryManagementActions/deliveriesAction";
+import {authHeader} from "../../actions/userManagementActions/customerActions"
 import ErrorMessage from "../../components/ErrorMessage";
 import MainScreen from "../../components/MainScreen";
 import axios from "axios";
@@ -17,7 +18,9 @@ export default function DeliveriesCreate({ match, history }) {
 
 	useEffect(() => {
 		const fetching = async () => {
-			const { data } = await axios.get(`${API_ENDPOINT}/get-customer-orders/6446b7a83ba3bed9813b90ab`);
+			const { data } = await axios.get(`${API_ENDPOINT}/orders/get-customer-orders/6446b7a83ba3bed9813b90ab`,{
+				headers: authHeader()
+			});
 			setOrderId(data._id);
 		};
 		fetching();
@@ -27,8 +30,8 @@ export default function DeliveriesCreate({ match, history }) {
 	const customer_Login = useSelector((state) => state.customer_Login);
 	const { customerInfo } = customer_Login;
 
-	const Delivery_Create = useSelector((state) => state.Delivery_Create);
-	const { loading, error } = Delivery_Create;
+	const deliveryCreate = useSelector((state) => state.deliveryCreate);
+	const { loading, error } = deliveryCreate;
 
 	
     const [customerName, setCustomerName] = useState(customerInfo.name);
@@ -51,7 +54,7 @@ export default function DeliveriesCreate({ match, history }) {
 		// console.log(sendingData)
 
 		dispatch(
-			DeliveryCreateAction(
+			createDeliveryAction(
 				orderId,
 				customerName,
 				customerEmail,
