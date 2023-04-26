@@ -117,12 +117,12 @@ const reducer = combineReducers({
 	adminOrderList: adminOrderListReducer,
 	orderUpdateStatus: orderUpdateStatusReducer,
 
-	customerDeliveryList:deliveryListForCustomerReducer,
-	adminDeliveryList:deliveryListForAdminReducer,
-	deliveryCreate:deliveryCreateReducer,
-	deliveryUpdate:deliveryUpdateReducer,
-	deliveryViewById:deliveryGetByIdReducer,
-	deliveryUpdateById:deliveryUpdateByIdReducer,
+	customerDeliveryList: deliveryListForCustomerReducer,
+	adminDeliveryList: deliveryListForAdminReducer,
+	deliveryCreate: deliveryCreateReducer,
+	deliveryUpdateStatus: deliveryUpdateReducer,
+	deliveryViewById: deliveryGetByIdReducer,
+	deliveryUpdateById: deliveryUpdateByIdReducer,
 });
 
 const adminInfoFromStorage = localStorage.getItem("adminInfo") ? JSON.parse(localStorage.getItem("adminInfo")) : null;

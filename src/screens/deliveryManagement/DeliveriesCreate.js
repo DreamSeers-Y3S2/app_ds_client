@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { createDeliveryAction } from "../../actions/deliveryManagementActions/deliveriesAction";
-import {authHeader} from "../../actions/userManagementActions/customerActions"
 import ErrorMessage from "../../components/ErrorMessage";
 import MainScreen from "../../components/MainScreen";
-import axios from "axios";
-import { API_ENDPOINT } from "../../config";
 
 export default function DeliveriesCreate({ match, history }) {
-	const [orderId, setOrderId] = useState("");
-    const [deliveryServiceName, setDeliveryServiceName] = useState("");
-     const [deliveryServiceEmail, setDeliveryServiceEmail] = useState("");
-    const [deliveryServicePhone, setDeliveryServicePhone] = useState("");
-     const [status, setStatus] = useState("");
-
-	useEffect(() => {
-		const fetching = async () => {
-			const { data } = await axios.get(`${API_ENDPOINT}/orders/get-customer-orders/6446b7a83ba3bed9813b90ab`,{
-				headers: authHeader()
-			});
-			setOrderId(data._id);
-		};
-		fetching();
-	}, [match.params.id]);
+	const orderID = useParams();
 
 	const dispatch = useDispatch();
 	const customer_Login = useSelector((state) => state.customer_Login);
@@ -33,46 +17,60 @@ export default function DeliveriesCreate({ match, history }) {
 	const deliveryCreate = useSelector((state) => state.deliveryCreate);
 	const { loading, error } = deliveryCreate;
 
-	
-    const [customerName, setCustomerName] = useState(customerInfo.name);
-    const [customerEmail, setCustomerEmail] = useState(customerInfo.email);
-    const [customerPhone, setCustomerPhone] = useState(customerInfo.telephone);
-  
+	const [customerName] = useState(customerInfo.name);
+	const [customerEmail] = useState(customerInfo.email);
+	const [customerPhone] = useState(customerInfo.telephone);
+	const [order] = useState(orderID.id);
+	const customerId = useState(customerInfo._id);
+	const str = customerId.toString();
+	const customer = str.split(",").shift();
+
+	const [deliveryServiceName, setDeliveryServiceName] = useState("");
+	const [deliveryServiceEmail, setDeliveryServiceEmail] = useState("");
+	const [deliveryServicePhone, setDeliveryServicePhone] = useState("");
+	const [deliveryStatus, setDeliveryStatus] = useState("Processing");
 
 	const resetHandler = () => {
-		setCustomerName("");
-		setCustomerEmail("");
-		setCustomerPhone("");
 		setDeliveryServiceName("");
-        setDeliveryServicePhone("");
-        setStatus("");
+		setDeliveryServicePhone("");
 	};
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		// const sendingData = { productId, email, reviewName, reviewTittle, reviewDescription, rating };
-		// console.log(sendingData)
+		const sendingData = {
+			order,
+			customer,
+			customerName,
+			customerEmail,
+			customerPhone,
+			deliveryServiceName,
+			deliveryServiceEmail,
+			deliveryServicePhone,
+			deliveryStatus,
+		};
+		console.log(sendingData);
 
 		dispatch(
 			createDeliveryAction(
-				orderId,
+				order,
+				customer,
 				customerName,
 				customerEmail,
 				customerPhone,
 				deliveryServiceName,
+				deliveryServiceEmail,
 				deliveryServicePhone,
-				status
+				deliveryStatus
 			)
 		);
 
 		resetHandler();
-		// history.push("/");
 	};
 
 	if (customerInfo) {
 		return (
 			<div className="DeliveriesBackgroundCreate">
-				<MainScreen title={"Enter Your Deliveries"}>
+				<MainScreen title={"Enter Your Delivery Preferences"}>
 					<Button
 						variant="success"
 						style={{
@@ -115,19 +113,21 @@ export default function DeliveriesCreate({ match, history }) {
 											fontSize: 18,
 										}}
 										type="orderId"
-										value={orderId}
+										value={order}
 										readOnly
 									/>
-
-									<Form.Group controlId="Name">
-										<Form.Label>Name</Form.Label>
-										<Form.Control value={customerInfo.name} placeholder="Enter Your Name" readOnly />
-									</Form.Group>
 								</Form.Group>
+								<br></br>
+								<Form.Group controlId="Name">
+									<Form.Label>Name</Form.Label>
+									<Form.Control value={customerInfo.name} placeholder="Enter Your Name" readOnly />
+								</Form.Group>
+								<br></br>
 								<Form.Group controlId="email">
 									<Form.Label>Email</Form.Label>
 									<Form.Control type="email" value={customerInfo.email} placeholder="Enter  Your Email" readOnly />
 								</Form.Group>
+								<br></br>
 								<Form.Group controlId="email">
 									<Form.Label>Phone Number</Form.Label>
 									<Form.Control
@@ -137,52 +137,72 @@ export default function DeliveriesCreate({ match, history }) {
 										readOnly
 									/>
 								</Form.Group>
-
+								<br></br>
 								<Form.Group controlId="deliveryServiceName">
 									<Form.Label>Delivery Service Name</Form.Label>
-									<Form.Control
-										type="deliveryServiceName"
-										value={deliveryServiceName}
-										placeholder="Enter Your delivery Tittle "
-										onChange={(e) => setDeliveryServiceName(e.target.value)}
-										required
-									/>
-								</Form.Group>
-								<Form.Group controlId="deliveryServiceEmail">
-									<Form.Label> delivery Service delivery Email</Form.Label>
-									<Form.Control
-										type="Email"
-										value={deliveryServiceEmail}
-										placeholder="Enter the Description"
-										onChange={(e) => setDeliveryServiceEmail(e.target.value)}
-										required
-									/>
-								</Form.Group>
-								<Form.Group controlId="deliveryServicePhone">
-									<Form.Label> delivery Service Phone</Form.Label>
-									<Form.Control
-										type="deliveryServicePhone"
-										value={deliveryServicePhone}
-										placeholder="Enter the Description"
-										onChange={(e) => setDeliveryServicePhone(e.target.value)}
-										required
-									/>
-								</Form.Group>
-
-								<div className="form-group">
-									<label className="status">status</label>
 									<select
 										className="form-control"
-										id="status"
-										value={status}
-										onChange={(e) => setStatus(e.target.value)}
+										id="deleveryServiceName"
+										value={deliveryServiceName}
+										onChange={(e) => setDeliveryServiceName(e.target.value)}
 										required
 									>
-										<option>Select Your Rating</option>
-										<option value="Approve">Approve</option>
-										<option value="Cancel">Cancel </option>
+										<option>Select Your Preffered Delivery Partner</option>
+										<option value="DHL">DHL</option>
+										<option value="Eco Air">Eco Air</option>
+										<option value="Pick Me">Pick Me</option>
+										<option value="Uber">Uber</option>
 									</select>
-								</div>
+								</Form.Group>
+								<br></br>
+								<Form.Group controlId="deliveryServiceEmail">
+									<Form.Label> Delivery Service Email</Form.Label>
+									<select
+										className="form-control"
+										id="deleveryServiceMail"
+										value={deliveryServiceEmail}
+										onChange={(e) => setDeliveryServiceEmail(e.target.value)}
+										required
+									>
+										<option>Select Delivery Partner Mail</option>
+										<option value="dhlshipping@co.lk">DHL - dhlshipping@co.lk</option>
+										<option value="ecoshipping@co.lk">Eco Air - ecoshipping@co.lk</option>
+										<option value="pickmedrops@pickme.com">Pick Me - pickmedrops@pickme.com</option>
+										<option value="uberconnect@uberblog.com">Uber - uberconnect@uberblog.com</option>
+									</select>
+								</Form.Group>
+								<br></br>
+								<Form.Group controlId="deliveryServicePhone">
+									<Form.Label> Delivery Service Phone</Form.Label>
+									<select
+										className="form-control"
+										id="deleveryServiceTelephone"
+										value={deliveryServicePhone}
+										onChange={(e) => setDeliveryServicePhone(e.target.value)}
+										required
+									>
+										<option>Select Delivery Partner Phone</option>
+										<option value="0777896532">DHL - 0777896532</option>
+										<option value="0118956556">Eco Air - 0118956556</option>
+										<option value="0115896236">Pick Me - 0115896236</option>
+										<option value="0775689565">Uber - 0775689565</option>
+									</select>
+								</Form.Group>
+								<br></br>
+								<Form.Group controlId="status">
+									<Form.Label>Status</Form.Label>
+									<select
+										className="form-control"
+										id="deleveryStatus"
+										value={deliveryStatus}
+										onChange={(e) => setDeliveryStatus(e.target.value)}
+										required
+									>
+										<option value="Processing">Processing</option>
+									</select>
+								</Form.Group>
+
+								<br></br>
 								<br></br>
 
 								{loading && <Loading size={50} />}

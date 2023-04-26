@@ -49,7 +49,7 @@ button.pay:active {
 	transform: scale(0.99);
 }
 
-.payContainer{
+.payContainer {
 	width: 90%;
 	margin: 0 auto;
 	margin-top: 50px;

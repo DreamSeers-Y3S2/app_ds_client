@@ -19,6 +19,7 @@ import swal from "sweetalert";
 export const createDeliveryAction =
 	(
 		order,
+		customer,
 		customerName,
 		customerEmail,
 		customerPhone,
@@ -27,14 +28,27 @@ export const createDeliveryAction =
 		deliveryServicePhone,
 		status
 	) =>
-	async (dispatch, getState) => {
+	async (dispatch) => {
 		try {
 			dispatch({
 				type: CREATE_DELIVERY_REQUEST,
 			});
-
-			const { data } = await axios.post(`${API_ENDPOINT}/delivery/create`, {
+			const dt = {
 				order,
+				customer,
+				customerName,
+				customerEmail,
+				customerPhone,
+				deliveryServiceName,
+				deliveryServiceEmail,
+				deliveryServicePhone,
+				status,
+			};
+			console.log(dt);
+
+			const { data } = await axios.post(`${API_ENDPOINT}/deliveries/delivery/create`, {
+				order,
+				customer,
 				customerName,
 				customerEmail,
 				customerPhone,
@@ -56,10 +70,9 @@ export const createDeliveryAction =
 				button: false,
 			});
 
-			// setTimeout(function () {
-			// 	window.location.href = "/customer-orders";
-			// 	dispatch(deleteAllCartAction(customerInfo._id));
-			// }, 2000);
+			setTimeout(function () {
+				window.location.href = "/customer-deliveries";
+			}, 2000);
 		} catch (error) {
 			const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 			dispatch({
@@ -69,78 +82,76 @@ export const createDeliveryAction =
 		}
 	};
 
-	export const deliveriesListForCustomerAction = (id) => async (dispatch, getState) => {
-		try {
-			dispatch({
-				type: DELIVERY_LIST_FOR_CUSTOMER_REQUEST,
-			});
-	
-			const { data } = await axios.get(`${API_ENDPOINT}/delivery/order/get/${id}`);
-	
-			dispatch({
-				type: DELIVERY_LIST_FOR_CUSTOMER_SUCCESS,
-				payload: data,
-			});
-		} catch (error) {
-			const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-			dispatch({
-				type: DELIVERY_LIST_FOR_CUSTOMER_FAIL,
-				payload: message,
-			});
-		}
-	};
+export const deliveriesListForCustomerAction = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: DELIVERY_LIST_FOR_CUSTOMER_REQUEST,
+		});
 
-	export const deliveriesListForAdminAction = () => async (dispatch, getState) => {
-		try {
-			dispatch({
-				type: DELIVERY_LIST_FOR_ADMIN_REQUEST,
-			});
-	
-			const { data } = await axios.get(`${API_ENDPOINT}/delivery`);
-	
-			dispatch({
-				type: DELIVERY_LIST_FOR_ADMIN_SUCCESS,
-				payload: data,
-			});
-		} catch (error) {
-			const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-			dispatch({
-				type: DELIVERY_LIST_FOR_ADMIN_FAIL,
-				payload: message,
-			});
-		}
-	};
+		const { data } = await axios.get(`${API_ENDPOINT}/deliveries/delivery/customer/all/${id}`);
 
-	export const updateDeliveryStatusAction = (id, status) => async (dispatch, getState) => {
-		try {
-			dispatch({
-				type: UPDATE_DELIVERY_REQUEST,
-			});
-	
-			
-			const { data } = await axios.put(`${API_ENDPOINT}/delivery/${id}`, { status });
-	
-			dispatch({
-				type: UPDATE_DELIVERY_SUCCESS,
-				payload: data,
-			});
-			swal({
-				title: "Success !!!",
-				text: "Orders status is updated",
-				icon: "success",
-				timer: 2000,
-				button: false,
-			});
-	
-			// setTimeout(function () {
-			// 	window.location.href = "/admin-orders";
-			// }, 2000);
-		} catch (error) {
-			const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-			dispatch({
-				type: UPDATE_DELIVERY_FAIL,
-				payload: message,
-			});
-		}
-	};
-	
+		dispatch({
+			type: DELIVERY_LIST_FOR_CUSTOMER_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+		dispatch({
+			type: DELIVERY_LIST_FOR_CUSTOMER_FAIL,
+			payload: message,
+		});
+	}
+};
+
+export const deliveriesListForAdminAction = () => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: DELIVERY_LIST_FOR_ADMIN_REQUEST,
+		});
+
+		const { data } = await axios.get(`${API_ENDPOINT}/deliveries/delivery/all`);
+
+		dispatch({
+			type: DELIVERY_LIST_FOR_ADMIN_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+		dispatch({
+			type: DELIVERY_LIST_FOR_ADMIN_FAIL,
+			payload: message,
+		});
+	}
+};
+
+export const updateDeliveryStatusAction = (id, status) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: UPDATE_DELIVERY_REQUEST,
+		});
+
+		const { data } = await axios.put(`${API_ENDPOINT}/deliveries/delivery/get/${id}`, { status });
+
+		dispatch({
+			type: UPDATE_DELIVERY_SUCCESS,
+			payload: data,
+		});
+		swal({
+			title: "Success !!!",
+			text: "Orders status is updated",
+			icon: "success",
+			timer: 2000,
+			button: false,
+		});
+
+		setTimeout(function () {
+			window.location.href = "/admin-deliveries";
+		}, 2000);
+	} catch (error) {
+		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+		dispatch({
+			type: UPDATE_DELIVERY_FAIL,
+			payload: message,
+		});
+	}
+};

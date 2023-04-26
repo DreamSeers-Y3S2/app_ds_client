@@ -1,4 +1,4 @@
-import{
+import {
 	DELIVERY_LIST_FOR_CUSTOMER_REQUEST,
 	DELIVERY_LIST_FOR_CUSTOMER_SUCCESS,
 	DELIVERY_LIST_FOR_CUSTOMER_FAIL,
@@ -6,7 +6,7 @@ import{
 	DELIVERY_LIST_FOR_ADMIN_SUCCESS,
 	DELIVERY_LIST_FOR_ADMIN_FAIL,
 	CREATE_DELIVERY_REQUEST,
-    CREATE_DELIVERY_SUCCESS,
+	CREATE_DELIVERY_SUCCESS,
 	CREATE_DELIVERY_FAIL,
 	UPDATE_DELIVERY_REQUEST,
 	UPDATE_DELIVERY_SUCCESS,
@@ -17,7 +17,7 @@ import{
 	DELIVERY_UPDATE_BY_ID_REQUEST,
 	DELIVERY_UPDATE_BY_ID_SUCCESS,
 	DELIVERY_UPDATE_BY_ID_FAIL,
-} from "../../constants/deliveryManagementConstants/deliveriesConstants"
+} from "../../constants/deliveryManagementConstants/deliveriesConstants";
 
 export const deliveryListForCustomerReducer = (state = { deliveries: [] }, action) => {
 	switch (action.type) {
@@ -71,7 +71,7 @@ export const deliveryUpdateReducer = (state = {}, action) => {
 			return state;
 	}
 };
-	
+
 export const deliveryGetByIdReducer = (state = {}, action) => {
 	switch (action.type) {
 		case DELIVERY_VIEW_BY_ID_REQUEST:

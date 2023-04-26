@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
@@ -32,6 +33,9 @@ export default function PaymentForm() {
 	const elements = useElements();
 	const [isSend, setisSend] = useState(false);
 
+	const orderId = useParams();
+	console.log(orderId);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -56,7 +60,7 @@ export default function PaymentForm() {
 						footer: '<a href="/buyerProfile">View Your Orders</a>',
 					}).then((result) => {
 						if (result.isConfirmed) {
-							window.location.href = "/delivery-create";
+							window.location.href = `/delivery-create/${orderId}`;
 						}
 					});
 				}
@@ -127,6 +131,9 @@ export default function PaymentForm() {
 					<br />
 				</form>
 			</div>
+			<br></br>
+			<br></br>
+			<br></br>
 		</>
 	);
 }

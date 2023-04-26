@@ -120,6 +120,20 @@ const AdminLandingScreen = ({ history }) => {
 										</Button>
 									</Link>
 								</div>
+								<br></br>
+								<div>
+									<Link to="/admin-deliveries">
+										<Button
+											id="landingBtn"
+											variant="success"
+											size="lg"
+											className="landingbutton"
+											style={{ width: 350, height: 75 }}
+										>
+											Deliveries Management
+										</Button>
+									</Link>
+								</div>
 
 								<br></br>
 							</div>
