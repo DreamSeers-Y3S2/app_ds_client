@@ -25,6 +25,7 @@ import axios from "axios";
 import { API_ENDPOINT } from "../../config";
 import swal from "sweetalert";
 
+//adding auth header for vendor
 export function authHeaderForVendor() {
 	let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
 
@@ -35,6 +36,7 @@ export function authHeaderForVendor() {
 	}
 }
 
+// adding auth header for admin
 export function authHeaderForAdmin() {
 	let admin = JSON.parse(localStorage.getItem("adminInfo"));
 
@@ -45,6 +47,7 @@ export function authHeaderForAdmin() {
 	}
 }
 
+// get product list for vendor action
 export const productsListForVendor = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -61,6 +64,7 @@ export const productsListForVendor = () => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/items/products/vendor/product/get`, config);
 
 		dispatch({
@@ -76,6 +80,7 @@ export const productsListForVendor = () => async (dispatch, getState) => {
 	}
 };
 
+// get product list for admin action
 export const productsListForAdmin = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -92,6 +97,7 @@ export const productsListForAdmin = () => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/items/products/admin/product/get`, config);
 
 		dispatch({
@@ -107,6 +113,7 @@ export const productsListForAdmin = () => async (dispatch, getState) => {
 	}
 };
 
+// create a product action
 export const createProduct =
 	(
 		vendorEmail,
@@ -141,6 +148,7 @@ export const createProduct =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.post(
 				`${API_ENDPOINT}/items/products/vendor/product/add`,
 				{
@@ -185,6 +193,7 @@ export const createProduct =
 		}
 	};
 
+// upadate product by vendor action
 export const updateProductByVendor =
 	(
 		id,
@@ -220,6 +229,7 @@ export const updateProductByVendor =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.put(
 				`${API_ENDPOINT}/items/products/vendor/product/get/${id}`,
 				{
@@ -254,6 +264,7 @@ export const updateProductByVendor =
 		}
 	};
 
+// update the product by admin action
 export const updateProductByAdmin =
 	(
 		id,
@@ -289,6 +300,7 @@ export const updateProductByAdmin =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.put(
 				`${API_ENDPOINT}/items/products/vendor/product/get/${id}`,
 				{
@@ -323,6 +335,7 @@ export const updateProductByAdmin =
 		}
 	};
 
+// delete product by vendor action
 export const deleteProductByVendor = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -339,6 +352,7 @@ export const deleteProductByVendor = (id) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/items/products/vendor/product/get/${id}`, config);
 
 		dispatch({
@@ -354,6 +368,7 @@ export const deleteProductByVendor = (id) => async (dispatch, getState) => {
 	}
 };
 
+// delete product by admin  action
 export const deleteProductByAdmin = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -370,6 +385,7 @@ export const deleteProductByAdmin = (id) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/items/products/admin/product/get/${id}`, config);
 
 		dispatch({

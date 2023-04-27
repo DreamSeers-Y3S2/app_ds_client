@@ -54,18 +54,18 @@ const VendorRegisterScreen = () => {
 	const demoHandler = async (e) => {
 		e.preventDefault();
 
-		setName("Jim Halpert");
+		setName("Andy Bernard");
 		setTelephone("0778456212");
 		setHomeAddress("Colombo");
-		setEmail("jimhalpert@gmail.com");
+		setEmail("andybernard@gmail.com");
 		setPassword("test");
 		setConfirmPassword("test");
-		setBusinessName("Halpert Cosmetics");
-		setBusinessAddress("One Galle Face Mall");
-		setWebsite("www.halpertcosmetics.com");
-		setBusinessRegNumber("BIS123564");
+		setBusinessName("Bernard Cosmetics and Products");
+		setBusinessAddress("Unity Plaza");
+		setWebsite("www.bernardbeautyandcare.com");
+		setBusinessRegNumber("BIS123456");
 		setDescription(
-			"Halpert Cosmetics is a full-service company that offers private labeling & contract manufacturing of cosmetics & Skin-Care products. Our experts develop the beauty, skin care and anti-aging products. The Halpert Cosmetics marketing team studies projects while anticipating future trends. We ensure optimal scientific monitoring of raw materials and active ingredients."
+			"Bernard Cosmetics and Products has all of your beauty must-haves under one roof at very affordable prices. Browse our wide range of the latest international beauty and skincare products, and enjoy some of the best deals online."
 		);
 	};
 

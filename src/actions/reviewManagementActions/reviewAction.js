@@ -10,6 +10,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { API_ENDPOINT } from "../../config";
 
+// adding auth header for customer
 export function authHeaderForCustomer() {
 	let customer = JSON.parse(localStorage.getItem("customerInfo"));
 
@@ -20,6 +21,7 @@ export function authHeaderForCustomer() {
 	}
 }
 
+// create a review by customer action
 export const ReviewCustomerCreateAction =
 	(product, email, reviewName, reviewTittle, reviewDescription, rating) => async (dispatch, getState) => {
 		try {
@@ -36,6 +38,7 @@ export const ReviewCustomerCreateAction =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.post(
 				`${API_ENDPOINT}/rate/review/customer/review/create`,
 				{
@@ -76,12 +79,14 @@ export const ReviewCustomerCreateAction =
 		}
 	};
 
+// get review customer list action
 export const ReviewCustomerListAction = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: REVIEW_CUSTOMER_LIST_REQUEST,
 		});
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/rate/review/product/get/${id}`);
 
 		dispatch({

@@ -17,6 +17,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { API_ENDPOINT } from "../../config";
 
+// admin loggin action
 export const adminLogin = (email, password) => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_LOGIN_REQUEST });
@@ -49,6 +50,7 @@ export const adminLogin = (email, password) => async (dispatch) => {
 	}
 };
 
+//creating authheader for admin
 export function authHeader() {
 	let admin = JSON.parse(localStorage.getItem("adminInfo"));
 
@@ -59,11 +61,13 @@ export function authHeader() {
 	}
 }
 
+//admin log out action
 export const adminLogout = () => async (dispatch) => {
 	localStorage.removeItem("adminInfo");
 	dispatch({ type: ADMIN_LOGOUT });
 };
 
+//admin register to system action
 export const adminRegister = (name, telephone, address, email, password, pic) => async (dispatch) => {
 	try {
 		dispatch({ type: ADMIN_REGISTER_REQUEST });
@@ -97,7 +101,7 @@ export const adminRegister = (name, telephone, address, email, password, pic) =>
 		});
 
 		setTimeout(function () {
-			window.location.href = "/admin";
+			window.location.href = "/admin-login";
 		}, 2000);
 	} catch (error) {
 		dispatch({
@@ -107,6 +111,7 @@ export const adminRegister = (name, telephone, address, email, password, pic) =>
 	}
 };
 
+// admin to view their profile action
 export const adminViewProfile = (admin) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ADMIN_VIEW_REQUEST });
@@ -137,6 +142,7 @@ export const adminViewProfile = (admin) => async (dispatch, getState) => {
 	}
 };
 
+//admin to update their profile action
 export const adminUpdateProfile = (admin) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ADMIN_UPDATE_REQUEST });

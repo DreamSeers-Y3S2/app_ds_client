@@ -35,10 +35,10 @@ const AdminRegisterScreen = () => {
 	const demoHandler = async (e) => {
 		e.preventDefault();
 
-		setName("Michael Scott");
+		setName("Dwight Shrute");
 		setTelephone("0715689562");
 		setAddress("Colombo");
-		setEmail("michaelscott@gmail.com");
+		setEmail("dwightshrute@gmail.com");
 		setPassword("test");
 		setConfirmPassword("test");
 	};

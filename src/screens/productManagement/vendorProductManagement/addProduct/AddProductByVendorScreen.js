@@ -53,21 +53,21 @@ function AddProductByVendorScreen() {
 
 	const demoHandler = () => {
 		setVendorEmail(vendorInfo.email);
-		setTitle("Link Natural Face Cream");
+		setTitle("Dove Beauty Bar");
 		setCategory("Beauty and Personal Care");
-		setProductBrand("Link");
-		setProductCode("BC-01234");
+		setProductBrand("Dove");
+		setProductCode("BC-1224");
 		setDescription(
-			"Link Natural Face Cream has a rich herbal and ayurvedic formulation that comforts and calms your skin while you sleep. Star ingredient Orange extraction moisturizes the skin and helps to restore skin's natural glow. Natural Honey induces a powerful cell activation mechanism offering health suppleness to the skin while enhancing the circulation for greater cell turnover, giving you a youthful, bright and glowing skin."
+			"The secret to beautiful skin is moisture, and no ordinary bar hydrates like Dove. That’s because Dove isn’t soap, it’s a Beauty Bar.  While ordinary soaps can strip skin of essential moisture, Dove Beauty Bar has mild cleansers to effectively wash away dirt and germs and care beautifully. Made with our ¼ moisturizing cream, Dove Beauty Bar leaves your body, face and hands feeling soft, smooth, and radiant. You can see why we call it a Beauty Bar."
 		);
 		setPrice(1200);
 		setIngredients(
-			"Sandalwood, Pure Sandalwood Oil, Venivel (Yellow vine), Kokun Bark, Suwanda Kottan, Indian Turmeric, Velmadata."
+			"Sodium Lauroyl Isethionate, Stearic Acid, Sodium Tallowate Or Sodium Palmitate, Lauric Acid, Sodium Isethionate, Water, Sodium Stearate, Cocamidopropyl Betaine, Sodium Cocoate Or Sodium Palm Kernelate, Fragrance, Sodium Chloride, Tetrasodium Edta, Tetrasodium Etidronate, Titanium Dioxide (Ci 77891)."
 		);
-		setUsage("Apply on skin after a clean wash");
+		setUsage("Wash with gentle touch");
 		setWarnings("People who are with sesnsitive skin must have medical approval before use.");
 		setDiscountNote("5% off");
-		setDiscountPrice(1140);
+		setDiscountPrice(60);
 		setQuantity(150);
 	};
 
