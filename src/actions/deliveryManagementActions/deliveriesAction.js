@@ -28,23 +28,15 @@ export const createDeliveryAction =
 		deliveryServicePhone,
 		status
 	) =>
-	async (dispatch) => {
+	async (dispatch, getState) => {
 		try {
 			dispatch({
 				type: CREATE_DELIVERY_REQUEST,
 			});
-			const dt = {
-				order,
-				customer,
-				customerName,
-				customerEmail,
-				customerPhone,
-				deliveryServiceName,
-				deliveryServiceEmail,
-				deliveryServicePhone,
-				status,
-			};
-			console.log(dt);
+
+			const {
+				customer_Login: { customerInfo },
+			} = getState();
 
 			const { data } = await axios.post(`${API_ENDPOINT}/deliveries/delivery/create`, {
 				order,
@@ -71,7 +63,7 @@ export const createDeliveryAction =
 			});
 
 			setTimeout(function () {
-				window.location.href = "/customer-deliveries";
+				window.location.href = `/customer-deliveries/${customerInfo._id}`;
 			}, 2000);
 		} catch (error) {
 			const message = error.response && error.response.data.message ? error.response.data.message : error.message;

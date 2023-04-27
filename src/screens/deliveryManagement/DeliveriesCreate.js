@@ -80,7 +80,7 @@ export default function DeliveriesCreate({ match, history }) {
 							fontSize: 15,
 						}}
 						size="lg"
-						href={`/}`}
+						href={`/customer-deliveries/${customerInfo._id}`}
 					>
 						Back to the Deliveries List
 					</Button>

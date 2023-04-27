@@ -33,8 +33,7 @@ export default function PaymentForm() {
 	const elements = useElements();
 	const [isSend, setisSend] = useState(false);
 
-	const orderId = useParams();
-	console.log(orderId);
+	const order = useParams();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -60,7 +59,7 @@ export default function PaymentForm() {
 						footer: '<a href="/buyerProfile">View Your Orders</a>',
 					}).then((result) => {
 						if (result.isConfirmed) {
-							window.location.href = `/delivery-create/${orderId}`;
+							window.location.href = `/delivery-create/${order.id}`;
 						}
 					});
 				}
@@ -83,6 +82,7 @@ export default function PaymentForm() {
 				setisSend(true);
 				setTimeout(() => {
 					setisSend(false);
+					window.location.href = `/delivery-create/${order.id}`;
 				}, 2500);
 			})
 			.catch((error) => {
