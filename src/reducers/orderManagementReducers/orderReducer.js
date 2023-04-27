@@ -8,6 +8,9 @@ import {
 	UPDATE_ORDER_REQUEST,
 	UPDATE_ORDER_SUCCESS,
 	UPDATE_ORDER_FAIL,
+	CUSTOMER_UPDATE_ORDER_REQUEST,
+	CUSTOMER_UPDATE_ORDER_SUCCESS,
+	CUSTOMER_UPDATE_ORDER_FAIL,
 	ORDER_DETAILS_REQUEST,
 	ORDER_DETAILS_SUCCESS,
 	ORDER_DETAILS_FAIL,
@@ -62,6 +65,20 @@ export const orderUpdateStatusReducer = (state = {}, action) => {
 		case UPDATE_ORDER_SUCCESS:
 			return { loading: false, success: true };
 		case UPDATE_ORDER_FAIL:
+			return { loading: false, error: action.payload, success: false };
+
+		default:
+			return state;
+	}
+};
+
+export const customerOrderUpdateStatusReducer = (state = {}, action) => {
+	switch (action.type) {
+		case CUSTOMER_UPDATE_ORDER_REQUEST:
+			return { loading: true };
+		case CUSTOMER_UPDATE_ORDER_SUCCESS:
+			return { loading: false, success: true };
+		case CUSTOMER_UPDATE_ORDER_FAIL:
 			return { loading: false, error: action.payload, success: false };
 
 		default:

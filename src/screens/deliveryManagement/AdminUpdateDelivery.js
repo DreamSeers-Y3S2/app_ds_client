@@ -1,40 +1,37 @@
 import React, { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { updateOrderStatusAction } from "../../actions/orderManagementActions/orderAction";
+import { updateDeliveryStatusAction } from "../../actions/deliveryManagementActions/deliveriesAction";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import MainScreen from "../../components/MainScreen";
 
-export default function AdminUpdateOrder({ match, history }) {
+export default function AdminUpdateDelivery({ match, history }) {
 	const [status, setStatus] = useState("");
 
 	const dispatch = useDispatch();
 	const admin_Login = useSelector((state) => state.admin_Login);
 	const { adminInfo } = admin_Login;
 
-	const orderUpdateStatus = useSelector((state) => state.orderUpdateStatus);
-	const { loading, error } = orderUpdateStatus;
+	const deliveryUpdateStatus = useSelector((state) => state.deliveryUpdateStatus);
+	const { loading, error } = deliveryUpdateStatus;
 
 	const updateHandler = (e) => {
 		e.preventDefault();
-		dispatch(updateOrderStatusAction(match.params.id, status));
+		dispatch(updateDeliveryStatusAction(match.params.id, status));
 	};
 	if (adminInfo) {
 		return (
 			<div
 				className="adminUpdate"
 				style={{
-					minHeight: 200,
+					background: "#088395",
 				}}
 			>
 				<br></br>
 				<br></br>
 				<MainScreen title="">
 					<br></br>
-					<br></br>
-					<br></br>
-					<h1 style={{ fontWeight: "400", fontSize: "50px" }}>UPDATE ORDER STATUS</h1>
 					<br></br>
 
 					<Button
@@ -44,24 +41,24 @@ export default function AdminUpdateOrder({ match, history }) {
 							marginTop: 5,
 							fontSize: 15,
 						}}
-						href="/admin-orders"
+						href="/admin-deliveries"
 					>
 						{" "}
-						Back To Order List
+						Back To Delivery List
 					</Button>
 					<br></br>
 					<br></br>
 					<br></br>
 					<br></br>
-
 					<Card
 						style={{
 							width: "60%",
-							borderWidth: 0,
+							bdeliveryWidth: 0,
+							padding: 15,
 							outline: "none",
-							marginLeft: 150,
-							background: "black",
-							borderRadius: 0,
+							marginLeft: 300,
+							background: "rgba(231, 238, 238, 0.8)",
+							borderRadius: 45,
 						}}
 					>
 						<Card.Body>
@@ -71,8 +68,7 @@ export default function AdminUpdateOrder({ match, history }) {
 								<Form.Group controlId="reply">
 									<Form.Label
 										style={{
-											fontSize: 20,
-											color: "white",
+											fontSize: 25,
 										}}
 									>
 										Status
@@ -81,16 +77,24 @@ export default function AdminUpdateOrder({ match, history }) {
 									<br></br>
 
 									<select
-										style={{ height: "35px", width: "100%", borderRadius: 5, borderColor: "#808080", borderWidth: 0.5 }}
+										style={{
+											height: "35px",
+											width: "100%",
+											bdeliveryRadius: 5,
+											bdeliveryColor: "#808080",
+											bdeliveryWidth: 0.5,
+										}}
 										onChange={(e) => setStatus(e.target.value)}
 									>
-										<option value="pending">Pending</option>
-										<option value="confirm">Confirm</option>
+										<option value="Processing">Processing</option>
+										<option value="Dispatched">Dispatched</option>
+										<option value="Delivered">Delivered</option>
 									</select>
 								</Form.Group>
 
 								{loading && <Loading size={50} />}
-								<Button style={{ fontSize: 15, marginTop: 10, borderRadius: "0px" }} type="submit" variant="primary">
+								<br></br>
+								<Button style={{ fontSize: 15, marginTop: 10 }} type="submit" variant="primary">
 									Submit
 								</Button>
 							</Form>

@@ -3,47 +3,52 @@ import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { listCustomerOrders } from "../../actions/orderManagementActions/orderAction";
+import { deliveriesListForCustomerAction } from "../../actions/deliveryManagementActions/deliveriesAction";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import MainScreen from "../../components/MainScreen";
-import "./orderLists.css";
+import "./deliveryLists.css";
 
-export default function CustomerOrderList() {
+export default function CustomerDeliveryList({ match }) {
 	const dispatch = useDispatch();
 	const customer_Login = useSelector((state) => state.customer_Login);
 	const { customerInfo } = customer_Login;
 
-	const customerOrderList = useSelector((state) => state.customerOrderList);
-	const { loading, customerOrders, error } = customerOrderList;
+	const customerDeliveryList = useSelector((state) => state.customerDeliveryList);
+	const { loading, deliveries, error } = customerDeliveryList;
+
+	console.log(deliveries);
 
 	const history = useHistory();
 	useEffect(() => {
-		dispatch(listCustomerOrders());
-	}, [dispatch, history, customerInfo]);
+		dispatch(deliveriesListForCustomerAction(match.params.id));
+	}, [dispatch, history, customerInfo, match.params.id]);
 
 	if (customerInfo) {
 		return (
-			<div className="orderCustomerList">
+			<div className="deliveryCustomerList">
 				<br></br>
-				<MainScreen title="">
+				<MainScreen title={`Delivery List - Customer..`}>
 					<div
 						style={{
 							minHeight: 700,
 							marginBottom: "100px",
 						}}
 					>
-						<br></br>
-						<h1 style={{ fontWeight: "400", fontSize: "50px" }}>ORDER LIST</h1>
-						<br></br>
 						{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
 						{loading && <Loading />}
-						<Table style={{ background: "white", borderRadius: 10, width: "1000px" }}>
+						<Table style={{ background: "white", marginTop: 50, borderRadius: 10 }}>
 							<>
+								<th>Order ID</th>
+								<th>Customer Name</th>
+								<th>Customer Email</th>
+								<th>Customer Phone</th>
+								<th>Delivery Service</th>
+								<th>Order Status</th>
 								<tbody>
-									{customerOrders?.reverse().map((order) => (
+									{deliveries?.reverse().map((delivery) => (
 										<tr
-											key={order._id}
+											key={delivery._id}
 											style={{
 												boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
 												borderRadius: 10,
@@ -54,34 +59,48 @@ export default function CustomerOrderList() {
 													fontSize: 20,
 												}}
 											>
-												{order.orderID}
+												{delivery.orderId}
 											</td>
 											<td
 												style={{
 													fontSize: 20,
 												}}
 											>
-												{order.products}
+												{delivery.customerName}
 											</td>
 											<td
 												style={{
 													fontSize: 20,
 												}}
 											>
-												{order.total}
+												{delivery.customerEmail}
 											</td>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{delivery.customerPhone}
+											</td>
+											<td
+												style={{
+													fontSize: 20,
+												}}
+											>
+												{delivery.deliveryServiceName}
+											</td>
+
 											<td>
 												<Button
-													href={`/payment/${order._id}`}
 													style={{
 														fontSize: 15,
-														backgroundColor: "red",
+														backgroundColor: "green",
 														borderRadius: 0,
 														border: "3px solid white",
 													}}
-													disabled={order.status === "pending" || order.status === "paid"}
+													disabled={delivery.status === "pending"}
 												>
-													{order.status}
+													{delivery.status}
 												</Button>
 											</td>
 										</tr>

@@ -1,8 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
+import { customerUpdateOrderStatusAction } from "../../actions/orderManagementActions/orderAction";
 
 import "./CardPayment.css";
 import PayServices from "./paymentService";
@@ -31,6 +34,14 @@ export default function PaymentForm() {
 	const stripe = useStripe();
 	const elements = useElements();
 	const [isSend, setisSend] = useState(false);
+	const orderStatus = "paid";
+
+	const { id } = useParams();
+	const orderId = id;
+
+	const dispatch = useDispatch();
+	const customer_Login = useSelector((state) => state.customer_Login);
+	const { customerInfo } = customer_Login;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -56,7 +67,8 @@ export default function PaymentForm() {
 						footer: '<a href="/buyerProfile">View Your Orders</a>',
 					}).then((result) => {
 						if (result.isConfirmed) {
-							window.location.href = "/delivery-create";
+							dispatch(customerUpdateOrderStatusAction(orderId, orderStatus));
+							window.location.href = `/delivery-create/${orderId}`;
 						}
 					});
 				}
@@ -79,6 +91,7 @@ export default function PaymentForm() {
 				setisSend(true);
 				setTimeout(() => {
 					setisSend(false);
+					window.location.href = `/delivery-create/${orderId}`;
 				}, 2500);
 			})
 			.catch((error) => {
@@ -127,6 +140,9 @@ export default function PaymentForm() {
 					<br />
 				</form>
 			</div>
+			<br></br>
+			<br></br>
+			<br></br>
 		</>
 	);
 }

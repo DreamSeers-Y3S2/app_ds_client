@@ -35,15 +35,7 @@ export const ReviewCustomerCreateAction =
 					Authorization: `Bearer ${customerInfo.token}`,
 				},
 			};
-			const dt = {
-				product,
-				email,
-				reviewName,
-				reviewTittle,
-				reviewDescription,
-				rating,
-			};
-			console.log("data", dt);
+
 			const { data } = await axios.post(
 				`${API_ENDPOINT}/rate/review/customer/review/create`,
 				{

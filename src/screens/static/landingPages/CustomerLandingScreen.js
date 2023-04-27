@@ -7,6 +7,8 @@ import MainScreen from "../../../components/MainScreen";
 const CustomerLandingScreen = ({ history }) => {
 	const customer_Login = useSelector((state) => state.customer_Login);
 	const { customerInfo } = customer_Login;
+
+	console.log(customerInfo._id);
 	const dispatch = useDispatch();
 	const logoutHandler = () => {
 		dispatch(customerLogout());
@@ -56,6 +58,14 @@ const CustomerLandingScreen = ({ history }) => {
 										Orders
 									</Button>
 								</a>
+								<br></br>
+								<br></br>
+								<a href={`customer-deliveries/${customerInfo._id}`}>
+									<Button id="landingBtn" variant="success" size="lg" style={{ width: 350, height: 75 }}>
+										Deliveries
+									</Button>
+								</a>
+
 								<br></br>
 								<br></br>
 								<br></br>
