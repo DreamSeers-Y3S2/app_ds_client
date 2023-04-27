@@ -121,7 +121,7 @@ export const customerRegister = (name, telephone, address, email, password, pic)
 			button: false,
 		});
 		setTimeout(function () {
-			window.location.href = "/customer";
+			window.location.href = "/customer-login";
 		}, 2000);
 	} catch (error) {
 		dispatch({

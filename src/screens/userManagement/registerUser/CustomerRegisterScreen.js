@@ -35,10 +35,10 @@ const CustomerRegisterScreen = () => {
 	const demoHandler = async (e) => {
 		e.preventDefault();
 
-		setName("Pamela Beesly");
+		setName("Jan Levinson");
 		setTelephone("0778569896");
 		setAddress("Colombo");
-		setEmail("pamelabeesly@gmail.com");
+		setEmail("janlevinson@gmail.com");
 		setPassword("test");
 		setConfirmPassword("test");
 	};

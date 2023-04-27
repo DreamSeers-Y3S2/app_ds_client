@@ -88,128 +88,133 @@ const CustomerProductView = () => {
 				</div>
 				{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
 				{loading && <Loading />}
-				{cartProducts
-					?.reverse()
-					.filter((filteredNote) => filteredNote.title.includes(search))
-					.map((product) => (
-						<Grid
-							item
-							xs={12}
-							sm={5}
-							md={4}
-							key={cartProducts.indexOf(product)}
-							style={{
-								display: "inline-flex",
-								width: "600px",
-							}}
-						>
-							<MDBContainer fluid className="my-5">
-								<MDBRow className="justify-content-center">
-									<MDBCol md="12" lg="6" xl="11">
-										<MDBCard
-											style={{
-												borderRadius: "0px",
-												boxShadow: " 10px 10px 5px #f2f3f4",
-												backgroundColor: "#f0fff0",
-												borderWidth: "5px",
-												borderColor: "#087830",
-												height: "550px",
-												width: "340px",
-											}}
-										>
-											<MDBRipple rippleColor="light" rippleTag="div" className="bg-image rounded hover-overlay">
-												<MDBCardImage
-													src={product.picURL}
-													fluid
-													className="w-100"
-													style={{
-														borderRadius: "0px",
-														width: "100px",
-														height: "300px",
-													}}
-												/>
-											</MDBRipple>
-											<MDBCardBody className="pb-0">
-												<div className="d-flex justify-content-between">
-													<div>
-														<h4>{product.title}</h4>
-													</div>
-													<div>
-														<div className="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
-															<ReactStars count={5} size={15} activeColor="#20cf20" />
+				{cartProducts &&
+					cartProducts
+						.reverse()
+						.filter(
+							(filteredProducts) =>
+								filteredProducts.title.toLowerCase().includes(search.toLowerCase()) ||
+								filteredProducts.productBrand.includes(search.toLowerCase)
+						)
+						.map((product) => (
+							<Grid
+								item
+								xs={12}
+								sm={5}
+								md={4}
+								key={cartProducts.indexOf(product)}
+								style={{
+									display: "inline-flex",
+									width: "600px",
+								}}
+							>
+								<MDBContainer fluid className="my-5">
+									<MDBRow className="justify-content-center">
+										<MDBCol md="12" lg="6" xl="11">
+											<MDBCard
+												style={{
+													borderRadius: "0px",
+													boxShadow: " 10px 10px 5px #f2f3f4",
+													backgroundColor: "#f0fff0",
+													borderWidth: "5px",
+													borderColor: "#087830",
+													height: "550px",
+													width: "340px",
+												}}
+											>
+												<MDBRipple rippleColor="light" rippleTag="div" className="bg-image rounded hover-overlay">
+													<MDBCardImage
+														src={product.picURL}
+														fluid
+														className="w-100"
+														style={{
+															borderRadius: "0px",
+															width: "100px",
+															height: "300px",
+														}}
+													/>
+												</MDBRipple>
+												<MDBCardBody className="pb-0">
+													<div className="d-flex justify-content-between">
+														<div>
+															<h4>{product.title}</h4>
+														</div>
+														<div>
+															<div className="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
+																<ReactStars count={5} size={15} activeColor="#20cf20" />
+															</div>
 														</div>
 													</div>
-												</div>
-											</MDBCardBody>
-											<hr class="my-0" />
-											<MDBCardBody className="pb-0">
-												<div className="d-flex justify-content-between">
-													<h4 style={{ textDecoration: "line-through" }}>
-														<a href="#!" className="text-dark">
-															Rs {product.price}
-														</a>
-													</h4>
-													<h4 className="text-dark">Availability : {product.quantity}</h4>
-												</div>
-												<h4>{product.discountNote}</h4>
-											</MDBCardBody>
-											<hr class="my-0" />
-											<MDBCardBody className="pb-0">
-												<div className="d-flex justify-content-between align-items-center pb-2 mb-4">
-													{customerInfo ? (
-														<Button
-															onClick={() =>
-																addToCart(
-																	product.title,
-																	product.category,
-																	product.productCode,
-																	product.picURL,
-																	product.price,
-																	product.discountNote,
-																	product.discountPrice
-																)
-															}
-															disabled={product.quantity <= 0}
+												</MDBCardBody>
+												<hr class="my-0" />
+												<MDBCardBody className="pb-0">
+													<div className="d-flex justify-content-between">
+														<h4 style={{ textDecoration: "line-through" }}>
+															<a href="#!" className="text-dark">
+																Rs {product.price}
+															</a>
+														</h4>
+														<h4 className="text-dark">Availability : {product.quantity}</h4>
+													</div>
+													<h4>{product.discountNote}</h4>
+												</MDBCardBody>
+												<hr class="my-0" />
+												<MDBCardBody className="pb-0">
+													<div className="d-flex justify-content-between align-items-center pb-2 mb-4">
+														{customerInfo ? (
+															<Button
+																onClick={() =>
+																	addToCart(
+																		product.title,
+																		product.category,
+																		product.productCode,
+																		product.picURL,
+																		product.price,
+																		product.discountNote,
+																		product.discountPrice
+																	)
+																}
+																disabled={product.quantity <= 0}
+																style={{
+																	paddingRight: "5px",
+																	paddingLeft: "5px",
+																	border: "3px solid white",
+																	width: "80px",
+																	fontSize: "10px",
+																	height: "30px",
+																	borderRadius: "0px",
+																	backgroundColor: "black",
+																}}
+															>
+																Add To Cart
+															</Button>
+														) : (
+															<></>
+														)}
+														<MDBBtn
+															href={`/single-product-view/${product._id}`}
 															style={{
 																paddingRight: "5px",
 																paddingLeft: "5px",
-																border: "3px solid white",
 																width: "80px",
+																backgroundColor: "#648c11",
+																border: "3px solid white",
 																fontSize: "10px",
 																height: "30px",
 																borderRadius: "0px",
-																backgroundColor: "black",
+																borderWidth: "5px white",
 															}}
 														>
-															Add To Cart
-														</Button>
-													) : (
-														<></>
-													)}
-													<MDBBtn
-														href={`/single-product-view/${product._id}`}
-														style={{
-															paddingRight: "5px",
-															paddingLeft: "5px",
-															width: "80px",
-															backgroundColor: "#648c11",
-															border: "3px solid white",
-															fontSize: "10px",
-															height: "30px",
-															borderRadius: "0px",
-															borderWidth: "5px white",
-														}}
-													>
-														More
-													</MDBBtn>
-												</div>
-											</MDBCardBody>
-										</MDBCard>
-									</MDBCol>
-								</MDBRow>
-							</MDBContainer>
-						</Grid>
-					))}
+															More
+														</MDBBtn>
+													</div>
+												</MDBCardBody>
+											</MDBCard>
+										</MDBCol>
+									</MDBRow>
+								</MDBContainer>
+							</Grid>
+						))}
 			</MainScreen>
 			<section className="page-section " id="product">
 				<div className="container">

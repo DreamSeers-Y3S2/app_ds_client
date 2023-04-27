@@ -136,7 +136,7 @@ export const vendorRegister =
 			});
 
 			setTimeout(function () {
-				window.location.href = "/vendor";
+				window.location.href = "/vendor-login";
 			}, 2000);
 		} catch (error) {
 			dispatch({
