@@ -111,7 +111,7 @@ export default function PaymentForm() {
 					<div>
 						<label>Email to send the payment confirmation: </label> <br />
 						<input
-							class="form-control form-control-sm"
+							className="form-control form-control-sm"
 							type="email"
 							name="useremail"
 							style={{ width: "300px", borderRadius: "3px" }}
@@ -121,7 +121,7 @@ export default function PaymentForm() {
 					<div>
 						<label>Mobile number to contact about the delivery: </label> <br />
 						<input
-							class="form-control form-control-sm"
+							className="form-control form-control-sm"
 							type="tel"
 							name="user.phone"
 							style={{ width: "300px", borderRadius: "3px" }}
