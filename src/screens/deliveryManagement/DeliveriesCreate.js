@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import Loading from "../../components/Loading";
 import { createDeliveryAction } from "../../actions/deliveryManagementActions/deliveriesAction";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -29,6 +30,9 @@ export default function DeliveriesCreate({ match, history }) {
 	const [deliveryServiceEmail, setDeliveryServiceEmail] = useState("");
 	const [deliveryServicePhone, setDeliveryServicePhone] = useState("");
 	const [deliveryStatus, setDeliveryStatus] = useState("Processing");
+
+	const formDelivery = useRef();
+	const [isSend, setisSend] = useState(false);
 
 	const resetHandler = () => {
 		setDeliveryServiceName("");
@@ -65,6 +69,19 @@ export default function DeliveriesCreate({ match, history }) {
 		);
 
 		resetHandler();
+
+		emailjs
+			.sendForm("service_a0dl37h", "template_nolrmc6", formDelivery.current, "-l-yfdg2kBiYgzEht")
+			.then((result) => {
+				console.log(result.text);
+				setisSend(true);
+				setTimeout(() => {
+					setisSend(false);
+				}, 2500);
+			})
+			.catch((error) => {
+				console.log(error.text);
+			});
 	};
 
 	if (customerInfo) {
@@ -103,7 +120,7 @@ export default function DeliveriesCreate({ match, history }) {
 						<Card.Body>
 							<br></br>
 
-							<Form onSubmit={submitHandler}>
+							<Form onSubmit={submitHandler} ref={formDelivery}>
 								{error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
 								<Form.Group controlId="">
 									<Form.Label>Order Id</Form.Label>
@@ -125,7 +142,13 @@ export default function DeliveriesCreate({ match, history }) {
 								<br></br>
 								<Form.Group controlId="email">
 									<Form.Label>Email</Form.Label>
-									<Form.Control type="email" value={customerInfo.email} placeholder="Enter  Your Email" readOnly />
+									<Form.Control
+										type="email"
+										value={customerInfo.email}
+										placeholder="Enter  Your Email"
+										name="useremail"
+										readOnly
+									/>
 								</Form.Group>
 								<br></br>
 								<Form.Group controlId="email">
@@ -145,6 +168,7 @@ export default function DeliveriesCreate({ match, history }) {
 										id="deleveryServiceName"
 										value={deliveryServiceName}
 										onChange={(e) => setDeliveryServiceName(e.target.value)}
+										name="servicename"
 										required
 									>
 										<option>Select Your Preffered Delivery Partner</option>
@@ -179,6 +203,7 @@ export default function DeliveriesCreate({ match, history }) {
 										id="deleveryServiceTelephone"
 										value={deliveryServicePhone}
 										onChange={(e) => setDeliveryServicePhone(e.target.value)}
+										name="servicemobile"
 										required
 									>
 										<option>Select Delivery Partner Phone</option>

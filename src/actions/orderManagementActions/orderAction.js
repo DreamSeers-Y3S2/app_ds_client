@@ -8,6 +8,9 @@ import {
 	UPDATE_ORDER_REQUEST,
 	UPDATE_ORDER_SUCCESS,
 	UPDATE_ORDER_FAIL,
+	CUSTOMER_UPDATE_ORDER_REQUEST,
+	CUSTOMER_UPDATE_ORDER_SUCCESS,
+	CUSTOMER_UPDATE_ORDER_FAIL,
 	ORDER_DETAILS_REQUEST,
 	ORDER_DETAILS_SUCCESS,
 	ORDER_DETAILS_FAIL,
@@ -167,6 +170,37 @@ export const updateOrderStatusAction = (id, status) => async (dispatch, getState
 		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 		dispatch({
 			type: UPDATE_ORDER_FAIL,
+			payload: message,
+		});
+	}
+};
+
+export const customerUpdateOrderStatusAction = (id, status) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: CUSTOMER_UPDATE_ORDER_REQUEST,
+		});
+
+		const {
+			customer_Login: { customerInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${customerInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(`${API_ENDPOINT}/orders/order/order-customer-status/${id}`, { status }, config);
+
+		dispatch({
+			type: CUSTOMER_UPDATE_ORDER_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		const message = error.response && error.response.data.message ? error.response.data.message : error.message;
+		dispatch({
+			type: CUSTOMER_UPDATE_ORDER_FAIL,
 			payload: message,
 		});
 	}
