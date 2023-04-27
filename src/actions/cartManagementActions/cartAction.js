@@ -22,6 +22,7 @@ import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import swal from "sweetalert";
 
+// Action to get the all products for customer view
 export const listCartProducts = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -43,6 +44,7 @@ export const listCartProducts = () => async (dispatch, getState) => {
 	}
 };
 
+// Action to display all the cart items of a particular customer
 export const listCart = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -74,6 +76,7 @@ export const listCart = () => async (dispatch, getState) => {
 	}
 };
 
+// Action to add a product to the cart
 export const createCartAction =
 	(customer, productName, category, productCode, picURL, price, discountNote, discountPrice, quantity) =>
 	async (dispatch, getState) => {
@@ -132,6 +135,7 @@ export const createCartAction =
 		}
 	};
 
+// Action to update the quantity of a cart item
 export const updateCartAction = (id, quantity) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -174,6 +178,7 @@ export const updateCartAction = (id, quantity) => async (dispatch, getState) => 
 	}
 };
 
+// Action to delete one cart item
 export const deleteCartAction = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -216,6 +221,7 @@ export const deleteCartAction = (id) => async (dispatch, getState) => {
 	}
 };
 
+// Action to delete all cart items from the cart when checkout
 export const deleteAllCartAction = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({

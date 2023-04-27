@@ -20,6 +20,7 @@ import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import swal from "sweetalert";
 
+// Action to create an order
 export const createOrderAction = (customer, total) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -70,6 +71,7 @@ export const createOrderAction = (customer, total) => async (dispatch, getState)
 	}
 };
 
+// Action to get all orders of a particular customer
 export const listCustomerOrders = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -101,6 +103,7 @@ export const listCustomerOrders = () => async (dispatch, getState) => {
 	}
 };
 
+// Action for the admin to get all the orders
 export const adminCustomerOrders = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -133,6 +136,7 @@ export const adminCustomerOrders = () => async (dispatch, getState) => {
 	}
 };
 
+// Action for the admin to confirm the order
 export const updateOrderStatusAction = (id, status) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -175,6 +179,7 @@ export const updateOrderStatusAction = (id, status) => async (dispatch, getState
 	}
 };
 
+// Action for updating the order status to paid when payment is done
 export const customerUpdateOrderStatusAction = (id, status) => async (dispatch, getState) => {
 	try {
 		dispatch({
