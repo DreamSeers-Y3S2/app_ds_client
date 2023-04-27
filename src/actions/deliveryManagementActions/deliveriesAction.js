@@ -16,6 +16,7 @@ import { API_ENDPOINT } from "../../config";
 import axios from "axios";
 import swal from "sweetalert";
 
+//actions for create delivery
 export const createDeliveryAction =
 	(
 		order,
@@ -38,6 +39,7 @@ export const createDeliveryAction =
 				customer_Login: { customerInfo },
 			} = getState();
 
+			//call the backend route
 			const { data } = await axios.post(`${API_ENDPOINT}/deliveries/delivery/create`, {
 				order,
 				customer,
@@ -74,12 +76,14 @@ export const createDeliveryAction =
 		}
 	};
 
+//  get delivery all customer list action
 export const deliveriesListForCustomerAction = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: DELIVERY_LIST_FOR_CUSTOMER_REQUEST,
 		});
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/deliveries/delivery/customer/all/${id}`);
 
 		dispatch({
@@ -95,12 +99,14 @@ export const deliveriesListForCustomerAction = (id) => async (dispatch, getState
 	}
 };
 
+// get delivery list for admin  action
 export const deliveriesListForAdminAction = () => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: DELIVERY_LIST_FOR_ADMIN_REQUEST,
 		});
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/deliveries/delivery/all`);
 
 		dispatch({
@@ -116,12 +122,14 @@ export const deliveriesListForAdminAction = () => async (dispatch, getState) => 
 	}
 };
 
+// update delivery status action
 export const updateDeliveryStatusAction = (id, status) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: UPDATE_DELIVERY_REQUEST,
 		});
 
+		//call the backend route
 		const { data } = await axios.put(`${API_ENDPOINT}/deliveries/delivery/get/${id}`, { status });
 
 		dispatch({

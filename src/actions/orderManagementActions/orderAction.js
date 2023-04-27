@@ -36,6 +36,7 @@ export const createOrderAction = (customer, total) => async (dispatch, getState)
 			},
 		};
 
+		
 		const { data } = await axios.post(
 			`${API_ENDPOINT}/orders/order/create`,
 			{

@@ -32,6 +32,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { API_ENDPOINT } from "../../config";
 
+// vendor loggin action
 export const vendorLogin = (email, password) => async (dispatch) => {
 	try {
 		dispatch({ type: VENDOR_LOGIN_REQUEST });
@@ -42,6 +43,7 @@ export const vendorLogin = (email, password) => async (dispatch) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.post(`${API_ENDPOINT}/user/vendor/login`, { email, password, isAdmin: false }, config);
 
 		dispatch({ type: VENDOR_LOGIN_SUCCESS, payload: data });
@@ -63,7 +65,7 @@ export const vendorLogin = (email, password) => async (dispatch) => {
 		});
 	}
 };
-
+//creating authheader for vendor
 export function authHeader() {
 	let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
 
@@ -74,11 +76,14 @@ export function authHeader() {
 	}
 }
 
+
+//vendor log out action
 export const vendorLogout = () => async (dispatch) => {
 	localStorage.removeItem("vendorInfo");
 	dispatch({ type: VENDOR_LOGOUT });
 };
 
+// register to system action
 export const vendorRegister =
 	(
 		name,
@@ -103,6 +108,7 @@ export const vendorRegister =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.post(
 				`${API_ENDPOINT}/user/vendor/register`,
 				{
@@ -141,6 +147,8 @@ export const vendorRegister =
 		}
 	};
 
+	
+// vendors to view their profile action
 export const vendorViewProfile = (vendor) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: VENDOR_VIEW_REQUEST });
@@ -156,6 +164,7 @@ export const vendorViewProfile = (vendor) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/user/vendor/view`, vendor, config);
 
 		dispatch({ type: VENDOR_VIEW_SUCCESS, payload: data });
@@ -171,6 +180,7 @@ export const vendorViewProfile = (vendor) => async (dispatch, getState) => {
 	}
 };
 
+//vendor to update their profile action
 export const vendorUpdateProfile = (vendor) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: VENDOR_UPDATE_REQUEST });
@@ -186,6 +196,7 @@ export const vendorUpdateProfile = (vendor) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.put(`${API_ENDPOINT}/user/vendor/edit`, vendor, config);
 
 		dispatch({ type: VENDOR_UPDATE_SUCCESS, payload: data });
@@ -210,6 +221,7 @@ export const vendorUpdateProfile = (vendor) => async (dispatch, getState) => {
 	}
 };
 
+// vendor to delete their profile action
 export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: VENDOR_DELETE_REQUEST });
@@ -225,6 +237,7 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/user/vendor/delete`, config);
 
 		dispatch({ type: VENDOR_DELETE_SUCCESS, payload: data });
@@ -247,6 +260,8 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
 	}
 };
 
+
+//get all of vendors list for  admin action
 export const vendorsList = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -263,6 +278,7 @@ export const vendorsList = () => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/user/admin/vendors`, config);
 
 		dispatch({
@@ -278,6 +294,7 @@ export const vendorsList = () => async (dispatch, getState) => {
 	}
 };
 
+// view vendors profile by  admin action
 export const vendorViewProfileById =
 	(
 		id,
@@ -309,6 +326,7 @@ export const vendorViewProfileById =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.get(
 				`${API_ENDPOINT}/user/admin/vendor/profile/view/${id}`,
 				{
@@ -341,6 +359,7 @@ export const vendorViewProfileById =
 		}
 	};
 
+// vendor to update their profile by admin action	
 export const vendorUpdateProfileById =
 	(
 		id,
@@ -372,6 +391,8 @@ export const vendorUpdateProfileById =
 					Authorization: `Bearer ${adminInfo.token}`,
 				},
 			};
+
+			//call the backend route
 			const { data } = await axios.put(
 				`${API_ENDPOINT}/user/admin/vendor/profile/edit/${id}`,
 				{
@@ -413,6 +434,7 @@ export const vendorUpdateProfileById =
 		}
 	};
 
+//vendor to delete their profilr by admin action
 export const vendorDeleteProfileById = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -429,6 +451,7 @@ export const vendorDeleteProfileById = (id) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/user/admin/vendor/profile/view/${id}`, config);
 
 		dispatch({

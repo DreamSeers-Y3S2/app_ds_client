@@ -32,6 +32,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { API_ENDPOINT } from "../../config";
 
+// customer loggin action
 export const customerLogin = (email, password) => async (dispatch) => {
 	try {
 		dispatch({ type: CUSTOMER_LOGIN_REQUEST });
@@ -42,6 +43,7 @@ export const customerLogin = (email, password) => async (dispatch) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.post(
 			`${API_ENDPOINT}/user/customer/login`,
 			{ email, password, isAdmin: false },
@@ -68,6 +70,7 @@ export const customerLogin = (email, password) => async (dispatch) => {
 	}
 };
 
+//creating authheader for customer
 export function authHeader() {
 	let customer = JSON.parse(localStorage.getItem("customerInfo"));
 
@@ -78,11 +81,13 @@ export function authHeader() {
 	}
 }
 
+//customer log out action
 export const customerLogout = () => async (dispatch) => {
 	localStorage.removeItem("customerInfo");
 	dispatch({ type: CUSTOMER_LOGOUT });
 };
 
+//customer register to system action
 export const customerRegister = (name, telephone, address, email, password, pic) => async (dispatch) => {
 	try {
 		dispatch({ type: CUSTOMER_REGISTER_REQUEST });
@@ -93,6 +98,7 @@ export const customerRegister = (name, telephone, address, email, password, pic)
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.post(
 			`${API_ENDPOINT}/user/customer/register`,
 			{
@@ -124,7 +130,7 @@ export const customerRegister = (name, telephone, address, email, password, pic)
 		});
 	}
 };
-
+// customer to view their profile action
 export const customerViewProfile = (customer) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: CUSTOMER_VIEW_REQUEST });
@@ -140,6 +146,7 @@ export const customerViewProfile = (customer) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/user/customer/view`, customer, config);
 
 		dispatch({ type: CUSTOMER_VIEW_SUCCESS, payload: data });
@@ -155,6 +162,7 @@ export const customerViewProfile = (customer) => async (dispatch, getState) => {
 	}
 };
 
+//customer to update their profile action
 export const customerUpdateProfile = (customer) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: CUSTOMER_UPDATE_REQUEST });
@@ -170,6 +178,7 @@ export const customerUpdateProfile = (customer) => async (dispatch, getState) =>
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.put(`${API_ENDPOINT}/user/customer/edit`, customer, config);
 
 		dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: data });
@@ -194,6 +203,7 @@ export const customerUpdateProfile = (customer) => async (dispatch, getState) =>
 	}
 };
 
+// customer to delete their profile action
 export const customerDeleteProfile = () => async (dispatch, getState) => {
 	try {
 		dispatch({ type: CUSTOMER_DELETE_REQUEST });
@@ -209,6 +219,7 @@ export const customerDeleteProfile = () => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/user/customer/delete`, config);
 
 		dispatch({ type: CUSTOMER_DELETE_SUCCESS, payload: data });
@@ -232,6 +243,7 @@ export const customerDeleteProfile = () => async (dispatch, getState) => {
 	}
 };
 
+//get all of customer list for  admin action
 export const customersList = () => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -248,6 +260,7 @@ export const customersList = () => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/user/admin/customers`, config);
 
 		dispatch({
@@ -263,6 +276,7 @@ export const customersList = () => async (dispatch, getState) => {
 	}
 };
 
+// view customer profile by  admin action
 export const customerViewProfileById =
 	(id, name, telephone, address, email, password, pic) => async (dispatch, getState) => {
 		try {
@@ -280,6 +294,7 @@ export const customerViewProfileById =
 				},
 			};
 
+			//call the backend route
 			const { data } = await axios.get(
 				`${API_ENDPOINT}/user/admin/customer/profile/view/${id}`,
 				{
@@ -307,6 +322,7 @@ export const customerViewProfileById =
 		}
 	};
 
+// customer to update their profile by admin action
 export const customerUpdateProfileById =
 	(id, name, telephone, address, email, password, pic, message) => async (dispatch, getState) => {
 		try {
@@ -324,6 +340,8 @@ export const customerUpdateProfileById =
 					Authorization: `Bearer ${adminInfo.token}`,
 				},
 			};
+
+			//call the backend route
 			const { data } = await axios.put(
 				`${API_ENDPOINT}/user/admin/customer/profile/edit/${id}`,
 				{
@@ -361,6 +379,7 @@ export const customerUpdateProfileById =
 		}
 	};
 
+//customer to delete their profilr by admin action
 export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -377,6 +396,7 @@ export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
 			},
 		};
 
+		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/user/admin/customer/profile/view/${id}`, config);
 
 		dispatch({
