@@ -67,7 +67,7 @@ function AddProductByVendorScreen() {
 		setUsage("Wash with gentle touch");
 		setWarnings("People who are with sesnsitive skin must have medical approval before use.");
 		setDiscountNote("5% off");
-		setDiscountPrice(1140);
+		setDiscountPrice(60);
 		setQuantity(150);
 	};
 
