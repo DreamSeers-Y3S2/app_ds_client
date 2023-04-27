@@ -76,7 +76,6 @@ export function authHeader() {
 	}
 }
 
-
 //vendor log out action
 export const vendorLogout = () => async (dispatch) => {
 	localStorage.removeItem("vendorInfo");
@@ -147,7 +146,6 @@ export const vendorRegister =
 		}
 	};
 
-	
 // vendors to view their profile action
 export const vendorViewProfile = (vendor) => async (dispatch, getState) => {
 	try {
@@ -260,7 +258,6 @@ export const vendorDeleteProfile = (vendor) => async (dispatch, getState) => {
 	}
 };
 
-
 //get all of vendors list for  admin action
 export const vendorsList = () => async (dispatch, getState) => {
 	try {
@@ -359,7 +356,7 @@ export const vendorViewProfileById =
 		}
 	};
 
-// vendor to update their profile by admin action	
+// vendor to update their profile by admin action
 export const vendorUpdateProfileById =
 	(
 		id,

@@ -25,7 +25,6 @@ import axios from "axios";
 import { API_ENDPOINT } from "../../config";
 import swal from "sweetalert";
 
-
 //adding auth header for vendor
 export function authHeaderForVendor() {
 	let vendor = JSON.parse(localStorage.getItem("vendorInfo"));
@@ -263,8 +262,8 @@ export const updateProductByVendor =
 				payload: message,
 			});
 		}
-		};
-	
+	};
+
 // update the product by admin action
 export const updateProductByAdmin =
 	(
@@ -336,7 +335,7 @@ export const updateProductByAdmin =
 		}
 	};
 
-// delete product by vendor action 
+// delete product by vendor action
 export const deleteProductByVendor = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
@@ -385,7 +384,7 @@ export const deleteProductByAdmin = (id) => async (dispatch, getState) => {
 				Authorization: `Bearer ${adminInfo.token}`,
 			},
 		};
-		
+
 		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/items/products/admin/product/get/${id}`, config);
 
