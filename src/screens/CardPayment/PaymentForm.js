@@ -92,9 +92,10 @@ export default function PaymentForm() {
         <h3>
           Hela Ayu Payment Process
         </h3><hr/>
-        <label>Delivery Cost - Rs.300 </label> <br/>
-        <label>Commission - Rs.100 </label> <hr/>
-        <label>Total Amount - Rs. {localStorage.getItem("total")+100+300} </label> <hr/>
+        <label>Total from the cart : Rs. {eval(localStorage.getItem("total"))}</label> <br />
+				<label>Delivery Cost - Rs.300 </label> <br />
+				<label>Commission - Rs.100 </label> <hr />
+				<label>Total Amount to be Paid- Rs. {eval(localStorage.getItem("total")) + 100 + 300} </label> <hr />
         <form onSubmit={handleSubmit} ref={formPay}>
           <div >
             <label>Email to send the payment confirmation: </label> <br/>
