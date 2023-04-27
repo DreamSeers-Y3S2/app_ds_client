@@ -104,7 +104,7 @@ export default function PaymentForm() {
 			<div className="payContainer">
 				<h3>Hela Ayu Payment Process</h3>
 				<hr />
-				<llabel>Total from the cart : Rs. {eval(localStorage.getItem("total"))}</llabel> <br />
+				<label>Total from the cart : Rs. {eval(localStorage.getItem("total"))}</label> <br />
 				<label>Delivery Cost - Rs.300 </label> <br />
 				<label>Commission - Rs.100 </label> <hr />
 				<label>Total Amount to be Paid- Rs. {eval(localStorage.getItem("total")) + 100 + 300} </label> <hr />
